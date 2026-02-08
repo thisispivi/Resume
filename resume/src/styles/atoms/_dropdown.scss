@@ -30,17 +30,6 @@
     min-width: 140px;
     @include transition(border-color, box-shadow, background);
 
-    &::after {
-        content: "";
-        width: 0;
-        height: 0;
-        border-left: 4px solid transparent;
-        border-right: 4px solid transparent;
-        border-top: 5px solid var(--ink-muted);
-        flex-shrink: 0;
-        transition: transform $duration-fast $ease-out;
-    }
-
     &:hover {
         border-color: var(--border-ghost);
         background: linear-gradient(
@@ -58,20 +47,21 @@
     .dropdown--open & {
         border-color: var(--color-accent);
         box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent), transparent 80%);
+    }
+}
 
-        &::after {
-            transform: rotate(180deg);
-        }
+.dropdown__chevron {
+    flex-shrink: 0;
+    color: var(--ink-muted);
+    transition: transform $duration-fast $ease-out;
+
+    .dropdown--open & {
+        transform: rotate(180deg);
     }
 }
 
 .dropdown__menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: $z-dropdown;
-    margin-top: $space-1;
+    z-index: $z-navbar + 10;
     padding: $space-1 0;
     background: var(--color-surface);
     border: 1px solid var(--border-light);

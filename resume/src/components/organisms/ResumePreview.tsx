@@ -10,6 +10,7 @@ import type { ResumeData, TemplateId } from "../../types";
 interface ResumePreviewProps {
   data: ResumeData;
   templateId: TemplateId;
+  pdfLocale: string;
 }
 
 const templateMap = {
@@ -22,7 +23,7 @@ const templateMap = {
   compact: TemplateCompact,
 };
 
-function ResumePreview({ data, templateId }: ResumePreviewProps) {
+function ResumePreview({ data, templateId, pdfLocale }: ResumePreviewProps) {
   const Template = templateMap[templateId] ?? TemplateModern;
 
   return (
@@ -31,7 +32,7 @@ function ResumePreview({ data, templateId }: ResumePreviewProps) {
         id="resume-preview"
         className={`resume-preview__page resume-preview__page--${templateId}`}
       >
-        <Template data={data} />
+        <Template data={data} pdfLocale={pdfLocale} />
       </div>
     </div>
   );

@@ -4,10 +4,12 @@ import type { ResumeData } from "../../types";
 
 interface TemplateExecutiveProps {
   data: ResumeData;
+  pdfLocale: string;
 }
 
-function TemplateExecutive({ data }: TemplateExecutiveProps) {
-  const { t } = useTranslation();
+function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT(pdfLocale);
 
   return (
     <div className="template template--executive">

@@ -23,12 +23,12 @@ interface SidebarProps {
   onPaletteChange: (palette: ThemePalette) => void;
   colors: ThemeColors;
   onColorsChange: (colors: ThemeColors) => void;
-  locale: string;
-  onLocaleChange: (value: string) => void;
+  pdfLocale: string;
+  onPdfLocaleChange: (value: string) => void;
   uploadError: string | null;
   onUploadData: (file: File | null) => void;
-  isDark: boolean;
-  onToggleDark: () => void;
+  isPdfDark: boolean;
+  onTogglePdfDark: () => void;
 }
 
 function Sidebar({
@@ -40,12 +40,12 @@ function Sidebar({
   onPaletteChange,
   colors,
   onColorsChange,
-  locale,
-  onLocaleChange,
+  pdfLocale,
+  onPdfLocaleChange,
   uploadError,
   onUploadData,
-  isDark,
-  onToggleDark,
+  isPdfDark,
+  onTogglePdfDark,
 }: SidebarProps) {
   const { t } = useTranslation();
 
@@ -73,9 +73,9 @@ function Sidebar({
 
         <section className="sidebar__section">
           <Toggle
-            label={t("darkModeLabel")}
-            checked={isDark}
-            onChange={onToggleDark}
+            label={t("pdfDarkModeLabel")}
+            checked={isPdfDark}
+            onChange={onTogglePdfDark}
           />
         </section>
 
@@ -88,7 +88,11 @@ function Sidebar({
         </section>
 
         <section className="sidebar__section">
-          <LocalePicker value={locale} onChange={onLocaleChange} />
+          <LocalePicker
+            label={t("pdfLanguageLabel")}
+            value={pdfLocale}
+            onChange={onPdfLocaleChange}
+          />
         </section>
 
         <section className="sidebar__section">

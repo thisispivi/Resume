@@ -5,10 +5,12 @@ import type { ResumeData } from "../../types";
 
 interface TemplateSplitProps {
   data: ResumeData;
+  pdfLocale: string;
 }
 
-function TemplateSplit({ data }: TemplateSplitProps) {
-  const { t } = useTranslation();
+function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT(pdfLocale);
 
   return (
     <div className="template template--split">

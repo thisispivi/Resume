@@ -4,10 +4,12 @@ import type { ResumeData } from "../../types";
 
 interface TemplateMinimalProps {
   data: ResumeData;
+  pdfLocale: string;
 }
 
-function TemplateMinimal({ data }: TemplateMinimalProps) {
-  const { t } = useTranslation();
+function TemplateMinimal({ data, pdfLocale }: TemplateMinimalProps) {
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT(pdfLocale);
 
   return (
     <div className="template template--minimal">

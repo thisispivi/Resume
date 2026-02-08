@@ -5,10 +5,12 @@ import type { ResumeData } from "../../types";
 
 interface TemplateModernProps {
   data: ResumeData;
+  pdfLocale: string;
 }
 
-function TemplateModern({ data }: TemplateModernProps) {
-  const { t } = useTranslation();
+function TemplateModern({ data, pdfLocale }: TemplateModernProps) {
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT(pdfLocale);
 
   return (
     <div className="template template--modern">

@@ -5,10 +5,12 @@ import type { ResumeData } from "../../types";
 
 interface TemplateCreativeProps {
   data: ResumeData;
+  pdfLocale: string;
 }
 
-function TemplateCreative({ data }: TemplateCreativeProps) {
-  const { t } = useTranslation();
+function TemplateCreative({ data, pdfLocale }: TemplateCreativeProps) {
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT(pdfLocale);
 
   return (
     <div className="template template--creative">

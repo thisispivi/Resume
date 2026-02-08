@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
 
 export interface DropdownOption {
   value: string;
@@ -22,6 +23,7 @@ function Dropdown({
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [menuPos, setMenuPos] = useState<{ top: number; left: number; width: number } | null>(null);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -45,11 +47,16 @@ function Dropdown({
   const close = useCallback(() => {
     setIsOpen(false);
     setHighlightedIndex(-1);
+    setMenuPos(null);
   }, []);
 
   const open = useCallback(() => {
     const idx = options.findIndex((opt) => opt.value === value);
     setHighlightedIndex(idx >= 0 ? idx : 0);
+    if (triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect();
+      setMenuPos({ top: rect.bottom + 4, left: rect.left, width: rect.width });
+    }
     setIsOpen(true);
   }, [options, value]);
 
@@ -72,10 +79,15 @@ function Dropdown({
 
   // Close on click outside
   useEffect(() => {
+    if (!isOpen) return;
+
     function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
       if (
         wrapperRef.current &&
-        !wrapperRef.current.contains(event.target as Node)
+        !wrapperRef.current.contains(target) &&
+        listRef.current &&
+        !listRef.current.contains(target)
       ) {
         close();
       }
@@ -85,7 +97,26 @@ function Dropdown({
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [close]);
+  }, [isOpen, close]);
+
+  // Reposition on scroll/resize while open
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function updatePosition() {
+      if (triggerRef.current) {
+        const rect = triggerRef.current.getBoundingClientRect();
+        setMenuPos({ top: rect.bottom + 4, left: rect.left, width: rect.width });
+      }
+    }
+
+    window.addEventListener("scroll", updatePosition, true);
+    window.addEventListener("resize", updatePosition);
+    return () => {
+      window.removeEventListener("scroll", updatePosition, true);
+      window.removeEventListener("resize", updatePosition);
+    };
+  }, [isOpen]);
 
   const handleTriggerKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
@@ -180,6 +211,53 @@ function Dropdown({
   const activeDescendant =
     isOpen && highlightedIndex >= 0 ? optionId(highlightedIndex) : undefined;
 
+  const menuStyle = useMemo(
+    () =>
+      menuPos
+        ? { position: "fixed" as const, top: menuPos.top, left: menuPos.left, width: menuPos.width }
+        : undefined,
+    [menuPos],
+  );
+
+  const menu =
+    isOpen && menuStyle
+      ? createPortal(
+          <ul
+            ref={listRef}
+            id={listboxId}
+            role="listbox"
+            className="dropdown__menu"
+            style={menuStyle}
+            aria-labelledby={label ? labelId : undefined}
+          >
+            {options.map((option, index) => {
+              const isSelected = option.value === value;
+              const isHighlighted = index === highlightedIndex;
+              let optionClass = "dropdown__option";
+              if (isSelected) optionClass += " dropdown__option--active";
+              if (isHighlighted)
+                optionClass += " dropdown__option--highlighted";
+
+              return (
+                <li
+                  key={option.value}
+                  id={optionId(index)}
+                  role="option"
+                  aria-selected={isSelected}
+                  className={optionClass}
+                  onClick={() => selectOption(option.value)}
+                  onKeyDown={(e) => handleOptionKeyDown(e, option.value)}
+                  tabIndex={isHighlighted ? 0 : -1}
+                >
+                  {option.label}
+                </li>
+              );
+            })}
+          </ul>,
+          document.body,
+        )
+      : null;
+
   return (
     <div
       ref={wrapperRef}
@@ -221,38 +299,7 @@ function Dropdown({
           />
         </svg>
       </button>
-      {isOpen && (
-        <ul
-          ref={listRef}
-          id={listboxId}
-          role="listbox"
-          className="dropdown__menu"
-          aria-labelledby={label ? labelId : undefined}
-        >
-          {options.map((option, index) => {
-            const isSelected = option.value === value;
-            const isHighlighted = index === highlightedIndex;
-            let optionClass = "dropdown__option";
-            if (isSelected) optionClass += " dropdown__option--active";
-            if (isHighlighted) optionClass += " dropdown__option--highlighted";
-
-            return (
-              <li
-                key={option.value}
-                id={optionId(index)}
-                role="option"
-                aria-selected={isSelected}
-                className={optionClass}
-                onClick={() => selectOption(option.value)}
-                onKeyDown={(e) => handleOptionKeyDown(e, option.value)}
-                tabIndex={isHighlighted ? 0 : -1}
-              >
-                {option.label}
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      {menu}
     </div>
   );
 }

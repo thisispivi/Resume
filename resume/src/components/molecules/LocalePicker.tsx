@@ -6,9 +6,10 @@ import { SUPPORTED_LOCALES } from "../../i18n";
 interface LocalePickerProps {
   value: string;
   onChange: (value: string) => void;
+  label?: string;
 }
 
-function LocalePicker({ value, onChange }: LocalePickerProps) {
+function LocalePicker({ value, onChange, label }: LocalePickerProps) {
   const { t } = useTranslation();
 
   const options = useMemo(
@@ -22,7 +23,7 @@ function LocalePicker({ value, onChange }: LocalePickerProps) {
 
   return (
     <Dropdown
-      label={t("localeLabel")}
+      label={label ?? t("localeLabel")}
       options={options}
       value={value}
       onChange={onChange}

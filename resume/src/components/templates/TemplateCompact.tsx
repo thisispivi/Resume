@@ -4,10 +4,12 @@ import type { ResumeData } from "../../types";
 
 interface TemplateCompactProps {
   data: ResumeData;
+  pdfLocale: string;
 }
 
-function TemplateCompact({ data }: TemplateCompactProps) {
-  const { t } = useTranslation();
+function TemplateCompact({ data, pdfLocale }: TemplateCompactProps) {
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT(pdfLocale);
 
   return (
     <div className="template template--compact">

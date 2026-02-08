@@ -32,7 +32,7 @@ function ResumeBuilderPage() {
   const { t, i18n } = useTranslation();
   const [resumeDataMap, setResumeDataMap] =
     useState<ResumeDataMap>(DEFAULT_DATA);
-  const [locale, setLocale] = useState<string>(
+  const [pdfLocale, setPdfLocale] = useState<string>(
     getFirstLocale(DEFAULT_DATA, DEFAULT_LOCALE),
   );
   const [templateId, setTemplateId] = useState<TemplateId>("modern");
@@ -40,37 +40,51 @@ function ResumeBuilderPage() {
   const [colors, setColors] = useState<ThemeColors>(THEME_PALETTES[0].colors);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [isPdfDark, setIsPdfDark] = useState(false);
   const { isDark, toggleDark } = useTheme();
+
+  const appLocale = i18n.language;
 
   const availableLocales = useMemo(
     () => Object.keys(resumeDataMap),
     [resumeDataMap],
   );
 
-  const activeLocale = availableLocales.includes(locale)
-    ? locale
+  const activePdfLocale = availableLocales.includes(pdfLocale)
+    ? pdfLocale
     : getFirstLocale(resumeDataMap, DEFAULT_LOCALE);
 
   const resumeData =
-    resumeDataMap[activeLocale] ?? resumeDataMap[availableLocales[0]];
+    resumeDataMap[activePdfLocale] ?? resumeDataMap[availableLocales[0]];
 
-  const effectiveColors = isDark
+  const effectiveColors = isPdfDark
     ? { ...colors, ...DARK_OVERRIDES }
     : colors;
 
-  const themeStyle = {
-    "--color-primary": effectiveColors.primary,
-    "--color-secondary": effectiveColors.secondary,
-    "--color-accent": effectiveColors.accent,
+  const appThemeStyle = {
+    "--color-primary": colors.primary,
+    "--color-secondary": colors.secondary,
+    "--color-accent": colors.accent,
+  } as CSSProperties;
+
+  const pdfThemeStyle = {
+    "--color-primary": colors.primary,
+    "--color-secondary": colors.secondary,
+    "--color-accent": colors.accent,
     "--color-background": effectiveColors.background,
     "--color-surface": effectiveColors.surface,
     "--color-text": effectiveColors.text,
   } as CSSProperties;
 
-  const handleLocaleChange = (nextLocale: string) => {
-    setLocale(nextLocale);
+  const handleAppLocaleChange = (nextLocale: string) => {
     i18n.changeLanguage(nextLocale);
   };
+
+  const handlePdfLocaleChange = (nextLocale: string) => {
+    setPdfLocale(nextLocale);
+  };
+
+  const togglePdfDark = () => setIsPdfDark((prev) => !prev);
 
   const handlePaletteChange = (palette: ThemePalette) => {
     setPaletteId(palette.id);
@@ -95,8 +109,7 @@ function ResumeBuilderPage() {
       setUploadError(null);
       setResumeDataMap(validation.data);
       const newLocale = getFirstLocale(validation.data, DEFAULT_LOCALE);
-      setLocale(newLocale);
-      i18n.changeLanguage(newLocale);
+      setPdfLocale(newLocale);
     } catch (error) {
       console.error("Failed to parse uploaded JSON:", error);
       setUploadError(t("uploadErrorInvalid"));
@@ -122,8 +135,13 @@ function ResumeBuilderPage() {
   };
 
   return (
-    <div className="app" style={themeStyle}>
-      <Navbar />
+    <div className="app" style={appThemeStyle}>
+      <Navbar
+        appLocale={appLocale}
+        onAppLocaleChange={handleAppLocaleChange}
+        isDark={isDark}
+        onToggleDark={toggleDark}
+      />
 
       <Sidebar
         templates={TEMPLATE_OPTIONS}
@@ -134,20 +152,26 @@ function ResumeBuilderPage() {
         onPaletteChange={handlePaletteChange}
         colors={colors}
         onColorsChange={handleColorsChange}
-        locale={activeLocale}
-        onLocaleChange={handleLocaleChange}
+        pdfLocale={activePdfLocale}
+        onPdfLocaleChange={handlePdfLocaleChange}
         uploadError={uploadError}
         onUploadData={handleUpload}
-        isDark={isDark}
-        onToggleDark={toggleDark}
+        isPdfDark={isPdfDark}
+        onTogglePdfDark={togglePdfDark}
       />
 
       <div className="preview-container">
         {resumeData ? (
-          <ResumePreview
-            data={resumeData}
-            templateId={templateId}
-          />
+          <div
+            style={pdfThemeStyle}
+            data-theme={isPdfDark ? "dark" : "light"}
+          >
+            <ResumePreview
+              data={resumeData}
+              templateId={templateId}
+              pdfLocale={activePdfLocale}
+            />
+          </div>
         ) : (
           <div className="preview-empty">{t("uploadErrorMissing")}</div>
         )}

@@ -60,6 +60,10 @@
 }
 
 [data-theme="dark"] {
+    --color-background: #0f172a;
+    --color-surface: #1e293b;
+    --color-text: #e2e8f0;
+
     --ink: #e2e8f0;
     --ink-secondary: rgba(226, 232, 240, 0.8);
     --ink-muted: rgba(226, 232, 240, 0.55);
