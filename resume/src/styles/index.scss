@@ -8,7 +8,8 @@
 @use "./molecules/theme-customizer";
 @use "./molecules/file-uploader";
 @use "./molecules/avatar";
-@use "./organisms/toolbar";
+@use "./organisms/navbar";
+@use "./organisms/sidebar";
 @use "./organisms/resume-preview";
 @use "./templates/template-modern";
 @use "./templates/template-classic";

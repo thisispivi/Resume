@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import rawData from "../data.json";
+import Navbar from "../components/organisms/Navbar";
+import Sidebar from "../components/organisms/Sidebar";
 import ResumePreview from "../components/organisms/ResumePreview";
-import Toolbar from "../components/organisms/Toolbar";
+import Button from "../components/atoms/Button";
 import { THEME_PALETTES } from "../data/palettes";
 import { TEMPLATE_OPTIONS } from "../data/templates";
 import { DEFAULT_LOCALE, UI_COPY } from "../i18n/copy";
@@ -13,6 +15,7 @@ import type {
   ThemePalette,
 } from "../types";
 import { getFirstLocale } from "../utils/resume";
+import { generateSinglePagePdf } from "../utils/pdf";
 import { validateResumeDataMap } from "../utils/validateResumeData";
 
 const DEFAULT_DATA = rawData as ResumeDataMap;
@@ -30,6 +33,7 @@ function ResumeBuilderPage() {
   const [paletteId, setPaletteId] = useState(THEME_PALETTES[0].id);
   const [colors, setColors] = useState<ThemeColors>(THEME_PALETTES[0].colors);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [downloading, setDownloading] = useState(false);
 
   const availableLocales = useMemo(
     () => Object.keys(resumeDataMap),
@@ -83,9 +87,28 @@ function ResumeBuilderPage() {
     }
   };
 
+  const handleDownloadPdf = async () => {
+    setDownloading(true);
+    try {
+      const fileName = resumeData?.name
+        ? `${resumeData.name.replace(/\s+/g, "_")}_Resume.pdf`
+        : "Resume.pdf";
+      await generateSinglePagePdf({
+        elementId: "resume-preview",
+        fileName,
+      });
+    } catch (error) {
+      console.error("PDF generation failed:", error);
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   return (
     <div className="app" style={themeStyle}>
-      <Toolbar
+      <Navbar copy={copy} />
+
+      <Sidebar
         copy={copy}
         templates={TEMPLATE_OPTIONS}
         templateId={templateId}
@@ -98,10 +121,10 @@ function ResumeBuilderPage() {
         locales={availableLocales}
         locale={activeLocale}
         onLocaleChange={setLocale}
-        resumeName={resumeData?.name ?? ""}
         uploadError={uploadError}
         onUploadData={handleUpload}
       />
+
       <div className="preview-container">
         {resumeData ? (
           <ResumePreview
@@ -112,6 +135,12 @@ function ResumeBuilderPage() {
         ) : (
           <div className="preview-empty">{copy.uploadErrorMissing}</div>
         )}
+      </div>
+
+      <div className="fab-download">
+        <Button onClick={handleDownloadPdf} disabled={downloading}>
+          {downloading ? copy.generatingLabel : copy.downloadLabel}
+        </Button>
       </div>
     </div>
   );

@@ -1,0 +1,19 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-surface);
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+    animation: drop-in 0.35s ease both;
+}
+
+.navbar__title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+}

@@ -13,7 +13,17 @@
         padding: 0;
     }
 
-    .toolbar {
+    .navbar,
+    .sidebar,
+    .fab-download {
         display: none !important;
+    }
+
+    .app {
+        padding-top: 0;
+    }
+
+    .preview-container {
+        margin-left: 0;
     }
 }

@@ -98,6 +98,7 @@ export interface UiCopy {
   uploadLabel: string;
   uploadHint: string;
   downloadLabel: string;
+  downloadTemplateLabel: string;
   generatingLabel: string;
   uploadErrorInvalid: string;
   uploadErrorMissing: string;
