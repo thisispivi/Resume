@@ -1,0 +1,70 @@
+// ── SCSS Variables ──
+// Non-theme values that don't change with user palette.
+// Theme colors are handled via CSS custom properties in _tokens.scss.
+
+// Typography
+$font-sans: "Inter", "Segoe UI", "Helvetica Neue", sans-serif;
+$font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+
+// Font weights
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+
+// Font sizes – UI chrome
+$fs-xs: 10px;
+$fs-sm: 12px;
+$fs-md: 13px;
+$fs-base: 14px;
+$fs-lg: 16px;
+$fs-xl: 18px;
+$fs-2xl: 22px;
+
+// Font sizes – resume content
+$fs-resume-xs: 8px;
+$fs-resume-sm: 9px;
+$fs-resume-md: 10px;
+$fs-resume-base: 11px;
+$fs-resume-lg: 12px;
+$fs-resume-xl: 14px;
+$fs-resume-name: 20px;
+$fs-resume-name-lg: 24px;
+
+// Spacing
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-7: 32px;
+$space-8: 40px;
+
+// Border radius
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 16px;
+$radius-xl: 20px;
+$radius-full: 999px;
+
+// Layout
+$sidebar-width: 320px;
+$navbar-height: 52px;
+$resume-width: 794px;
+$resume-height: 1123px;
+
+// Transitions
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$duration-fast: 0.15s;
+$duration-normal: 0.25s;
+$duration-slow: 0.35s;
+
+// Z-index scale
+$z-sidebar: 20;
+$z-dropdown: 30;
+$z-navbar: 40;
+$z-fab: 25;

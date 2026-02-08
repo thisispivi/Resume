@@ -1,19 +1,24 @@
+@use "variables" as *;
+
 :root {
-    --font-sans: "Space Grotesk", "Segoe UI", "Helvetica Neue", sans-serif;
-    --font-serif: "Source Serif 4", "Times New Roman", serif;
+    --font-sans: #{$font-sans};
+    --font-mono: #{$font-mono};
 
-    --space-1: 4px;
-    --space-2: 8px;
-    --space-3: 12px;
-    --space-4: 16px;
-    --space-5: 20px;
-    --space-6: 24px;
-    --space-7: 32px;
-    --space-8: 40px;
+    --space-1: #{$space-1};
+    --space-2: #{$space-2};
+    --space-3: #{$space-3};
+    --space-4: #{$space-4};
+    --space-5: #{$space-5};
+    --space-6: #{$space-6};
+    --space-7: #{$space-7};
+    --space-8: #{$space-8};
 
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 16px;
+    --radius-xs: #{$radius-xs};
+    --radius-sm: #{$radius-sm};
+    --radius-md: #{$radius-md};
+    --radius-lg: #{$radius-lg};
+    --radius-xl: #{$radius-xl};
+    --radius-full: #{$radius-full};
 
     --color-primary: #0f4c5c;
     --color-secondary: #2f6690;
@@ -25,52 +30,58 @@
     // Ink – text variants
     --ink: #111827;
     --ink-secondary: rgba(15, 23, 42, 0.72);
-    --ink-muted: rgba(15, 23, 42, 0.7);
-    --ink-hint: rgba(15, 23, 42, 0.6);
+    --ink-muted: rgba(15, 23, 42, 0.56);
+    --ink-hint: rgba(15, 23, 42, 0.48);
     --ink-tag: rgba(15, 23, 42, 0.8);
 
     // Borders
-    --border: rgba(15, 23, 42, 0.12);
-    --border-light: rgba(15, 23, 42, 0.1);
-    --border-lighter: rgba(15, 23, 42, 0.07);
-    --border-ghost: rgba(15, 23, 42, 0.2);
+    --border: rgba(15, 23, 42, 0.1);
+    --border-light: rgba(15, 23, 42, 0.08);
+    --border-lighter: rgba(15, 23, 42, 0.05);
+    --border-ghost: rgba(15, 23, 42, 0.16);
 
     // Shadows
-    --shadow-soft: 0 8px 32px rgba(15, 23, 42, 0.12);
-    --shadow-strong: rgba(15, 23, 42, 0.2);
-    --shadow-light: rgba(15, 23, 42, 0.08);
-    --shadow-lighter: rgba(15, 23, 42, 0.06);
+    --shadow-soft: 0 4px 24px rgba(15, 23, 42, 0.08);
+    --shadow-medium: 0 8px 32px rgba(15, 23, 42, 0.12);
+    --shadow-strong: rgba(15, 23, 42, 0.18);
+    --shadow-light: rgba(15, 23, 42, 0.06);
+    --shadow-lighter: rgba(15, 23, 42, 0.04);
+    --shadow-elevated: 0 12px 40px rgba(15, 23, 42, 0.15);
 
     // Fills
-    --fill-subtle: rgba(15, 23, 42, 0.06);
-    --fill-tag: rgba(15, 23, 42, 0.08);
+    --fill-subtle: rgba(15, 23, 42, 0.04);
+    --fill-tag: rgba(15, 23, 42, 0.06);
     --fill-ring: rgba(15, 23, 42, 0.4);
+    --fill-hover: rgba(15, 23, 42, 0.03);
 
     // App background
     --app-gradient-end: #e7ecf3;
-    --app-gradient-overlay: rgba(255, 255, 255, 0.9);
+    --app-gradient-overlay: rgba(255, 255, 255, 0.85);
 }
 
 [data-theme="dark"] {
     --ink: #e2e8f0;
     --ink-secondary: rgba(226, 232, 240, 0.8);
-    --ink-muted: rgba(226, 232, 240, 0.65);
-    --ink-hint: rgba(226, 232, 240, 0.55);
+    --ink-muted: rgba(226, 232, 240, 0.55);
+    --ink-hint: rgba(226, 232, 240, 0.45);
     --ink-tag: rgba(226, 232, 240, 0.85);
 
-    --border: rgba(226, 232, 240, 0.12);
-    --border-light: rgba(226, 232, 240, 0.1);
-    --border-lighter: rgba(226, 232, 240, 0.08);
-    --border-ghost: rgba(226, 232, 240, 0.2);
+    --border: rgba(226, 232, 240, 0.1);
+    --border-light: rgba(226, 232, 240, 0.08);
+    --border-lighter: rgba(226, 232, 240, 0.05);
+    --border-ghost: rgba(226, 232, 240, 0.16);
 
-    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
+    --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.35);
     --shadow-strong: rgba(0, 0, 0, 0.4);
-    --shadow-light: rgba(0, 0, 0, 0.25);
-    --shadow-lighter: rgba(0, 0, 0, 0.2);
+    --shadow-light: rgba(0, 0, 0, 0.2);
+    --shadow-lighter: rgba(0, 0, 0, 0.15);
+    --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.4);
 
-    --fill-subtle: rgba(226, 232, 240, 0.06);
-    --fill-tag: rgba(226, 232, 240, 0.1);
+    --fill-subtle: rgba(226, 232, 240, 0.05);
+    --fill-tag: rgba(226, 232, 240, 0.08);
     --fill-ring: rgba(226, 232, 240, 0.5);
+    --fill-hover: rgba(226, 232, 240, 0.04);
 
     --app-gradient-end: #0c1220;
     --app-gradient-overlay: rgba(0, 0, 0, 0.3);
@@ -83,4 +94,5 @@ body {
     line-height: 1.5;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

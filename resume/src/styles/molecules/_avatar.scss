@@ -1,15 +1,25 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
 .avatar {
     width: 96px;
     height: 96px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.2);
-    font-weight: 700;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    @include flex-center;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.1) 100%
+        );
+    font-weight: $fw-bold;
     color: #ffffff;
+    box-shadow:
+        0 4px 16px -2px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+    flex-shrink: 0;
 }
 
 .avatar__img {
@@ -20,6 +30,8 @@
 }
 
 .avatar__initials {
-    font-size: 28px;
+    font-size: $fs-resume-name-lg;
     letter-spacing: 2px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    user-select: none;
 }

@@ -1,19 +1,58 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 40;
-    display: flex;
-    align-items: center;
-    padding: var(--space-3) var(--space-5);
-    background: var(--color-surface);
-    box-shadow: 0 2px 12px var(--shadow-lighter);
-    animation: drop-in 0.35s ease both;
+    z-index: $z-navbar;
+    @include flex-between;
+    height: $navbar-height;
+    padding: 0 $space-5;
+    background: linear-gradient(
+        180deg,
+        var(--color-surface) 0%,
+        color-mix(in srgb, var(--color-surface), var(--color-background) 8%) 100%
+    );
+    box-shadow:
+        0 1px 0 0 var(--border-lighter),
+        0 4px 16px -4px var(--shadow-lighter);
+    animation: drop-in $duration-slow $ease-out both;
+
+    // Subtle gradient border at bottom
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            var(--border-light) 20%,
+            var(--border) 50%,
+            var(--border-light) 80%,
+            transparent 100%
+        );
+    }
 }
 
 .navbar__title {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: $fs-xl;
+    font-weight: $fw-bold;
     letter-spacing: -0.4px;
+    color: var(--ink);
+    @include truncate;
+}
+
+.navbar__spacer {
+    flex: 1;
+}
+
+.navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
 }

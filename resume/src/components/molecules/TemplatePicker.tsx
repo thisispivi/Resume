@@ -1,5 +1,6 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import Select from "../atoms/Select";
+import Dropdown from "../atoms/Dropdown";
 import type { TemplateId, TemplateOption } from "../../types";
 
 interface TemplatePickerProps {
@@ -11,18 +12,22 @@ interface TemplatePickerProps {
 function TemplatePicker({ templates, value, onChange }: TemplatePickerProps) {
   const { t } = useTranslation();
 
+  const options = useMemo(
+    () =>
+      templates.map((template) => ({
+        value: template.id,
+        label: t(`templateNames.${template.id}`, template.fallbackLabel),
+      })),
+    [templates, t],
+  );
+
   return (
-    <Select
+    <Dropdown
       label={t("templateLabel")}
+      options={options}
       value={value}
-      onChange={(event) => onChange(event.target.value as TemplateId)}
-    >
-      {templates.map((template) => (
-        <option key={template.id} value={template.id}>
-          {t(`templateNames.${template.id}`, template.fallbackLabel)}
-        </option>
-      ))}
-    </Select>
+      onChange={(v) => onChange(v as TemplateId)}
+    />
   );
 }
 

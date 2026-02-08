@@ -3,6 +3,7 @@
 @use "./base/animations";
 @use "./base/print";
 @use "./atoms/button";
+@use "./atoms/dropdown";
 @use "./atoms/inputs";
 @use "./atoms/toggle";
 @use "./molecules/palette-picker";
@@ -16,4 +17,7 @@
 @use "./templates/template-classic";
 @use "./templates/template-minimal";
 @use "./templates/template-split";
+@use "./templates/template-executive";
+@use "./templates/template-creative";
+@use "./templates/template-compact";
 @use "./pages/app";

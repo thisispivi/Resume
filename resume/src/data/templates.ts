@@ -5,4 +5,7 @@ export const TEMPLATE_OPTIONS: TemplateOption[] = [
   { id: "classic", labelKey: "template.classic", fallbackLabel: "Classic" },
   { id: "minimal", labelKey: "template.minimal", fallbackLabel: "Minimal" },
   { id: "split", labelKey: "template.split", fallbackLabel: "Split" },
+  { id: "executive", labelKey: "template.executive", fallbackLabel: "Executive" },
+  { id: "creative", labelKey: "template.creative", fallbackLabel: "Creative" },
+  { id: "compact", labelKey: "template.compact", fallbackLabel: "Compact" },
 ];

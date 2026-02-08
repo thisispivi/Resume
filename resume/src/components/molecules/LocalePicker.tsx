@@ -1,5 +1,6 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import Select from "../atoms/Select";
+import Dropdown from "../atoms/Dropdown";
 import { SUPPORTED_LOCALES } from "../../i18n";
 
 interface LocalePickerProps {
@@ -10,18 +11,22 @@ interface LocalePickerProps {
 function LocalePicker({ value, onChange }: LocalePickerProps) {
   const { t } = useTranslation();
 
+  const options = useMemo(
+    () =>
+      SUPPORTED_LOCALES.map((locale) => ({
+        value: locale,
+        label: t(`localeNames.${locale}`),
+      })),
+    [t],
+  );
+
   return (
-    <Select
+    <Dropdown
       label={t("localeLabel")}
+      options={options}
       value={value}
-      onChange={(event) => onChange(event.target.value)}
-    >
-      {SUPPORTED_LOCALES.map((locale) => (
-        <option key={locale} value={locale}>
-          {t(`localeNames.${locale}`)}
-        </option>
-      ))}
-    </Select>
+      onChange={onChange}
+    />
   );
 }
 

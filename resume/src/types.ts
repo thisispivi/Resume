@@ -60,7 +60,7 @@ export interface ResumeData {
 
 export type ResumeDataMap = Record<string, ResumeData>;
 
-export type TemplateId = "modern" | "classic" | "minimal" | "split";
+export type TemplateId = "modern" | "classic" | "minimal" | "split" | "executive" | "creative" | "compact";
 
 export interface ThemeColors {
   primary: string;

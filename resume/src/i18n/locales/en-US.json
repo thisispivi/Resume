@@ -22,7 +22,10 @@
     "modern": "Modern",
     "classic": "Classic",
     "minimal": "Minimal",
-    "split": "Split"
+    "split": "Split",
+    "executive": "Executive",
+    "creative": "Creative",
+    "compact": "Compact"
   },
   "sectionTitles": {
     "profile": "Profile",

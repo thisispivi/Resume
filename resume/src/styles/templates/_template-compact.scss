@@ -1,0 +1,155 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+// ── Compact Template ──
+// Dense two-column layout that maximises information density.
+// Ideal for experienced professionals with extensive history.
+
+.template--compact {
+  display: grid;
+  grid-template-columns: 28% 1fr;
+  height: 100%;
+}
+
+// ── Side column ──
+.template-compact__side {
+  padding: $space-5 $space-4;
+  border-right: 1px solid var(--border);
+  @include flex-col(14px);
+}
+
+.template-compact__header {
+  @include flex-col($space-1);
+}
+
+.template-compact__avatar {
+  margin-bottom: $space-2;
+}
+
+.template-compact__name {
+  font-size: $fs-lg;
+  font-weight: $fw-bold;
+  color: var(--ink);
+}
+
+.template-compact__title {
+  font-size: $fs-resume-sm;
+  color: var(--ink-muted);
+}
+
+// ── Side sections ──
+.template-compact__section {
+  @include flex-col(6px);
+}
+
+.template-compact__section-title {
+  font-size: $fs-resume-sm;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: $fw-bold;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 3px;
+}
+
+// ── Skills ──
+.template-compact__skills {
+  @include flex-col($space-2);
+}
+
+.template-compact__skill-category {
+  @include flex-col(2px);
+}
+
+.template-compact__skill-name {
+  font-size: 8.5px;
+  text-transform: uppercase;
+  font-weight: $fw-bold;
+  color: var(--ink-muted);
+}
+
+.template-compact__skill-items {
+  font-size: 8.5px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+// ── Languages ──
+.template-compact__languages {
+  list-style: none;
+  @include flex-col(3px);
+  font-size: $fs-resume-sm;
+}
+
+.template-compact__language {
+  @include flex-between;
+}
+
+.template-compact__language-level {
+  color: var(--ink-hint);
+  font-size: 8.5px;
+}
+
+// ── Main column ──
+.template-compact__main {
+  padding: $space-5 22px;
+  @include flex-col($space-3);
+}
+
+// ── Tighter shared components inside compact ──
+.template--compact .resume-section {
+  margin-bottom: 10px;
+}
+
+.template--compact .resume-section:last-child {
+  margin-bottom: 0;
+}
+
+.template--compact .resume-section__title {
+  font-size: $fs-resume-md;
+  letter-spacing: 1.5px;
+  padding-bottom: $space-1;
+  border-bottom-width: 1.5px;
+}
+
+.template--compact .resume-entry {
+  margin-bottom: $space-2;
+  gap: 3px;
+}
+
+.template--compact .resume-entry:last-child {
+  margin-bottom: 0;
+}
+
+.template--compact .resume-entry__title {
+  font-size: $fs-resume-base;
+}
+
+.template--compact .resume-entry__subtitle {
+  font-size: $fs-resume-md;
+}
+
+.template--compact .resume-entry__body {
+  font-size: $fs-resume-sm;
+  line-height: 1.45;
+}
+
+.template--compact .resume-entry__date {
+  font-size: $fs-resume-sm;
+}
+
+.template--compact .resume-section__body {
+  font-size: $fs-resume-md;
+  line-height: 1.5;
+}
+
+.template--compact .resume-tag {
+  font-size: $fs-resume-xs;
+  padding: 1px 6px;
+}
+
+// Contact list inside the side column
+.template--compact .contact-list {
+  font-size: $fs-resume-sm;
+  gap: $space-1;
+}
