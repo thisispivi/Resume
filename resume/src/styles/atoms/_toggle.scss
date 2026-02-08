@@ -1,0 +1,47 @@
+.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    cursor: pointer;
+}
+
+.toggle__label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--ink-muted);
+}
+
+.toggle__track {
+    position: relative;
+    width: 40px;
+    height: 22px;
+    border-radius: 999px;
+    border: none;
+    background: var(--border-ghost);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease;
+}
+
+.toggle__track--on {
+    background: var(--color-primary);
+}
+
+.toggle__thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle__track--on .toggle__thumb {
+    transform: translateX(18px);
+}

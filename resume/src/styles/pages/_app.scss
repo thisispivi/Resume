@@ -2,8 +2,8 @@
     min-height: 100vh;
     padding-top: 50px;
     background:
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.9), transparent 55%),
-        linear-gradient(140deg, var(--color-background), #e7ecf3 65%);
+        radial-gradient(circle at top, var(--app-gradient-overlay), transparent 55%),
+        linear-gradient(140deg, var(--color-background), var(--app-gradient-end) 65%);
 }
 
 .preview-container {

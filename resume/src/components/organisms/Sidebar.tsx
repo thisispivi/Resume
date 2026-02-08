@@ -1,4 +1,5 @@
 import Button from "../atoms/Button";
+import Toggle from "../atoms/Toggle";
 import ColorPalettePicker from "../molecules/ColorPalettePicker";
 import FileUploader from "../molecules/FileUploader";
 import LocalePicker from "../molecules/LocalePicker";
@@ -28,6 +29,8 @@ interface SidebarProps {
   onLocaleChange: (value: string) => void;
   uploadError: string | null;
   onUploadData: (file: File | null) => void;
+  isDark: boolean;
+  onToggleDark: () => void;
 }
 
 function Sidebar({
@@ -45,6 +48,8 @@ function Sidebar({
   onLocaleChange,
   uploadError,
   onUploadData,
+  isDark,
+  onToggleDark,
 }: SidebarProps) {
   const handleDownloadTemplate = () => {
     downloadJsonFile(buildResumeTemplate(), "resume-template.json");
@@ -68,6 +73,14 @@ function Sidebar({
           {uploadError && (
             <span className="sidebar__error">{uploadError}</span>
           )}
+        </section>
+
+        <section className="sidebar__section">
+          <Toggle
+            label={copy.darkModeLabel}
+            checked={isDark}
+            onChange={onToggleDark}
+          />
         </section>
 
         <section className="sidebar__section">

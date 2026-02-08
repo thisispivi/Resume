@@ -41,7 +41,7 @@
 
 .resume-section__body {
     font-size: 11px;
-    color: rgba(15, 23, 42, 0.72);
+    color: var(--ink-secondary);
     line-height: 1.6;
 }
 
@@ -66,12 +66,12 @@
 .resume-entry__title {
     font-size: 12px;
     font-weight: 600;
-    color: #111827;
+    color: var(--ink);
 }
 
 .resume-entry__date {
     font-size: 10px;
-    color: rgba(15, 23, 42, 0.6);
+    color: var(--ink-hint);
     white-space: nowrap;
 }
 
@@ -82,13 +82,13 @@
 
 .resume-entry__body {
     font-size: 10.5px;
-    color: rgba(15, 23, 42, 0.72);
+    color: var(--ink-secondary);
     line-height: 1.5;
 }
 
 .resume-entry__detail {
     font-size: 10px;
-    color: rgba(15, 23, 42, 0.6);
+    color: var(--ink-hint);
     font-style: italic;
 }
 
@@ -109,8 +109,8 @@
 }
 
 .resume-tag {
-    background: rgba(15, 23, 42, 0.08);
-    color: rgba(15, 23, 42, 0.8);
+    background: var(--fill-tag);
+    color: var(--ink-tag);
     padding: 2px 8px;
     border-radius: 999px;
     font-size: 9px;

@@ -4,11 +4,13 @@ import { jsPDF } from "jspdf";
 interface PdfOptions {
   elementId: string;
   fileName: string;
+  backgroundColor?: string;
 }
 
 export const generateSinglePagePdf = async ({
   elementId,
   fileName,
+  backgroundColor = "#ffffff",
 }: PdfOptions) => {
   const element = document.getElementById(elementId);
   if (!element) {
@@ -19,7 +21,7 @@ export const generateSinglePagePdf = async ({
     scale: 2,
     useCORS: true,
     logging: false,
-    backgroundColor: "#ffffff",
+    backgroundColor,
   });
 
   const pdf = new jsPDF({

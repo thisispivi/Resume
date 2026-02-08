@@ -22,7 +22,58 @@
     --color-surface: #ffffff;
     --color-text: #1f2937;
 
+    // Ink – text variants
+    --ink: #111827;
+    --ink-secondary: rgba(15, 23, 42, 0.72);
+    --ink-muted: rgba(15, 23, 42, 0.7);
+    --ink-hint: rgba(15, 23, 42, 0.6);
+    --ink-tag: rgba(15, 23, 42, 0.8);
+
+    // Borders
+    --border: rgba(15, 23, 42, 0.12);
+    --border-light: rgba(15, 23, 42, 0.1);
+    --border-lighter: rgba(15, 23, 42, 0.07);
+    --border-ghost: rgba(15, 23, 42, 0.2);
+
+    // Shadows
     --shadow-soft: 0 8px 32px rgba(15, 23, 42, 0.12);
+    --shadow-strong: rgba(15, 23, 42, 0.2);
+    --shadow-light: rgba(15, 23, 42, 0.08);
+    --shadow-lighter: rgba(15, 23, 42, 0.06);
+
+    // Fills
+    --fill-subtle: rgba(15, 23, 42, 0.06);
+    --fill-tag: rgba(15, 23, 42, 0.08);
+    --fill-ring: rgba(15, 23, 42, 0.4);
+
+    // App background
+    --app-gradient-end: #e7ecf3;
+    --app-gradient-overlay: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] {
+    --ink: #e2e8f0;
+    --ink-secondary: rgba(226, 232, 240, 0.8);
+    --ink-muted: rgba(226, 232, 240, 0.65);
+    --ink-hint: rgba(226, 232, 240, 0.55);
+    --ink-tag: rgba(226, 232, 240, 0.85);
+
+    --border: rgba(226, 232, 240, 0.12);
+    --border-light: rgba(226, 232, 240, 0.1);
+    --border-lighter: rgba(226, 232, 240, 0.08);
+    --border-ghost: rgba(226, 232, 240, 0.2);
+
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-strong: rgba(0, 0, 0, 0.4);
+    --shadow-light: rgba(0, 0, 0, 0.25);
+    --shadow-lighter: rgba(0, 0, 0, 0.2);
+
+    --fill-subtle: rgba(226, 232, 240, 0.06);
+    --fill-tag: rgba(226, 232, 240, 0.1);
+    --fill-ring: rgba(226, 232, 240, 0.5);
+
+    --app-gradient-end: #0c1220;
+    --app-gradient-overlay: rgba(0, 0, 0, 0.3);
 }
 
 body {

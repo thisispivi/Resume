@@ -8,6 +8,7 @@ import Button from "../components/atoms/Button";
 import { THEME_PALETTES } from "../data/palettes";
 import { TEMPLATE_OPTIONS } from "../data/templates";
 import { DEFAULT_LOCALE, UI_COPY } from "../i18n/copy";
+import { useTheme } from "../context/ThemeContext";
 import type {
   ResumeDataMap,
   TemplateId,
@@ -19,6 +20,12 @@ import { generateSinglePagePdf } from "../utils/pdf";
 import { validateResumeDataMap } from "../utils/validateResumeData";
 
 const DEFAULT_DATA = rawData as ResumeDataMap;
+
+const DARK_OVERRIDES = {
+  background: "#0f172a",
+  surface: "#1e293b",
+  text: "#e2e8f0",
+};
 
 const getLocaleCopy = (locale: string) =>
   UI_COPY[locale] ?? UI_COPY[DEFAULT_LOCALE];
@@ -34,6 +41,7 @@ function ResumeBuilderPage() {
   const [colors, setColors] = useState<ThemeColors>(THEME_PALETTES[0].colors);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const { isDark, toggleDark } = useTheme();
 
   const availableLocales = useMemo(
     () => Object.keys(resumeDataMap),
@@ -49,13 +57,17 @@ function ResumeBuilderPage() {
 
   const copy = getLocaleCopy(activeLocale);
 
+  const effectiveColors = isDark
+    ? { ...colors, ...DARK_OVERRIDES }
+    : colors;
+
   const themeStyle = {
-    "--color-primary": colors.primary,
-    "--color-secondary": colors.secondary,
-    "--color-accent": colors.accent,
-    "--color-background": colors.background,
-    "--color-surface": colors.surface,
-    "--color-text": colors.text,
+    "--color-primary": effectiveColors.primary,
+    "--color-secondary": effectiveColors.secondary,
+    "--color-accent": effectiveColors.accent,
+    "--color-background": effectiveColors.background,
+    "--color-surface": effectiveColors.surface,
+    "--color-text": effectiveColors.text,
   } as CSSProperties;
 
   const handlePaletteChange = (palette: ThemePalette) => {
@@ -96,6 +108,7 @@ function ResumeBuilderPage() {
       await generateSinglePagePdf({
         elementId: "resume-preview",
         fileName,
+        backgroundColor: effectiveColors.surface,
       });
     } catch (error) {
       console.error("PDF generation failed:", error);
@@ -123,6 +136,8 @@ function ResumeBuilderPage() {
         onLocaleChange={setLocale}
         uploadError={uploadError}
         onUploadData={handleUpload}
+        isDark={isDark}
+        onToggleDark={toggleDark}
       />
 
       <div className="preview-container">
