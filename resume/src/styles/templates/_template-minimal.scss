@@ -1,0 +1,40 @@
+.template--minimal {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 34px;
+  height: 100%;
+}
+
+.template-minimal__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.template-minimal__name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.template-minimal__title {
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.template-minimal__languages {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.template--minimal .contact-list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  font-size: 10px;
+}

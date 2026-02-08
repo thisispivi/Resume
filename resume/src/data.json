@@ -1,0 +1,183 @@
+{
+  "it-IT": {
+    "name": "Luca Ferri",
+    "jobTitle": "Software Engineer, Machine Learning Specialist",
+    "photo": "",
+    "contact": {
+      "email": "luca.ferri@example.com",
+      "phone": "+39 333 000 0000",
+      "linkedin": "https://www.linkedin.com/in/lucaferri",
+      "github": "https://github.com/lucaferri",
+      "website": "https://www.lucaferri.dev"
+    },
+    "summary": "Ingegnere del software con esperienza nello sviluppo di applicazioni web full-stack e nella progettazione di soluzioni di machine learning. Specializzato nella realizzazione di sistemi scalabili, data-driven e nell’integrazione di modelli di intelligenza artificiale per supportare processi decisionali e analisi avanzate.",
+    "experience": [
+      {
+        "company": "Tech Consulting Srl",
+        "position": "Software Engineer & Machine Learning Consultant",
+        "duration": "2021 - in corso",
+        "description": "Sviluppo di piattaforme web full-stack basate su architetture moderne. Progettazione di dashboard interattive, API e servizi backend. Integrazione di modelli di machine learning per analisi predittiva, valutazione del rischio e supporto alle decisioni aziendali."
+      },
+      {
+        "company": "Università Italiana",
+        "position": "Ricercatore Software e AI",
+        "duration": "2020 - 2021",
+        "description": "Attività di ricerca applicata su algoritmi di machine learning e data analysis, con focus su interpretabilità dei modelli e sistemi data-driven."
+      },
+      {
+        "company": "Digital Solutions Studio",
+        "position": "Web Developer",
+        "duration": "2018 - 2020",
+        "description": "Sviluppo e manutenzione di siti web e applicazioni frontend. Collaborazione con team di design e marketing per la realizzazione di soluzioni user-centric."
+      }
+    ],
+    "education": [
+      {
+        "institution": "Università degli Studi",
+        "degree": "Laurea Magistrale in Informatica",
+        "duration": "2018 - 2020",
+        "grades": "105/110",
+        "thesis": "Framework data-driven per l’analisi e la previsione di indicatori complessi"
+      },
+      {
+        "institution": "Università degli Studi",
+        "degree": "Laurea Triennale in Informatica",
+        "duration": "2015 - 2018",
+        "grades": "110/110",
+        "thesis": "Sistemi software per l’analisi automatizzata dei dati"
+      }
+    ],
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": [
+          "React",
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Charting Libraries"
+        ]
+      },
+      {
+        "category": "Backend",
+        "items": [
+          "Node.js",
+          "REST APIs",
+          "PostgreSQL",
+          "Authentication",
+          "WebSockets"
+        ]
+      },
+      {
+        "category": "ML & Data Science",
+        "items": [
+          "Scikit-learn",
+          "TensorFlow",
+          "Pandas",
+          "NumPy",
+          "Data Visualization"
+        ]
+      },
+      {
+        "category": "DevOps & Tools",
+        "items": ["Git", "Docker", "CI/CD", "Testing"]
+      }
+    ],
+    "languages": [
+      { "language": "Italiano", "proficiency": "Madrelingua" },
+      { "language": "Inglese", "proficiency": "B2" }
+    ]
+  },
+
+  "en-US": {
+    "name": "Lucas Ferris",
+    "jobTitle": "Software Engineer, Machine Learning Specialist",
+    "photo": "",
+    "contact": {
+      "email": "lucas.ferris@example.com",
+      "phone": "+1 555 000 0000",
+      "linkedin": "https://www.linkedin.com/in/lucasferris",
+      "github": "https://github.com/lucasferris",
+      "website": "https://www.lucasferris.dev"
+    },
+    "summary": "Software engineer with experience in full-stack web development and machine learning solutions. Specialized in building scalable, data-driven systems and integrating AI models to support decision-making, predictive analytics, and business intelligence.",
+    "experience": [
+      {
+        "company": "Tech Consulting Ltd.",
+        "position": "Software Engineer & Machine Learning Consultant",
+        "duration": "2021 - Present",
+        "description": "Design and development of modern full-stack web platforms. Implementation of APIs, interactive dashboards, and backend services. Integration of machine learning models for predictive analytics, risk assessment, and business decision support."
+      },
+      {
+        "company": "National University",
+        "position": "Software & AI Researcher",
+        "duration": "2020 - 2021",
+        "description": "Applied research in machine learning and data analysis, with a focus on model interpretability and data-driven systems."
+      },
+      {
+        "company": "Digital Solutions Studio",
+        "position": "Web Developer",
+        "duration": "2018 - 2020",
+        "description": "Development and maintenance of websites and frontend applications. Close collaboration with design and marketing teams to deliver user-focused solutions."
+      }
+    ],
+    "education": [
+      {
+        "institution": "University",
+        "degree": "Master’s Degree in Computer Science",
+        "duration": "2018 - 2020",
+        "grades": "105/110",
+        "thesis": "A data-driven framework for analyzing and predicting complex indicators"
+      },
+      {
+        "institution": "University",
+        "degree": "Bachelor’s Degree in Computer Science",
+        "duration": "2015 - 2018",
+        "grades": "110/110",
+        "thesis": "Software systems for automated data analysis"
+      }
+    ],
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": [
+          "React",
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Data Visualization"
+        ]
+      },
+      {
+        "category": "Backend",
+        "items": [
+          "Node.js",
+          "REST APIs",
+          "PostgreSQL",
+          "Auth Systems",
+          "WebSockets"
+        ]
+      },
+      {
+        "category": "ML & Data Science",
+        "items": [
+          "Scikit-learn",
+          "TensorFlow",
+          "Pandas",
+          "NumPy",
+          "Visualization"
+        ]
+      },
+      {
+        "category": "DevOps & Tools",
+        "items": ["Git", "Docker", "CI/CD", "Testing"]
+      }
+    ],
+    "languages": [
+      { "language": "Italian", "proficiency": "Native" },
+      { "language": "English", "proficiency": "Upper-Intermediate (B2)" }
+    ]
+  }
+}

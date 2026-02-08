@@ -1,0 +1,23 @@
+.file-uploader {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.file-uploader__label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: rgba(15, 23, 42, 0.7);
+}
+
+.file-uploader__input {
+    font-size: 12px;
+}
+
+.file-uploader__hint {
+    font-size: 11px;
+    color: rgba(15, 23, 42, 0.6);
+}

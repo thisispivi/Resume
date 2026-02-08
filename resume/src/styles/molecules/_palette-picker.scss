@@ -1,0 +1,39 @@
+.palette-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.palette-picker__label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: rgba(15, 23, 42, 0.7);
+}
+
+.palette-picker__swatches {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.swatch:hover {
+    transform: scale(1.1);
+}
+
+.swatch--active {
+    border-color: var(--color-surface);
+    box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.4);
+}

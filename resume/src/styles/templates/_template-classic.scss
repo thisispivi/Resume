@@ -1,0 +1,65 @@
+.template--classic {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 28px 32px;
+}
+
+.template-classic__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.template-classic__identity {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.template-classic__avatar {
+  border-color: rgba(15, 23, 42, 0.2);
+  color: var(--color-primary);
+  background: rgba(15, 23, 42, 0.06);
+}
+
+.template-classic__name {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.template-classic__title {
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.template-classic__body {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.template-classic__column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.template-classic__languages {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.template--classic .contact-list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  font-size: 10px;
+}

@@ -1,0 +1,19 @@
+.theme-customizer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.theme-customizer__label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: rgba(15, 23, 42, 0.7);
+}
+
+.theme-customizer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px 16px;
+}

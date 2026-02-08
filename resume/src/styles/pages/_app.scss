@@ -1,0 +1,27 @@
+.app {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.9), transparent 55%),
+        linear-gradient(140deg, var(--color-background), #e7ecf3 65%);
+}
+
+.preview-container {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-8) var(--space-4) var(--space-8);
+    animation: rise-in 0.5s ease both;
+}
+
+.preview-empty {
+    background: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 900px) {
+    .preview-container {
+        padding: var(--space-6) var(--space-3) var(--space-6);
+        overflow-x: auto;
+    }
+}

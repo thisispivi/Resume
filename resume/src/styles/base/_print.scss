@@ -1,0 +1,19 @@
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    body {
+        background: none;
+    }
+
+    #root {
+        margin: 0;
+        padding: 0;
+    }
+
+    .toolbar {
+        display: none !important;
+    }
+}

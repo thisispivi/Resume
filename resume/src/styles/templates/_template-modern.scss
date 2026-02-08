@@ -1,0 +1,101 @@
+.template--modern {
+  display: grid;
+  grid-template-columns: 32% 1fr;
+  height: 100%;
+}
+
+.template-modern__sidebar {
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.template-modern__header {
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.template-modern__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.template-modern__avatar {
+  margin: 0 auto 12px;
+}
+
+.template-modern__name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.template-modern__title {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.template-modern__section-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 4px;
+}
+
+.template-modern__skills {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.template-modern__skill-name {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.7;
+}
+
+.template-modern__skill-items {
+  font-size: 9px;
+  opacity: 0.9;
+}
+
+.template-modern__languages {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.template-modern__language {
+  display: flex;
+  justify-content: space-between;
+}
+
+.template-modern__language-level {
+  opacity: 0.7;
+}
+
+.template-modern__main {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.template--modern .contact-list {
+  color: #ffffff;
+}
+
+.template--modern .contact-link {
+  color: #ffffff;
+}
