@@ -1,12 +1,14 @@
+import { useTranslation } from "react-i18next";
 import ContactList from "../molecules/ContactList";
-import type { ResumeData, UiCopy } from "../../types";
+import type { ResumeData } from "../../types";
 
 interface TemplateMinimalProps {
   data: ResumeData;
-  copy: UiCopy;
 }
 
-function TemplateMinimal({ data, copy }: TemplateMinimalProps) {
+function TemplateMinimal({ data }: TemplateMinimalProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="template template--minimal">
       <header className="template-minimal__header">
@@ -20,7 +22,7 @@ function TemplateMinimal({ data, copy }: TemplateMinimalProps) {
       {data.summary && (
         <section className="resume-section">
           <h2 className="resume-section__title">
-            {copy.sectionTitles.profile}
+            {t("sectionTitles.profile")}
           </h2>
           <p className="resume-section__body">{data.summary}</p>
         </section>
@@ -29,7 +31,7 @@ function TemplateMinimal({ data, copy }: TemplateMinimalProps) {
       {data.experience && data.experience.length > 0 && (
         <section className="resume-section">
           <h2 className="resume-section__title">
-            {copy.sectionTitles.experience}
+            {t("sectionTitles.experience")}
           </h2>
           {data.experience.map((experience, index) => (
             <div
@@ -52,7 +54,7 @@ function TemplateMinimal({ data, copy }: TemplateMinimalProps) {
       {data.education && data.education.length > 0 && (
         <section className="resume-section">
           <h2 className="resume-section__title">
-            {copy.sectionTitles.education}
+            {t("sectionTitles.education")}
           </h2>
           {data.education.map((education, index) => (
             <div
@@ -66,7 +68,7 @@ function TemplateMinimal({ data, copy }: TemplateMinimalProps) {
               <p className="resume-entry__subtitle">{education.institution}</p>
               {education.grades && (
                 <p className="resume-entry__detail">
-                  {copy.fieldLabels.grade}: {education.grades}
+                  {t("fieldLabels.grade")}: {education.grades}
                 </p>
               )}
             </div>
@@ -77,7 +79,7 @@ function TemplateMinimal({ data, copy }: TemplateMinimalProps) {
       {data.projects && data.projects.length > 0 && (
         <section className="resume-section">
           <h2 className="resume-section__title">
-            {copy.sectionTitles.projects}
+            {t("sectionTitles.projects")}
           </h2>
           {data.projects.map((project, index) => (
             <div key={`${project.name}-${index}`} className="resume-entry">
@@ -100,7 +102,7 @@ function TemplateMinimal({ data, copy }: TemplateMinimalProps) {
 
       {data.skills && data.skills.length > 0 && (
         <section className="resume-section">
-          <h2 className="resume-section__title">{copy.sectionTitles.skills}</h2>
+          <h2 className="resume-section__title">{t("sectionTitles.skills")}</h2>
           <div className="resume-tags">
             {data.skills.flatMap((category) =>
               category.items.map((item) => (
@@ -119,7 +121,7 @@ function TemplateMinimal({ data, copy }: TemplateMinimalProps) {
       {data.languages && data.languages.length > 0 && (
         <section className="resume-section">
           <h2 className="resume-section__title">
-            {copy.sectionTitles.languages}
+            {t("sectionTitles.languages")}
           </h2>
           <ul className="template-minimal__languages">
             {data.languages.map((language) => (

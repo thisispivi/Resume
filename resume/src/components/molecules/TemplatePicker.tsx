@@ -1,28 +1,25 @@
+import { useTranslation } from "react-i18next";
 import Select from "../atoms/Select";
-import type { TemplateId, TemplateOption, UiCopy } from "../../types";
+import type { TemplateId, TemplateOption } from "../../types";
 
 interface TemplatePickerProps {
   templates: TemplateOption[];
   value: TemplateId;
-  copy: UiCopy;
   onChange: (value: TemplateId) => void;
 }
 
-function TemplatePicker({
-  templates,
-  value,
-  copy,
-  onChange,
-}: TemplatePickerProps) {
+function TemplatePicker({ templates, value, onChange }: TemplatePickerProps) {
+  const { t } = useTranslation();
+
   return (
     <Select
-      label={copy.templateLabel}
+      label={t("templateLabel")}
       value={value}
       onChange={(event) => onChange(event.target.value as TemplateId)}
     >
       {templates.map((template) => (
         <option key={template.id} value={template.id}>
-          {copy.templateNames[template.id] ?? template.fallbackLabel}
+          {t(`templateNames.${template.id}`, template.fallbackLabel)}
         </option>
       ))}
     </Select>

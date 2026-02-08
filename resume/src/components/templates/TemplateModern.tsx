@@ -1,13 +1,15 @@
+import { useTranslation } from "react-i18next";
 import Avatar from "../molecules/Avatar";
 import ContactList from "../molecules/ContactList";
-import type { ResumeData, UiCopy } from "../../types";
+import type { ResumeData } from "../../types";
 
 interface TemplateModernProps {
   data: ResumeData;
-  copy: UiCopy;
 }
 
-function TemplateModern({ data, copy }: TemplateModernProps) {
+function TemplateModern({ data }: TemplateModernProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="template template--modern">
       <aside className="template-modern__sidebar">
@@ -23,7 +25,7 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
 
         <div className="template-modern__section">
           <h2 className="template-modern__section-title">
-            {copy.sectionTitles.contact}
+            {t("sectionTitles.contact")}
           </h2>
           <ContactList contact={data.contact} />
         </div>
@@ -31,7 +33,7 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
         {data.skills && data.skills.length > 0 && (
           <div className="template-modern__section">
             <h2 className="template-modern__section-title">
-              {copy.sectionTitles.skills}
+              {t("sectionTitles.skills")}
             </h2>
             <div className="template-modern__skills">
               {data.skills.map((category) => (
@@ -51,7 +53,7 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
         {data.languages && data.languages.length > 0 && (
           <div className="template-modern__section">
             <h2 className="template-modern__section-title">
-              {copy.sectionTitles.languages}
+              {t("sectionTitles.languages")}
             </h2>
             <ul className="template-modern__languages">
               {data.languages.map((language) => (
@@ -76,7 +78,7 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
         {data.summary && (
           <section className="resume-section">
             <h2 className="resume-section__title">
-              {copy.sectionTitles.profile}
+              {t("sectionTitles.profile")}
             </h2>
             <p className="resume-section__body">{data.summary}</p>
           </section>
@@ -85,7 +87,7 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
         {data.experience && data.experience.length > 0 && (
           <section className="resume-section">
             <h2 className="resume-section__title">
-              {copy.sectionTitles.experience}
+              {t("sectionTitles.experience")}
             </h2>
             {data.experience.map((experience, index) => (
               <div
@@ -108,7 +110,7 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
         {data.education && data.education.length > 0 && (
           <section className="resume-section">
             <h2 className="resume-section__title">
-              {copy.sectionTitles.education}
+              {t("sectionTitles.education")}
             </h2>
             {data.education.map((education, index) => (
               <div
@@ -126,12 +128,12 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
                 </p>
                 {education.grades && (
                   <p className="resume-entry__detail">
-                    {copy.fieldLabels.grade}: {education.grades}
+                    {t("fieldLabels.grade")}: {education.grades}
                   </p>
                 )}
                 {education.thesis && (
                   <p className="resume-entry__detail">
-                    {copy.fieldLabels.thesis}: {education.thesis}
+                    {t("fieldLabels.thesis")}: {education.thesis}
                   </p>
                 )}
               </div>
@@ -142,7 +144,7 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
         {data.projects && data.projects.length > 0 && (
           <section className="resume-section">
             <h2 className="resume-section__title">
-              {copy.sectionTitles.projects}
+              {t("sectionTitles.projects")}
             </h2>
             {data.projects.map((project, index) => (
               <div key={`${project.name}-${index}`} className="resume-entry">
@@ -175,7 +177,7 @@ function TemplateModern({ data, copy }: TemplateModernProps) {
         {data.certifications && data.certifications.length > 0 && (
           <section className="resume-section">
             <h2 className="resume-section__title">
-              {copy.sectionTitles.certifications}
+              {t("sectionTitles.certifications")}
             </h2>
             {data.certifications.map((certification, index) => (
               <div

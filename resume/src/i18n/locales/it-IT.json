@@ -1,0 +1,45 @@
+{
+  "appTitle": "Resume Builder",
+  "templateLabel": "Template",
+  "paletteLabel": "Palette",
+  "customColorsLabel": "Colori personalizzati",
+  "primaryColorLabel": "Primario",
+  "secondaryColorLabel": "Secondario",
+  "accentColorLabel": "Accento",
+  "backgroundColorLabel": "Sfondo",
+  "surfaceColorLabel": "Superficie",
+  "textColorLabel": "Testo",
+  "localeLabel": "Lingua",
+  "uploadLabel": "Carica JSON",
+  "uploadHint": "Carica un file data.json del curriculum",
+  "downloadLabel": "Scarica PDF",
+  "downloadTemplateLabel": "Scarica Template",
+  "darkModeLabel": "Modalità Scura",
+  "generatingLabel": "Generazione...",
+  "uploadErrorInvalid": "JSON non valido. Carica un file dati valido.",
+  "uploadErrorMissing": "Nessun dato curriculum trovato nel file caricato.",
+  "templateNames": {
+    "modern": "Moderno",
+    "classic": "Classico",
+    "minimal": "Minimale",
+    "split": "Split"
+  },
+  "sectionTitles": {
+    "profile": "Profilo",
+    "experience": "Esperienza",
+    "education": "Formazione",
+    "projects": "Progetti",
+    "certifications": "Certificazioni",
+    "skills": "Competenze",
+    "languages": "Lingue",
+    "contact": "Contatti"
+  },
+  "fieldLabels": {
+    "grade": "Voto",
+    "thesis": "Tesi"
+  },
+  "localeNames": {
+    "en-US": "English",
+    "it-IT": "Italiano"
+  }
+}

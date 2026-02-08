@@ -83,43 +83,6 @@ export interface TemplateOption {
   fallbackLabel: string;
 }
 
-export interface UiCopy {
-  appTitle: string;
-  templateLabel: string;
-  paletteLabel: string;
-  customColorsLabel: string;
-  primaryColorLabel: string;
-  secondaryColorLabel: string;
-  accentColorLabel: string;
-  backgroundColorLabel: string;
-  surfaceColorLabel: string;
-  textColorLabel: string;
-  localeLabel: string;
-  uploadLabel: string;
-  uploadHint: string;
-  downloadLabel: string;
-  downloadTemplateLabel: string;
-  darkModeLabel: string;
-  generatingLabel: string;
-  uploadErrorInvalid: string;
-  uploadErrorMissing: string;
-  templateNames: Record<TemplateId, string>;
-  sectionTitles: {
-    profile: string;
-    experience: string;
-    education: string;
-    projects: string;
-    certifications: string;
-    skills: string;
-    languages: string;
-    contact: string;
-  };
-  fieldLabels: {
-    grade: string;
-    thesis: string;
-  };
-}
-
 export interface ValidationResult {
   data?: ResumeDataMap;
   errors: string[];

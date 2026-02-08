@@ -1,54 +1,56 @@
+import { useTranslation } from "react-i18next";
 import ColorInput from "../atoms/ColorInput";
-import type { ThemeColors, UiCopy } from "../../types";
+import type { ThemeColors } from "../../types";
 
 interface ThemeCustomizerProps {
   colors: ThemeColors;
-  copy: UiCopy;
   onChange: (colors: ThemeColors) => void;
 }
 
-function ThemeCustomizer({ colors, copy, onChange }: ThemeCustomizerProps) {
+function ThemeCustomizer({ colors, onChange }: ThemeCustomizerProps) {
+  const { t } = useTranslation();
+
   const handleChange = (key: keyof ThemeColors, value: string) => {
     onChange({ ...colors, [key]: value });
   };
 
   return (
     <div className="theme-customizer">
-      <span className="theme-customizer__label">{copy.customColorsLabel}</span>
+      <span className="theme-customizer__label">{t("customColorsLabel")}</span>
       <div className="theme-customizer__grid">
         <ColorInput
           id="color-primary"
-          label={copy.primaryColorLabel}
+          label={t("primaryColorLabel")}
           value={colors.primary}
           onChange={(value) => handleChange("primary", value)}
         />
         <ColorInput
           id="color-secondary"
-          label={copy.secondaryColorLabel}
+          label={t("secondaryColorLabel")}
           value={colors.secondary}
           onChange={(value) => handleChange("secondary", value)}
         />
         <ColorInput
           id="color-accent"
-          label={copy.accentColorLabel}
+          label={t("accentColorLabel")}
           value={colors.accent}
           onChange={(value) => handleChange("accent", value)}
         />
         <ColorInput
           id="color-background"
-          label={copy.backgroundColorLabel}
+          label={t("backgroundColorLabel")}
           value={colors.background}
           onChange={(value) => handleChange("background", value)}
         />
         <ColorInput
           id="color-surface"
-          label={copy.surfaceColorLabel}
+          label={t("surfaceColorLabel")}
           value={colors.surface}
           onChange={(value) => handleChange("surface", value)}
         />
         <ColorInput
           id="color-text"
-          label={copy.textColorLabel}
+          label={t("textColorLabel")}
           value={colors.text}
           onChange={(value) => handleChange("text", value)}
         />

@@ -1,23 +1,24 @@
+import { useTranslation } from "react-i18next";
 import Select from "../atoms/Select";
-import type { UiCopy } from "../../types";
+import { SUPPORTED_LOCALES } from "../../i18n";
 
 interface LocalePickerProps {
-  locales: string[];
   value: string;
-  copy: UiCopy;
   onChange: (value: string) => void;
 }
 
-function LocalePicker({ locales, value, copy, onChange }: LocalePickerProps) {
+function LocalePicker({ value, onChange }: LocalePickerProps) {
+  const { t } = useTranslation();
+
   return (
     <Select
-      label={copy.localeLabel}
+      label={t("localeLabel")}
       value={value}
       onChange={(event) => onChange(event.target.value)}
     >
-      {locales.map((locale) => (
+      {SUPPORTED_LOCALES.map((locale) => (
         <option key={locale} value={locale}>
-          {locale}
+          {t(`localeNames.${locale}`)}
         </option>
       ))}
     </Select>

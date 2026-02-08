@@ -1,13 +1,15 @@
+import { useTranslation } from "react-i18next";
 import Avatar from "../molecules/Avatar";
 import ContactList from "../molecules/ContactList";
-import type { ResumeData, UiCopy } from "../../types";
+import type { ResumeData } from "../../types";
 
 interface TemplateClassicProps {
   data: ResumeData;
-  copy: UiCopy;
 }
 
-function TemplateClassic({ data, copy }: TemplateClassicProps) {
+function TemplateClassic({ data }: TemplateClassicProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="template template--classic">
       <header className="template-classic__header">
@@ -30,7 +32,7 @@ function TemplateClassic({ data, copy }: TemplateClassicProps) {
           {data.summary && (
             <section className="resume-section">
               <h2 className="resume-section__title">
-                {copy.sectionTitles.profile}
+                {t("sectionTitles.profile")}
               </h2>
               <p className="resume-section__body">{data.summary}</p>
             </section>
@@ -39,7 +41,7 @@ function TemplateClassic({ data, copy }: TemplateClassicProps) {
           {data.skills && data.skills.length > 0 && (
             <section className="resume-section">
               <h2 className="resume-section__title">
-                {copy.sectionTitles.skills}
+                {t("sectionTitles.skills")}
               </h2>
               <div className="resume-section__body">
                 {data.skills.map((category) => (
@@ -57,7 +59,7 @@ function TemplateClassic({ data, copy }: TemplateClassicProps) {
           {data.languages && data.languages.length > 0 && (
             <section className="resume-section">
               <h2 className="resume-section__title">
-                {copy.sectionTitles.languages}
+                {t("sectionTitles.languages")}
               </h2>
               <ul className="template-classic__languages">
                 {data.languages.map((language) => (
@@ -74,7 +76,7 @@ function TemplateClassic({ data, copy }: TemplateClassicProps) {
           {data.experience && data.experience.length > 0 && (
             <section className="resume-section">
               <h2 className="resume-section__title">
-                {copy.sectionTitles.experience}
+                {t("sectionTitles.experience")}
               </h2>
               {data.experience.map((experience, index) => (
                 <div
@@ -99,7 +101,7 @@ function TemplateClassic({ data, copy }: TemplateClassicProps) {
           {data.education && data.education.length > 0 && (
             <section className="resume-section">
               <h2 className="resume-section__title">
-                {copy.sectionTitles.education}
+                {t("sectionTitles.education")}
               </h2>
               {data.education.map((education, index) => (
                 <div
@@ -117,7 +119,7 @@ function TemplateClassic({ data, copy }: TemplateClassicProps) {
                   </p>
                   {education.grades && (
                     <p className="resume-entry__detail">
-                      {copy.fieldLabels.grade}: {education.grades}
+                      {t("fieldLabels.grade")}: {education.grades}
                     </p>
                   )}
                 </div>
@@ -128,7 +130,7 @@ function TemplateClassic({ data, copy }: TemplateClassicProps) {
           {data.projects && data.projects.length > 0 && (
             <section className="resume-section">
               <h2 className="resume-section__title">
-                {copy.sectionTitles.projects}
+                {t("sectionTitles.projects")}
               </h2>
               {data.projects.map((project, index) => (
                 <div key={`${project.name}-${index}`} className="resume-entry">
@@ -151,7 +153,7 @@ function TemplateClassic({ data, copy }: TemplateClassicProps) {
           {data.certifications && data.certifications.length > 0 && (
             <section className="resume-section">
               <h2 className="resume-section__title">
-                {copy.sectionTitles.certifications}
+                {t("sectionTitles.certifications")}
               </h2>
               {data.certifications.map((certification, index) => (
                 <div

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Button from "../atoms/Button";
 import Toggle from "../atoms/Toggle";
 import ColorPalettePicker from "../molecules/ColorPalettePicker";
@@ -10,12 +11,10 @@ import type {
   TemplateOption,
   ThemeColors,
   ThemePalette,
-  UiCopy,
 } from "../../types";
 import { buildResumeTemplate, downloadJsonFile } from "../../utils/resume";
 
 interface SidebarProps {
-  copy: UiCopy;
   templates: TemplateOption[];
   templateId: TemplateId;
   onTemplateChange: (value: TemplateId) => void;
@@ -24,7 +23,6 @@ interface SidebarProps {
   onPaletteChange: (palette: ThemePalette) => void;
   colors: ThemeColors;
   onColorsChange: (colors: ThemeColors) => void;
-  locales: string[];
   locale: string;
   onLocaleChange: (value: string) => void;
   uploadError: string | null;
@@ -34,7 +32,6 @@ interface SidebarProps {
 }
 
 function Sidebar({
-  copy,
   templates,
   templateId,
   onTemplateChange,
@@ -43,7 +40,6 @@ function Sidebar({
   onPaletteChange,
   colors,
   onColorsChange,
-  locales,
   locale,
   onLocaleChange,
   uploadError,
@@ -51,6 +47,8 @@ function Sidebar({
   isDark,
   onToggleDark,
 }: SidebarProps) {
+  const { t } = useTranslation();
+
   const handleDownloadTemplate = () => {
     downloadJsonFile(buildResumeTemplate(), "resume-template.json");
   };
@@ -60,24 +58,22 @@ function Sidebar({
       <nav className="sidebar__content">
         <section className="sidebar__section sidebar__actions">
           <Button variant="ghost" onClick={handleDownloadTemplate}>
-            {copy.downloadTemplateLabel}
+            {t("downloadTemplateLabel")}
           </Button>
         </section>
 
         <section className="sidebar__section">
           <FileUploader
-            label={copy.uploadLabel}
-            hint={copy.uploadHint}
+            label={t("uploadLabel")}
+            hint={t("uploadHint")}
             onFileSelect={onUploadData}
           />
-          {uploadError && (
-            <span className="sidebar__error">{uploadError}</span>
-          )}
+          {uploadError && <span className="sidebar__error">{uploadError}</span>}
         </section>
 
         <section className="sidebar__section">
           <Toggle
-            label={copy.darkModeLabel}
+            label={t("darkModeLabel")}
             checked={isDark}
             onChange={onToggleDark}
           />
@@ -87,23 +83,17 @@ function Sidebar({
           <TemplatePicker
             templates={templates}
             value={templateId}
-            copy={copy}
             onChange={onTemplateChange}
           />
         </section>
 
         <section className="sidebar__section">
-          <LocalePicker
-            locales={locales}
-            value={locale}
-            copy={copy}
-            onChange={onLocaleChange}
-          />
+          <LocalePicker value={locale} onChange={onLocaleChange} />
         </section>
 
         <section className="sidebar__section">
           <ColorPalettePicker
-            label={copy.paletteLabel}
+            label={t("paletteLabel")}
             palettes={palettes}
             selectedId={paletteId}
             onSelect={onPaletteChange}
@@ -111,11 +101,7 @@ function Sidebar({
         </section>
 
         <section className="sidebar__section">
-          <ThemeCustomizer
-            colors={colors}
-            copy={copy}
-            onChange={onColorsChange}
-          />
+          <ThemeCustomizer colors={colors} onChange={onColorsChange} />
         </section>
       </nav>
     </aside>

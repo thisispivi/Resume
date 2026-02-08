@@ -2,12 +2,11 @@ import TemplateClassic from "../templates/TemplateClassic";
 import TemplateMinimal from "../templates/TemplateMinimal";
 import TemplateModern from "../templates/TemplateModern";
 import TemplateSplit from "../templates/TemplateSplit";
-import type { ResumeData, TemplateId, UiCopy } from "../../types";
+import type { ResumeData, TemplateId } from "../../types";
 
 interface ResumePreviewProps {
   data: ResumeData;
   templateId: TemplateId;
-  copy: UiCopy;
 }
 
 const templateMap = {
@@ -17,7 +16,7 @@ const templateMap = {
   split: TemplateSplit,
 };
 
-function ResumePreview({ data, templateId, copy }: ResumePreviewProps) {
+function ResumePreview({ data, templateId }: ResumePreviewProps) {
   const Template = templateMap[templateId] ?? TemplateModern;
 
   return (
@@ -26,7 +25,7 @@ function ResumePreview({ data, templateId, copy }: ResumePreviewProps) {
         id="resume-preview"
         className={`resume-preview__page resume-preview__page--${templateId}`}
       >
-        <Template data={data} copy={copy} />
+        <Template data={data} />
       </div>
     </div>
   );

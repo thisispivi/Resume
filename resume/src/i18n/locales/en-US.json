@@ -1,0 +1,45 @@
+{
+  "appTitle": "Resume Builder",
+  "templateLabel": "Template",
+  "paletteLabel": "Palette",
+  "customColorsLabel": "Custom colors",
+  "primaryColorLabel": "Primary",
+  "secondaryColorLabel": "Secondary",
+  "accentColorLabel": "Accent",
+  "backgroundColorLabel": "Background",
+  "surfaceColorLabel": "Surface",
+  "textColorLabel": "Text",
+  "localeLabel": "Language",
+  "uploadLabel": "Upload JSON",
+  "uploadHint": "Upload a resume data.json file",
+  "downloadLabel": "Download PDF",
+  "downloadTemplateLabel": "Download Template",
+  "darkModeLabel": "Dark Mode",
+  "generatingLabel": "Generating...",
+  "uploadErrorInvalid": "Invalid JSON. Please upload a valid resume data file.",
+  "uploadErrorMissing": "No resume data found in the uploaded file.",
+  "templateNames": {
+    "modern": "Modern",
+    "classic": "Classic",
+    "minimal": "Minimal",
+    "split": "Split"
+  },
+  "sectionTitles": {
+    "profile": "Profile",
+    "experience": "Experience",
+    "education": "Education",
+    "projects": "Projects",
+    "certifications": "Certifications",
+    "skills": "Skills",
+    "languages": "Languages",
+    "contact": "Contact"
+  },
+  "fieldLabels": {
+    "grade": "Grade",
+    "thesis": "Thesis"
+  },
+  "localeNames": {
+    "en-US": "English",
+    "it-IT": "Italiano"
+  }
+}

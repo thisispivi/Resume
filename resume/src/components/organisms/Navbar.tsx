@@ -1,13 +1,11 @@
-import type { UiCopy } from "../../types";
+import { useTranslation } from "react-i18next";
 
-interface NavbarProps {
-  copy: UiCopy;
-}
+function Navbar() {
+  const { t } = useTranslation();
 
-function Navbar({ copy }: NavbarProps) {
   return (
     <header className="navbar">
-      <h1 className="navbar__title">{copy.appTitle}</h1>
+      <h1 className="navbar__title">{t("appTitle")}</h1>
     </header>
   );
 }
