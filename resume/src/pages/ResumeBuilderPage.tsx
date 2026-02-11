@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 import rawData from "../data.json";
@@ -8,6 +8,8 @@ import ResumePreview from "../components/organisms/ResumePreview";
 import Button from "../components/atoms/Button";
 import { THEME_PALETTES } from "../data/palettes";
 import { TEMPLATE_OPTIONS } from "../data/templates";
+import { GOOGLE_FONTS, loadGoogleFont, buildFontFamily } from "../data/fonts";
+import type { GoogleFont } from "../data/fonts";
 import { DEFAULT_LOCALE } from "../i18n";
 import { useTheme } from "../context/ThemeContext";
 import type {
@@ -28,6 +30,8 @@ const DARK_OVERRIDES = {
   text: "#e2e8f0",
 };
 
+const DEFAULT_FONT = GOOGLE_FONTS[0];
+
 function ResumeBuilderPage() {
   const { t, i18n } = useTranslation();
   const [resumeDataMap, setResumeDataMap] =
@@ -41,9 +45,14 @@ function ResumeBuilderPage() {
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [isPdfDark, setIsPdfDark] = useState(false);
+  const [resumeFont, setResumeFont] = useState<GoogleFont>(DEFAULT_FONT);
   const { isDark, toggleDark } = useTheme();
 
   const appLocale = i18n.language;
+
+  useEffect(() => {
+    loadGoogleFont(resumeFont);
+  }, [resumeFont]);
 
   const availableLocales = useMemo(
     () => Object.keys(resumeDataMap),
@@ -74,6 +83,7 @@ function ResumeBuilderPage() {
     "--color-background": effectiveColors.background,
     "--color-surface": effectiveColors.surface,
     "--color-text": effectiveColors.text,
+    "--font-sans": buildFontFamily(resumeFont),
   } as CSSProperties;
 
   const handleAppLocaleChange = (nextLocale: string) => {
@@ -94,6 +104,10 @@ function ResumeBuilderPage() {
   const handleColorsChange = (nextColors: ThemeColors) => {
     setPaletteId("custom");
     setColors(nextColors);
+  };
+
+  const handleFontChange = (font: GoogleFont) => {
+    setResumeFont(font);
   };
 
   const handleUpload = async (file: File | null) => {
@@ -158,6 +172,8 @@ function ResumeBuilderPage() {
         onUploadData={handleUpload}
         isPdfDark={isPdfDark}
         onTogglePdfDark={togglePdfDark}
+        fontFamily={resumeFont.family}
+        onFontChange={handleFontChange}
       />
 
       <div className="preview-container">

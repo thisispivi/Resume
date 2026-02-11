@@ -3,6 +3,7 @@ import Button from "../atoms/Button";
 import Toggle from "../atoms/Toggle";
 import ColorPalettePicker from "../molecules/ColorPalettePicker";
 import FileUploader from "../molecules/FileUploader";
+import FontPicker from "../molecules/FontPicker";
 import LocalePicker from "../molecules/LocalePicker";
 import TemplatePicker from "../molecules/TemplatePicker";
 import ThemeCustomizer from "../molecules/ThemeCustomizer";
@@ -12,6 +13,7 @@ import type {
   ThemeColors,
   ThemePalette,
 } from "../../types";
+import type { GoogleFont } from "../../data/fonts";
 import { buildResumeTemplate, downloadJsonFile } from "../../utils/resume";
 
 interface SidebarProps {
@@ -29,6 +31,8 @@ interface SidebarProps {
   onUploadData: (file: File | null) => void;
   isPdfDark: boolean;
   onTogglePdfDark: () => void;
+  fontFamily: string;
+  onFontChange: (font: GoogleFont) => void;
 }
 
 function Sidebar({
@@ -46,6 +50,8 @@ function Sidebar({
   onUploadData,
   isPdfDark,
   onTogglePdfDark,
+  fontFamily,
+  onFontChange,
 }: SidebarProps) {
   const { t } = useTranslation();
 
@@ -85,6 +91,10 @@ function Sidebar({
             value={templateId}
             onChange={onTemplateChange}
           />
+        </section>
+
+        <section className="sidebar__section">
+          <FontPicker value={fontFamily} onChange={onFontChange} />
         </section>
 
         <section className="sidebar__section">
