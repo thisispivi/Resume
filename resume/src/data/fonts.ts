@@ -6,6 +6,7 @@ export interface GoogleFont {
 
 export const GOOGLE_FONTS: GoogleFont[] = [
   { family: "Inter", weights: [300, 400, 500, 600, 700], category: "sans-serif" },
+  { family: "Plus Jakarta Sans", weights: [300, 400, 500, 600, 700], category: "sans-serif" },
   { family: "Roboto", weights: [300, 400, 500, 700], category: "sans-serif" },
   { family: "Open Sans", weights: [300, 400, 600, 700], category: "sans-serif" },
   { family: "Lato", weights: [300, 400, 700], category: "sans-serif" },
@@ -28,21 +29,28 @@ export const GOOGLE_FONTS: GoogleFont[] = [
   { family: "Source Code Pro", weights: [300, 400, 500, 700], category: "monospace" },
 ];
 
-const loadedFonts = new Set<string>();
+const loadedFonts = new Map<string, Promise<void>>();
 
-export function loadGoogleFont(font: GoogleFont): void {
-  if (loadedFonts.has(font.family)) return;
-  loadedFonts.add(font.family);
+export function loadGoogleFont(font: GoogleFont): Promise<void> {
+  const existing = loadedFonts.get(font.family);
+  if (existing) return existing;
 
-  const params = new URLSearchParams();
-  const familyParam = `${font.family}:wght@${font.weights.join(";")}`;
-  params.set("family", familyParam);
-  params.set("display", "swap");
+  const promise = new Promise<void>((resolve) => {
+    const familyParam = `${font.family}:wght@${font.weights.join(";")}`;
+    const url = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(familyParam)}&display=swap`;
 
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = `https://fonts.googleapis.com/css2?${params.toString()}`;
-  document.head.appendChild(link);
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    link.onload = () => {
+      document.fonts.ready.then(() => resolve());
+    };
+    link.onerror = () => resolve();
+    document.head.appendChild(link);
+  });
+
+  loadedFonts.set(font.family, promise);
+  return promise;
 }
 
 export function buildFontFamily(font: GoogleFont): string {

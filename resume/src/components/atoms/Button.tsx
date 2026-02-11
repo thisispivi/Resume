@@ -5,18 +5,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "sm" | "md";
 }
 
-function Button({
-  variant = "primary",
-  size = "md",
-  className = "",
-  ...props
-}: ButtonProps) {
-  return (
-    <button
-      className={`btn btn--${variant} btn--${size} ${className}`.trim()}
-      {...props}
-    />
-  );
+function Button({ variant = "primary", size = "md", className = "", ...props }: ButtonProps) {
+  return <button className={`btn btn--${variant} btn--${size} ${className}`.trim()} {...props} />;
 }
 
 export default Button;

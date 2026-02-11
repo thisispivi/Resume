@@ -50,34 +50,15 @@
     "skills": [
       {
         "category": "Frontend",
-        "items": [
-          "React",
-          "TypeScript",
-          "JavaScript",
-          "HTML",
-          "CSS",
-          "Charting Libraries"
-        ]
+        "items": ["React", "TypeScript", "JavaScript", "HTML", "CSS", "Charting Libraries"]
       },
       {
         "category": "Backend",
-        "items": [
-          "Node.js",
-          "REST APIs",
-          "PostgreSQL",
-          "Authentication",
-          "WebSockets"
-        ]
+        "items": ["Node.js", "REST APIs", "PostgreSQL", "Authentication", "WebSockets"]
       },
       {
         "category": "ML & Data Science",
-        "items": [
-          "Scikit-learn",
-          "TensorFlow",
-          "Pandas",
-          "NumPy",
-          "Data Visualization"
-        ]
+        "items": ["Scikit-learn", "TensorFlow", "Pandas", "NumPy", "Data Visualization"]
       },
       {
         "category": "DevOps & Tools",
@@ -141,34 +122,15 @@
     "skills": [
       {
         "category": "Frontend",
-        "items": [
-          "React",
-          "TypeScript",
-          "JavaScript",
-          "HTML",
-          "CSS",
-          "Data Visualization"
-        ]
+        "items": ["React", "TypeScript", "JavaScript", "HTML", "CSS", "Data Visualization"]
       },
       {
         "category": "Backend",
-        "items": [
-          "Node.js",
-          "REST APIs",
-          "PostgreSQL",
-          "Auth Systems",
-          "WebSockets"
-        ]
+        "items": ["Node.js", "REST APIs", "PostgreSQL", "Auth Systems", "WebSockets"]
       },
       {
         "category": "ML & Data Science",
-        "items": [
-          "Scikit-learn",
-          "TensorFlow",
-          "Pandas",
-          "NumPy",
-          "Visualization"
-        ]
+        "items": ["Scikit-learn", "TensorFlow", "Pandas", "NumPy", "Visualization"]
       },
       {
         "category": "DevOps & Tools",

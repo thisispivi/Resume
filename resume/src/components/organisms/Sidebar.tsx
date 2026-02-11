@@ -7,12 +7,7 @@ import FontPicker from "../molecules/FontPicker";
 import LocalePicker from "../molecules/LocalePicker";
 import TemplatePicker from "../molecules/TemplatePicker";
 import ThemeCustomizer from "../molecules/ThemeCustomizer";
-import type {
-  TemplateId,
-  TemplateOption,
-  ThemeColors,
-  ThemePalette,
-} from "../../types";
+import type { TemplateId, TemplateOption, ThemeColors, ThemePalette } from "../../types";
 import type { GoogleFont } from "../../data/fonts";
 import { buildResumeTemplate, downloadJsonFile } from "../../utils/resume";
 
@@ -78,19 +73,11 @@ function Sidebar({
         </section>
 
         <section className="sidebar__section">
-          <Toggle
-            label={t("pdfDarkModeLabel")}
-            checked={isPdfDark}
-            onChange={onTogglePdfDark}
-          />
+          <Toggle label={t("pdfDarkModeLabel")} checked={isPdfDark} onChange={onTogglePdfDark} />
         </section>
 
         <section className="sidebar__section">
-          <TemplatePicker
-            templates={templates}
-            value={templateId}
-            onChange={onTemplateChange}
-          />
+          <TemplatePicker templates={templates} value={templateId} onChange={onTemplateChange} />
         </section>
 
         <section className="sidebar__section">

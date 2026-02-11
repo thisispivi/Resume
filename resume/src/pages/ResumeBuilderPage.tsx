@@ -6,18 +6,14 @@ import Navbar from "../components/organisms/Navbar";
 import Sidebar from "../components/organisms/Sidebar";
 import ResumePreview from "../components/organisms/ResumePreview";
 import Button from "../components/atoms/Button";
+import Spinner from "../components/atoms/Spinner";
 import { THEME_PALETTES } from "../data/palettes";
 import { TEMPLATE_OPTIONS } from "../data/templates";
 import { GOOGLE_FONTS, loadGoogleFont, buildFontFamily } from "../data/fonts";
 import type { GoogleFont } from "../data/fonts";
 import { DEFAULT_LOCALE } from "../i18n";
-import { useTheme } from "../context/ThemeContext";
-import type {
-  ResumeDataMap,
-  TemplateId,
-  ThemeColors,
-  ThemePalette,
-} from "../types";
+import { useTheme } from "../context/useTheme";
+import type { ResumeDataMap, TemplateId, ThemeColors, ThemePalette } from "../types";
 import { getFirstLocale } from "../utils/resume";
 import { generateSinglePagePdf } from "../utils/pdf";
 import { validateResumeDataMap } from "../utils/validateResumeData";
@@ -34,11 +30,8 @@ const DEFAULT_FONT = GOOGLE_FONTS[0];
 
 function ResumeBuilderPage() {
   const { t, i18n } = useTranslation();
-  const [resumeDataMap, setResumeDataMap] =
-    useState<ResumeDataMap>(DEFAULT_DATA);
-  const [pdfLocale, setPdfLocale] = useState<string>(
-    getFirstLocale(DEFAULT_DATA, DEFAULT_LOCALE),
-  );
+  const [resumeDataMap, setResumeDataMap] = useState<ResumeDataMap>(DEFAULT_DATA);
+  const [pdfLocale, setPdfLocale] = useState<string>(getFirstLocale(DEFAULT_DATA, DEFAULT_LOCALE));
   const [templateId, setTemplateId] = useState<TemplateId>("modern");
   const [paletteId, setPaletteId] = useState(THEME_PALETTES[0].id);
   const [colors, setColors] = useState<ThemeColors>(THEME_PALETTES[0].colors);
@@ -46,29 +39,25 @@ function ResumeBuilderPage() {
   const [downloading, setDownloading] = useState(false);
   const [isPdfDark, setIsPdfDark] = useState(false);
   const [resumeFont, setResumeFont] = useState<GoogleFont>(DEFAULT_FONT);
+  const [fontLoading, setFontLoading] = useState(false);
   const { isDark, toggleDark } = useTheme();
 
   const appLocale = i18n.language;
 
   useEffect(() => {
-    loadGoogleFont(resumeFont);
+    setFontLoading(true);
+    loadGoogleFont(resumeFont).then(() => setFontLoading(false));
   }, [resumeFont]);
 
-  const availableLocales = useMemo(
-    () => Object.keys(resumeDataMap),
-    [resumeDataMap],
-  );
+  const availableLocales = useMemo(() => Object.keys(resumeDataMap), [resumeDataMap]);
 
   const activePdfLocale = availableLocales.includes(pdfLocale)
     ? pdfLocale
     : getFirstLocale(resumeDataMap, DEFAULT_LOCALE);
 
-  const resumeData =
-    resumeDataMap[activePdfLocale] ?? resumeDataMap[availableLocales[0]];
+  const resumeData = resumeDataMap[activePdfLocale] ?? resumeDataMap[availableLocales[0]];
 
-  const effectiveColors = isPdfDark
-    ? { ...colors, ...DARK_OVERRIDES }
-    : colors;
+  const effectiveColors = isPdfDark ? { ...colors, ...DARK_OVERRIDES } : colors;
 
   const appThemeStyle = {
     "--color-primary": colors.primary,
@@ -179,14 +168,16 @@ function ResumeBuilderPage() {
       <div className="preview-container">
         {resumeData ? (
           <div
+            className="preview-wrapper"
             style={pdfThemeStyle}
             data-theme={isPdfDark ? "dark" : "light"}
           >
-            <ResumePreview
-              data={resumeData}
-              templateId={templateId}
-              pdfLocale={activePdfLocale}
-            />
+            {fontLoading && (
+              <div className="font-loading-overlay">
+                <Spinner size={40} />
+              </div>
+            )}
+            <ResumePreview data={resumeData} templateId={templateId} pdfLocale={activePdfLocale} />
           </div>
         ) : (
           <div className="preview-empty">{t("uploadErrorMissing")}</div>

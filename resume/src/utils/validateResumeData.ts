@@ -22,9 +22,7 @@ const isStringArray = (value: unknown): value is string[] =>
 const validateContact = (value: unknown): value is Contact => {
   if (!isRecord(value)) return false;
   const fields = ["email", "phone", "linkedin", "github", "website"] as const;
-  return fields.every((field) =>
-    value[field] === undefined ? true : isString(value[field]),
-  );
+  return fields.every((field) => (value[field] === undefined ? true : isString(value[field])));
 };
 
 const validateExperience = (value: unknown): value is Experience =>
@@ -69,15 +67,13 @@ const validateResumeData = (value: unknown): value is ResumeData => {
   if (value.summary !== undefined && !isString(value.summary)) return false;
   if (
     value.experience !== undefined &&
-    (!Array.isArray(value.experience) ||
-      !value.experience.every(validateExperience))
+    (!Array.isArray(value.experience) || !value.experience.every(validateExperience))
   ) {
     return false;
   }
   if (
     value.education !== undefined &&
-    (!Array.isArray(value.education) ||
-      !value.education.every(validateEducation))
+    (!Array.isArray(value.education) || !value.education.every(validateEducation))
   ) {
     return false;
   }
@@ -89,8 +85,7 @@ const validateResumeData = (value: unknown): value is ResumeData => {
   }
   if (
     value.languages !== undefined &&
-    (!Array.isArray(value.languages) ||
-      !value.languages.every(validateLanguage))
+    (!Array.isArray(value.languages) || !value.languages.every(validateLanguage))
   ) {
     return false;
   }
@@ -102,8 +97,7 @@ const validateResumeData = (value: unknown): value is ResumeData => {
   }
   if (
     value.certifications !== undefined &&
-    (!Array.isArray(value.certifications) ||
-      !value.certifications.every(validateCertification))
+    (!Array.isArray(value.certifications) || !value.certifications.every(validateCertification))
   ) {
     return false;
   }

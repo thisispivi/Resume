@@ -6,11 +6,9 @@ import type { ResumeDataMap } from "../types";
  * validator and can be removed before uploading.
  */
 export const buildResumeTemplate = (): Record<string, unknown> => ({
-  "_comment":
-    "Each top-level key is a locale code (e.g. en-US). Add as many locales as you need.",
+  _comment: "Each top-level key is a locale code (e.g. en-US). Add as many locales as you need.",
   "en-US": {
-    "_comment":
-      "Required fields: name, jobTitle, contact. All other sections are optional.",
+    _comment: "Required fields: name, jobTitle, contact. All other sections are optional.",
     name: "Jane Doe",
     jobTitle: "Full-Stack Developer",
     photo: "",
@@ -21,22 +19,19 @@ export const buildResumeTemplate = (): Record<string, unknown> => ({
       github: "https://github.com/janedoe",
       website: "https://www.janedoe.dev",
     },
-    summary:
-      "Brief professional summary highlighting your key skills and experience.",
+    summary: "Brief professional summary highlighting your key skills and experience.",
     experience: [
       {
         company: "Acme Corp.",
         position: "Senior Developer",
         duration: "2022 - Present",
-        description:
-          "Describe your responsibilities and achievements in this role.",
+        description: "Describe your responsibilities and achievements in this role.",
       },
       {
         company: "StartUp Inc.",
         position: "Junior Developer",
         duration: "2019 - 2022",
-        description:
-          "Describe your responsibilities and achievements in this role.",
+        description: "Describe your responsibilities and achievements in this role.",
       },
     ],
     education: [
@@ -45,8 +40,7 @@ export const buildResumeTemplate = (): Record<string, unknown> => ({
         degree: "Master's Degree in Computer Science",
         duration: "2017 - 2019",
         grades: "3.9/4.0",
-        thesis:
-          "Optional — title of your thesis or final project",
+        thesis: "Optional — title of your thesis or final project",
       },
       {
         institution: "State University",
@@ -111,10 +105,7 @@ export const getInitials = (name: string) => {
     .slice(0, 2);
 };
 
-export const getFirstLocale = (
-  resumeDataMap: ResumeDataMap,
-  fallback: string,
-) => {
+export const getFirstLocale = (resumeDataMap: ResumeDataMap, fallback: string) => {
   const locales = Object.keys(resumeDataMap);
   return locales.length > 0 ? locales[0] : fallback;
 };

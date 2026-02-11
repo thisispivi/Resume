@@ -34,12 +34,7 @@ function FontPicker({ value, onChange }: FontPickerProps) {
   };
 
   return (
-    <Dropdown
-      label={t("fontLabel")}
-      options={options}
-      value={value}
-      onChange={handleChange}
-    />
+    <Dropdown label={t("fontLabel")} options={options} value={value} onChange={handleChange} />
   );
 }
 

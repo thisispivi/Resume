@@ -23,28 +23,19 @@ function TemplateMinimal({ data, pdfLocale }: TemplateMinimalProps) {
 
       {data.summary && (
         <section className="resume-section">
-          <h2 className="resume-section__title">
-            {t("sectionTitles.profile")}
-          </h2>
+          <h2 className="resume-section__title">{t("sectionTitles.profile")}</h2>
           <p className="resume-section__body">{data.summary}</p>
         </section>
       )}
 
       {data.experience && data.experience.length > 0 && (
         <section className="resume-section">
-          <h2 className="resume-section__title">
-            {t("sectionTitles.experience")}
-          </h2>
+          <h2 className="resume-section__title">{t("sectionTitles.experience")}</h2>
           {data.experience.map((experience, index) => (
-            <div
-              key={`${experience.company}-${index}`}
-              className="resume-entry"
-            >
+            <div key={`${experience.company}-${index}`} className="resume-entry">
               <div className="resume-entry__header">
                 <h3 className="resume-entry__title">{experience.position}</h3>
-                <span className="resume-entry__date">
-                  {experience.duration}
-                </span>
+                <span className="resume-entry__date">{experience.duration}</span>
               </div>
               <p className="resume-entry__subtitle">{experience.company}</p>
               <p className="resume-entry__body">{experience.description}</p>
@@ -55,14 +46,9 @@ function TemplateMinimal({ data, pdfLocale }: TemplateMinimalProps) {
 
       {data.education && data.education.length > 0 && (
         <section className="resume-section">
-          <h2 className="resume-section__title">
-            {t("sectionTitles.education")}
-          </h2>
+          <h2 className="resume-section__title">{t("sectionTitles.education")}</h2>
           {data.education.map((education, index) => (
-            <div
-              key={`${education.institution}-${index}`}
-              className="resume-entry"
-            >
+            <div key={`${education.institution}-${index}`} className="resume-entry">
               <div className="resume-entry__header">
                 <h3 className="resume-entry__title">{education.degree}</h3>
                 <span className="resume-entry__date">{education.duration}</span>
@@ -80,9 +66,7 @@ function TemplateMinimal({ data, pdfLocale }: TemplateMinimalProps) {
 
       {data.projects && data.projects.length > 0 && (
         <section className="resume-section">
-          <h2 className="resume-section__title">
-            {t("sectionTitles.projects")}
-          </h2>
+          <h2 className="resume-section__title">{t("sectionTitles.projects")}</h2>
           {data.projects.map((project, index) => (
             <div key={`${project.name}-${index}`} className="resume-entry">
               <h3 className="resume-entry__title">{project.name}</h3>
@@ -108,10 +92,7 @@ function TemplateMinimal({ data, pdfLocale }: TemplateMinimalProps) {
           <div className="resume-tags">
             {data.skills.flatMap((category) =>
               category.items.map((item) => (
-                <span
-                  key={`${category.category}-${item}`}
-                  className="resume-tag"
-                >
+                <span key={`${category.category}-${item}`} className="resume-tag">
                   {item}
                 </span>
               )),
@@ -122,9 +103,7 @@ function TemplateMinimal({ data, pdfLocale }: TemplateMinimalProps) {
 
       {data.languages && data.languages.length > 0 && (
         <section className="resume-section">
-          <h2 className="resume-section__title">
-            {t("sectionTitles.languages")}
-          </h2>
+          <h2 className="resume-section__title">{t("sectionTitles.languages")}</h2>
           <ul className="template-minimal__languages">
             {data.languages.map((language) => (
               <li key={language.language}>

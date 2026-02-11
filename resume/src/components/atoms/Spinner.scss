@@ -1,0 +1,37 @@
+.spinner {
+  animation: spinner-rotate 0.8s linear infinite;
+}
+
+.spinner__track {
+  opacity: 0.2;
+}
+
+.spinner__arc {
+  opacity: 1;
+}
+
+@keyframes spinner-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.font-loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  z-index: 5;
+  border-radius: inherit;
+  animation: fade-in 0.15s ease-out both;
+  pointer-events: none;
+
+  [data-theme="dark"] & {
+    background: rgba(15, 23, 42, 0.5);
+  }
+}

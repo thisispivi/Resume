@@ -1,0 +1,54 @@
+@use "../styles/base/variables" as *;
+@use "../styles/base/mixins" as *;
+
+.app {
+  min-height: 100vh;
+  padding-top: $navbar-height;
+  background:
+    radial-gradient(ellipse at top left, var(--app-gradient-overlay), transparent 50%),
+    radial-gradient(
+      ellipse at bottom right,
+      color-mix(in srgb, var(--color-primary), transparent 95%),
+      transparent 50%
+    ),
+    linear-gradient(140deg, var(--color-background), var(--app-gradient-end) 65%);
+}
+
+.preview-container {
+  @include flex-center;
+  padding: $space-8 $space-4 $space-8;
+  margin-left: $sidebar-width;
+  animation: rise-in 0.5s $ease-out both;
+  min-height: calc(100vh - #{$navbar-height});
+}
+
+.preview-wrapper {
+  position: relative;
+}
+
+.preview-empty {
+  @include card;
+  @include flex-center;
+  @include flex-col($space-3);
+  padding: $space-8 $space-6;
+  color: var(--ink-muted);
+  text-align: center;
+  animation: scale-in $duration-slow $ease-out both;
+}
+
+// Floating download button
+.fab-download {
+  position: fixed;
+  bottom: $space-7;
+  right: $space-7;
+  z-index: $z-fab;
+  animation: rise-in $duration-slow $ease-out 0.3s both;
+}
+
+@media (max-width: 900px) {
+  .preview-container {
+    margin-left: 0;
+    padding: $space-6 $space-3 $space-6;
+    overflow-x: auto;
+  }
+}

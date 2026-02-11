@@ -22,12 +22,7 @@ function ContactList({ contact }: ContactListProps) {
       {contact.linkedin && (
         <li className="contact-item">
           <span className="contact-icon">in</span>
-          <a
-            href={contact.linkedin}
-            className="contact-link"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={contact.linkedin} className="contact-link" target="_blank" rel="noreferrer">
             {contact.linkedin.replace(/^https?:\/\/(www\.)?/, "")}
           </a>
         </li>
@@ -35,12 +30,7 @@ function ContactList({ contact }: ContactListProps) {
       {contact.github && (
         <li className="contact-item">
           <span className="contact-icon">gh</span>
-          <a
-            href={contact.github}
-            className="contact-link"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={contact.github} className="contact-link" target="_blank" rel="noreferrer">
             {contact.github.replace(/^https?:\/\//, "")}
           </a>
         </li>
@@ -48,12 +38,7 @@ function ContactList({ contact }: ContactListProps) {
       {contact.website && (
         <li className="contact-item">
           <span className="contact-icon">web</span>
-          <a
-            href={contact.website}
-            className="contact-link"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={contact.website} className="contact-link" target="_blank" rel="noreferrer">
             {contact.website.replace(/^https?:\/\//, "")}
           </a>
         </li>

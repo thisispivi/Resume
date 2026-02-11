@@ -1,23 +1,35 @@
+// Base
 @use "./base/reset";
 @use "./base/tokens";
 @use "./base/animations";
 @use "./base/print";
-@use "./atoms/button";
-@use "./atoms/dropdown";
-@use "./atoms/inputs";
-@use "./atoms/toggle";
-@use "./molecules/palette-picker";
-@use "./molecules/theme-customizer";
-@use "./molecules/file-uploader";
-@use "./molecules/avatar";
-@use "./organisms/navbar";
-@use "./organisms/sidebar";
-@use "./organisms/resume-preview";
-@use "./templates/template-modern";
-@use "./templates/template-classic";
-@use "./templates/template-minimal";
-@use "./templates/template-split";
-@use "./templates/template-executive";
-@use "./templates/template-creative";
-@use "./templates/template-compact";
-@use "./pages/app";
+
+// Atoms
+@use "../components/atoms/Button";
+@use "../components/atoms/Dropdown";
+@use "../components/atoms/Inputs";
+@use "../components/atoms/Toggle";
+@use "../components/atoms/Spinner";
+
+// Molecules
+@use "../components/molecules/ColorPalettePicker";
+@use "../components/molecules/ThemeCustomizer";
+@use "../components/molecules/FileUploader";
+@use "../components/molecules/Avatar";
+
+// Organisms
+@use "../components/organisms/Navbar";
+@use "../components/organisms/Sidebar";
+@use "../components/organisms/ResumePreview";
+
+// Templates
+@use "../components/templates/TemplateModern";
+@use "../components/templates/TemplateClassic";
+@use "../components/templates/TemplateMinimal";
+@use "../components/templates/TemplateSplit";
+@use "../components/templates/TemplateExecutive";
+@use "../components/templates/TemplateCreative";
+@use "../components/templates/TemplateCompact";
+
+// Pages
+@use "../pages/ResumeBuilderPage";

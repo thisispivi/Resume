@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback, useMemo } from "react";
+import { useId, useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 
 export interface DropdownOption {
@@ -14,13 +14,7 @@ interface DropdownProps {
   className?: string;
 }
 
-function Dropdown({
-  label,
-  options,
-  value,
-  onChange,
-  className = "",
-}: DropdownProps) {
+function Dropdown({ label, options, value, onChange, className = "" }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [menuPos, setMenuPos] = useState<{ top: number; left: number; width: number } | null>(null);
@@ -29,20 +23,14 @@ function Dropdown({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
-  const labelId = useRef(
-    `dropdown-label-${Math.random().toString(36).slice(2, 9)}`,
-  ).current;
-  const listboxId = useRef(
-    `dropdown-listbox-${Math.random().toString(36).slice(2, 9)}`,
-  ).current;
+  const reactId = useId();
+  const labelId = `dropdown-label-${reactId}`;
+  const listboxId = `dropdown-listbox-${reactId}`;
 
   const selectedOption = options.find((opt) => opt.value === value);
   const selectedLabel = selectedOption ? selectedOption.label : "";
 
-  const optionId = useCallback(
-    (index: number) => `${listboxId}-option-${index}`,
-    [listboxId],
-  );
+  const optionId = useCallback((index: number) => `${listboxId}-option-${index}`, [listboxId]);
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -132,9 +120,7 @@ function Dropdown({
           if (!isOpen) {
             open();
           } else {
-            setHighlightedIndex((prev) =>
-              prev < options.length - 1 ? prev + 1 : prev,
-            );
+            setHighlightedIndex((prev) => (prev < options.length - 1 ? prev + 1 : prev));
           }
           break;
         }
@@ -171,9 +157,7 @@ function Dropdown({
         }
         case "ArrowDown": {
           event.preventDefault();
-          setHighlightedIndex((prev) =>
-            prev < options.length - 1 ? prev + 1 : prev,
-          );
+          setHighlightedIndex((prev) => (prev < options.length - 1 ? prev + 1 : prev));
           break;
         }
         case "ArrowUp": {
@@ -201,15 +185,12 @@ function Dropdown({
   // Scroll highlighted option into view
   useEffect(() => {
     if (isOpen && highlightedIndex >= 0 && listRef.current) {
-      const highlighted = listRef.current.children[highlightedIndex] as
-        | HTMLElement
-        | undefined;
+      const highlighted = listRef.current.children[highlightedIndex] as HTMLElement | undefined;
       highlighted?.scrollIntoView({ block: "nearest" });
     }
   }, [isOpen, highlightedIndex]);
 
-  const activeDescendant =
-    isOpen && highlightedIndex >= 0 ? optionId(highlightedIndex) : undefined;
+  const activeDescendant = isOpen && highlightedIndex >= 0 ? optionId(highlightedIndex) : undefined;
 
   const menuStyle = useMemo(
     () =>
@@ -235,8 +216,7 @@ function Dropdown({
               const isHighlighted = index === highlightedIndex;
               let optionClass = "dropdown__option";
               if (isSelected) optionClass += " dropdown__option--active";
-              if (isHighlighted)
-                optionClass += " dropdown__option--highlighted";
+              if (isHighlighted) optionClass += " dropdown__option--highlighted";
 
               return (
                 <li

@@ -1,29 +1,29 @@
 @page {
-    size: A4;
-    margin: 0;
+  size: A4;
+  margin: 0;
 }
 
 @media print {
-    body {
-        background: none;
-    }
+  body {
+    background: none;
+  }
 
-    #root {
-        margin: 0;
-        padding: 0;
-    }
+  #root {
+    margin: 0;
+    padding: 0;
+  }
 
-    .navbar,
-    .sidebar,
-    .fab-download {
-        display: none !important;
-    }
+  .navbar,
+  .sidebar,
+  .fab-download {
+    display: none !important;
+  }
 
-    .app {
-        padding-top: 0;
-    }
+  .app {
+    padding-top: 0;
+  }
 
-    .preview-container {
-        margin-left: 0;
-    }
+  .preview-container {
+    margin-left: 0;
+  }
 }

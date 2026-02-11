@@ -15,12 +15,7 @@ function Avatar({ name, photo, className = "" }: AvatarProps) {
   return (
     <div className={`avatar ${className}`.trim()}>
       {showPhoto ? (
-        <img
-          src={photo}
-          alt={name}
-          className="avatar__img"
-          onError={() => setHasError(true)}
-        />
+        <img src={photo} alt={name} className="avatar__img" onError={() => setHasError(true)} />
       ) : (
         <span className="avatar__initials">{initials}</span>
       )}

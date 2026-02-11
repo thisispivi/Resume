@@ -8,12 +8,7 @@ interface ColorPalettePickerProps {
   onSelect: (palette: ThemePalette) => void;
 }
 
-function ColorPalettePicker({
-  label,
-  palettes,
-  selectedId,
-  onSelect,
-}: ColorPalettePickerProps) {
+function ColorPalettePicker({ label, palettes, selectedId, onSelect }: ColorPalettePickerProps) {
   return (
     <div className="palette-picker">
       <span className="palette-picker__label">{label}</span>

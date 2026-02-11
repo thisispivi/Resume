@@ -15,38 +15,26 @@ function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
   return (
     <div className="template template--split">
       <aside className="template-split__side">
-        <Avatar
-          name={data.name}
-          photo={data.photo}
-          className="template-split__avatar"
-        />
+        <Avatar name={data.name} photo={data.photo} className="template-split__avatar" />
         <h1 className="template-split__name">{data.name}</h1>
         <p className="template-split__title">{data.jobTitle}</p>
         <ContactList contact={data.contact} />
 
         {data.summary && (
           <section className="template-split__section">
-            <h2 className="template-split__section-title">
-              {t("sectionTitles.profile")}
-            </h2>
+            <h2 className="template-split__section-title">{t("sectionTitles.profile")}</h2>
             <p className="template-split__summary">{data.summary}</p>
           </section>
         )}
 
         {data.skills && data.skills.length > 0 && (
           <section className="template-split__section">
-            <h2 className="template-split__section-title">
-              {t("sectionTitles.skills")}
-            </h2>
+            <h2 className="template-split__section-title">{t("sectionTitles.skills")}</h2>
             <div className="template-split__skills">
               {data.skills.map((category) => (
                 <div key={category.category}>
-                  <h3 className="template-split__skill-name">
-                    {category.category}
-                  </h3>
-                  <p className="template-split__skill-items">
-                    {category.items.join(", ")}
-                  </p>
+                  <h3 className="template-split__skill-name">{category.category}</h3>
+                  <p className="template-split__skill-items">{category.items.join(", ")}</p>
                 </div>
               ))}
             </div>
@@ -57,19 +45,12 @@ function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
       <main className="template-split__main">
         {data.experience && data.experience.length > 0 && (
           <section className="resume-section">
-            <h2 className="resume-section__title">
-              {t("sectionTitles.experience")}
-            </h2>
+            <h2 className="resume-section__title">{t("sectionTitles.experience")}</h2>
             {data.experience.map((experience, index) => (
-              <div
-                key={`${experience.company}-${index}`}
-                className="resume-entry"
-              >
+              <div key={`${experience.company}-${index}`} className="resume-entry">
                 <div className="resume-entry__header">
                   <h3 className="resume-entry__title">{experience.position}</h3>
-                  <span className="resume-entry__date">
-                    {experience.duration}
-                  </span>
+                  <span className="resume-entry__date">{experience.duration}</span>
                 </div>
                 <p className="resume-entry__subtitle">{experience.company}</p>
                 <p className="resume-entry__body">{experience.description}</p>
@@ -80,23 +61,14 @@ function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
 
         {data.education && data.education.length > 0 && (
           <section className="resume-section">
-            <h2 className="resume-section__title">
-              {t("sectionTitles.education")}
-            </h2>
+            <h2 className="resume-section__title">{t("sectionTitles.education")}</h2>
             {data.education.map((education, index) => (
-              <div
-                key={`${education.institution}-${index}`}
-                className="resume-entry"
-              >
+              <div key={`${education.institution}-${index}`} className="resume-entry">
                 <div className="resume-entry__header">
                   <h3 className="resume-entry__title">{education.degree}</h3>
-                  <span className="resume-entry__date">
-                    {education.duration}
-                  </span>
+                  <span className="resume-entry__date">{education.duration}</span>
                 </div>
-                <p className="resume-entry__subtitle">
-                  {education.institution}
-                </p>
+                <p className="resume-entry__subtitle">{education.institution}</p>
                 {education.grades && (
                   <p className="resume-entry__detail">
                     {t("fieldLabels.grade")}: {education.grades}
@@ -109,9 +81,7 @@ function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
 
         {data.projects && data.projects.length > 0 && (
           <section className="resume-section">
-            <h2 className="resume-section__title">
-              {t("sectionTitles.projects")}
-            </h2>
+            <h2 className="resume-section__title">{t("sectionTitles.projects")}</h2>
             {data.projects.map((project, index) => (
               <div key={`${project.name}-${index}`} className="resume-entry">
                 <h3 className="resume-entry__title">{project.name}</h3>
@@ -132,20 +102,13 @@ function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
 
         {data.certifications && data.certifications.length > 0 && (
           <section className="resume-section">
-            <h2 className="resume-section__title">
-              {t("sectionTitles.certifications")}
-            </h2>
+            <h2 className="resume-section__title">{t("sectionTitles.certifications")}</h2>
             {data.certifications.map((certification, index) => (
-              <div
-                key={`${certification.name}-${index}`}
-                className="resume-entry"
-              >
+              <div key={`${certification.name}-${index}`} className="resume-entry">
                 <div className="resume-entry__header">
                   <h3 className="resume-entry__title">{certification.name}</h3>
                   {certification.date && (
-                    <span className="resume-entry__date">
-                      {certification.date}
-                    </span>
+                    <span className="resume-entry__date">{certification.date}</span>
                   )}
                 </div>
                 <p className="resume-entry__subtitle">{certification.issuer}</p>
@@ -156,9 +119,7 @@ function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
 
         {data.languages && data.languages.length > 0 && (
           <section className="resume-section">
-            <h2 className="resume-section__title">
-              {t("sectionTitles.languages")}
-            </h2>
+            <h2 className="resume-section__title">{t("sectionTitles.languages")}</h2>
             <ul className="template-split__languages">
               {data.languages.map((language) => (
                 <li key={language.language}>

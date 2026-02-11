@@ -1,0 +1,156 @@
+.resume-preview {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.resume-preview__page {
+  width: 794px;
+  height: 1123px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.template {
+  height: 100%;
+}
+
+.resume-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.resume-section:last-child {
+  margin-bottom: 0;
+}
+
+.resume-section__title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--color-primary);
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.resume-section__body {
+  font-size: 11px;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+}
+
+.resume-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.resume-entry:last-child {
+  margin-bottom: 0;
+}
+
+.resume-entry__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.resume-entry__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.resume-entry__date {
+  font-size: 10px;
+  color: var(--ink-hint);
+  white-space: nowrap;
+}
+
+.resume-entry__subtitle {
+  font-size: 11px;
+  color: var(--color-secondary);
+}
+
+.resume-entry__body {
+  font-size: 10.5px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+.resume-entry__detail {
+  font-size: 10px;
+  color: var(--ink-hint);
+  font-style: italic;
+}
+
+.resume-entry__link {
+  font-size: 10px;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.resume-entry__link:hover {
+  text-decoration: underline;
+}
+
+.resume-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.resume-tag {
+  background: var(--fill-tag);
+  color: var(--ink-tag);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 9px;
+}
+
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-icon {
+  min-width: 24px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.contact-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+@media print {
+  .resume-preview__page {
+    box-shadow: none;
+    width: 100%;
+    height: auto;
+  }
+}

@@ -1,102 +1,102 @@
 @use "variables" as *;
 
 :root {
-    --font-sans: #{$font-sans};
-    --font-mono: #{$font-mono};
+  --font-sans: #{$font-sans};
+  --font-mono: #{$font-mono};
 
-    --space-1: #{$space-1};
-    --space-2: #{$space-2};
-    --space-3: #{$space-3};
-    --space-4: #{$space-4};
-    --space-5: #{$space-5};
-    --space-6: #{$space-6};
-    --space-7: #{$space-7};
-    --space-8: #{$space-8};
+  --space-1: #{$space-1};
+  --space-2: #{$space-2};
+  --space-3: #{$space-3};
+  --space-4: #{$space-4};
+  --space-5: #{$space-5};
+  --space-6: #{$space-6};
+  --space-7: #{$space-7};
+  --space-8: #{$space-8};
 
-    --radius-xs: #{$radius-xs};
-    --radius-sm: #{$radius-sm};
-    --radius-md: #{$radius-md};
-    --radius-lg: #{$radius-lg};
-    --radius-xl: #{$radius-xl};
-    --radius-full: #{$radius-full};
+  --radius-xs: #{$radius-xs};
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-xl: #{$radius-xl};
+  --radius-full: #{$radius-full};
 
-    --color-primary: #0f4c5c;
-    --color-secondary: #2f6690;
-    --color-accent: #3a6ea5;
-    --color-background: #f6f7fb;
-    --color-surface: #ffffff;
-    --color-text: #1f2937;
+  --color-primary: #0f4c5c;
+  --color-secondary: #2f6690;
+  --color-accent: #3a6ea5;
+  --color-background: #f6f7fb;
+  --color-surface: #ffffff;
+  --color-text: #1f2937;
 
-    // Ink – text variants
-    --ink: #111827;
-    --ink-secondary: rgba(15, 23, 42, 0.72);
-    --ink-muted: rgba(15, 23, 42, 0.56);
-    --ink-hint: rgba(15, 23, 42, 0.48);
-    --ink-tag: rgba(15, 23, 42, 0.8);
+  // Ink – text variants
+  --ink: #111827;
+  --ink-secondary: rgba(15, 23, 42, 0.72);
+  --ink-muted: rgba(15, 23, 42, 0.56);
+  --ink-hint: rgba(15, 23, 42, 0.48);
+  --ink-tag: rgba(15, 23, 42, 0.8);
 
-    // Borders
-    --border: rgba(15, 23, 42, 0.1);
-    --border-light: rgba(15, 23, 42, 0.08);
-    --border-lighter: rgba(15, 23, 42, 0.05);
-    --border-ghost: rgba(15, 23, 42, 0.16);
+  // Borders
+  --border: rgba(15, 23, 42, 0.1);
+  --border-light: rgba(15, 23, 42, 0.08);
+  --border-lighter: rgba(15, 23, 42, 0.05);
+  --border-ghost: rgba(15, 23, 42, 0.16);
 
-    // Shadows
-    --shadow-soft: 0 4px 24px rgba(15, 23, 42, 0.08);
-    --shadow-medium: 0 8px 32px rgba(15, 23, 42, 0.12);
-    --shadow-strong: rgba(15, 23, 42, 0.18);
-    --shadow-light: rgba(15, 23, 42, 0.06);
-    --shadow-lighter: rgba(15, 23, 42, 0.04);
-    --shadow-elevated: 0 12px 40px rgba(15, 23, 42, 0.15);
+  // Shadows
+  --shadow-soft: 0 4px 24px rgba(15, 23, 42, 0.08);
+  --shadow-medium: 0 8px 32px rgba(15, 23, 42, 0.12);
+  --shadow-strong: rgba(15, 23, 42, 0.18);
+  --shadow-light: rgba(15, 23, 42, 0.06);
+  --shadow-lighter: rgba(15, 23, 42, 0.04);
+  --shadow-elevated: 0 12px 40px rgba(15, 23, 42, 0.15);
 
-    // Fills
-    --fill-subtle: rgba(15, 23, 42, 0.04);
-    --fill-tag: rgba(15, 23, 42, 0.06);
-    --fill-ring: rgba(15, 23, 42, 0.4);
-    --fill-hover: rgba(15, 23, 42, 0.03);
+  // Fills
+  --fill-subtle: rgba(15, 23, 42, 0.04);
+  --fill-tag: rgba(15, 23, 42, 0.06);
+  --fill-ring: rgba(15, 23, 42, 0.4);
+  --fill-hover: rgba(15, 23, 42, 0.03);
 
-    // App background
-    --app-gradient-end: #e7ecf3;
-    --app-gradient-overlay: rgba(255, 255, 255, 0.85);
+  // App background
+  --app-gradient-end: #e7ecf3;
+  --app-gradient-overlay: rgba(255, 255, 255, 0.85);
 }
 
 [data-theme="dark"] {
-    --color-background: #0f172a;
-    --color-surface: #1e293b;
-    --color-text: #e2e8f0;
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #e2e8f0;
 
-    --ink: #e2e8f0;
-    --ink-secondary: rgba(226, 232, 240, 0.8);
-    --ink-muted: rgba(226, 232, 240, 0.55);
-    --ink-hint: rgba(226, 232, 240, 0.45);
-    --ink-tag: rgba(226, 232, 240, 0.85);
+  --ink: #e2e8f0;
+  --ink-secondary: rgba(226, 232, 240, 0.8);
+  --ink-muted: rgba(226, 232, 240, 0.55);
+  --ink-hint: rgba(226, 232, 240, 0.45);
+  --ink-tag: rgba(226, 232, 240, 0.85);
 
-    --border: rgba(226, 232, 240, 0.1);
-    --border-light: rgba(226, 232, 240, 0.08);
-    --border-lighter: rgba(226, 232, 240, 0.05);
-    --border-ghost: rgba(226, 232, 240, 0.16);
+  --border: rgba(226, 232, 240, 0.1);
+  --border-light: rgba(226, 232, 240, 0.08);
+  --border-lighter: rgba(226, 232, 240, 0.05);
+  --border-ghost: rgba(226, 232, 240, 0.16);
 
-    --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
-    --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.35);
-    --shadow-strong: rgba(0, 0, 0, 0.4);
-    --shadow-light: rgba(0, 0, 0, 0.2);
-    --shadow-lighter: rgba(0, 0, 0, 0.15);
-    --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --shadow-strong: rgba(0, 0, 0, 0.4);
+  --shadow-light: rgba(0, 0, 0, 0.2);
+  --shadow-lighter: rgba(0, 0, 0, 0.15);
+  --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.4);
 
-    --fill-subtle: rgba(226, 232, 240, 0.05);
-    --fill-tag: rgba(226, 232, 240, 0.08);
-    --fill-ring: rgba(226, 232, 240, 0.5);
-    --fill-hover: rgba(226, 232, 240, 0.04);
+  --fill-subtle: rgba(226, 232, 240, 0.05);
+  --fill-tag: rgba(226, 232, 240, 0.08);
+  --fill-ring: rgba(226, 232, 240, 0.5);
+  --fill-hover: rgba(226, 232, 240, 0.04);
 
-    --app-gradient-end: #0c1220;
-    --app-gradient-overlay: rgba(0, 0, 0, 0.3);
+  --app-gradient-end: #0c1220;
+  --app-gradient-overlay: rgba(0, 0, 0, 0.3);
 }
 
 body {
-    font-family: var(--font-sans);
-    color: var(--color-text);
-    background: var(--color-background);
-    line-height: 1.5;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-background);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
