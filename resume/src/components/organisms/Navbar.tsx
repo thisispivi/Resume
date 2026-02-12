@@ -22,7 +22,13 @@ const FLAG_MAP: Record<string, string> = {
 };
 
 /** Top navigation bar with app branding, language switcher, and dark mode toggle. */
-function Navbar({ appLocale, onAppLocaleChange, isDark, onToggleDark, onToggleSidebar }: NavbarProps) {
+function Navbar({
+  appLocale,
+  onAppLocaleChange,
+  isDark,
+  onToggleDark,
+  onToggleSidebar,
+}: NavbarProps) {
   const { t } = useTranslation();
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [menuPos, setMenuPos] = useState<{ top: number; left: number } | null>(null);

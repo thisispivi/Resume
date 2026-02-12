@@ -22,12 +22,15 @@ function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
       </header>
 
       <main className="template-executive__body">
-        {data.summary ? <section className="resume-section">
+        {data.summary ? (
+          <section className="resume-section">
             <h2 className="resume-section__title">{t("sectionTitles.profile")}</h2>
             <p className="resume-section__body">{data.summary}</p>
-          </section> : null}
+          </section>
+        ) : null}
 
-        {data.experience && data.experience.length > 0 ? <section className="resume-section">
+        {data.experience && data.experience.length > 0 ? (
+          <section className="resume-section">
             <h2 className="resume-section__title">{t("sectionTitles.experience")}</h2>
             {data.experience.map((experience, index) => (
               <div className="resume-entry" key={`${experience.company}-${index}`}>
@@ -39,9 +42,11 @@ function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
                 <p className="resume-entry__body">{experience.description}</p>
               </div>
             ))}
-          </section> : null}
+          </section>
+        ) : null}
 
-        {data.education && data.education.length > 0 ? <section className="resume-section">
+        {data.education && data.education.length > 0 ? (
+          <section className="resume-section">
             <h2 className="resume-section__title">{t("sectionTitles.education")}</h2>
             {data.education.map((education, index) => (
               <div className="resume-entry" key={`${education.institution}-${index}`}>
@@ -50,55 +55,71 @@ function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
                   <span className="resume-entry__date">{education.duration}</span>
                 </div>
                 <p className="resume-entry__subtitle">{education.institution}</p>
-                {education.grades ? <p className="resume-entry__detail">
+                {education.grades ? (
+                  <p className="resume-entry__detail">
                     {t("fieldLabels.grade")}: {education.grades}
-                  </p> : null}
-                {education.thesis ? <p className="resume-entry__detail">
+                  </p>
+                ) : null}
+                {education.thesis ? (
+                  <p className="resume-entry__detail">
                     {t("fieldLabels.thesis")}: {education.thesis}
-                  </p> : null}
+                  </p>
+                ) : null}
               </div>
             ))}
-          </section> : null}
+          </section>
+        ) : null}
 
-        {data.projects && data.projects.length > 0 ? <section className="resume-section">
+        {data.projects && data.projects.length > 0 ? (
+          <section className="resume-section">
             <h2 className="resume-section__title">{t("sectionTitles.projects")}</h2>
             {data.projects.map((project, index) => (
               <div className="resume-entry" key={`${project.name}-${index}`}>
                 <h3 className="resume-entry__title">{project.name}</h3>
                 <p className="resume-entry__body">{project.description}</p>
-                {project.technologies && project.technologies.length > 0 ? <div className="resume-tags">
+                {project.technologies && project.technologies.length > 0 ? (
+                  <div className="resume-tags">
                     {project.technologies.map((tech) => (
                       <span className="resume-tag" key={tech}>
                         {tech}
                       </span>
                     ))}
-                  </div> : null}
-                {project.link ? <a
+                  </div>
+                ) : null}
+                {project.link ? (
+                  <a
                     className="resume-entry__link"
                     href={project.link}
                     rel="noreferrer"
                     target="_blank"
                   >
                     {project.link}
-                  </a> : null}
+                  </a>
+                ) : null}
               </div>
             ))}
-          </section> : null}
+          </section>
+        ) : null}
 
-        {data.certifications && data.certifications.length > 0 ? <section className="resume-section">
+        {data.certifications && data.certifications.length > 0 ? (
+          <section className="resume-section">
             <h2 className="resume-section__title">{t("sectionTitles.certifications")}</h2>
             {data.certifications.map((certification, index) => (
               <div className="resume-entry" key={`${certification.name}-${index}`}>
                 <div className="resume-entry__header">
                   <h3 className="resume-entry__title">{certification.name}</h3>
-                  {certification.date ? <span className="resume-entry__date">{certification.date}</span> : null}
+                  {certification.date ? (
+                    <span className="resume-entry__date">{certification.date}</span>
+                  ) : null}
                 </div>
                 <p className="resume-entry__subtitle">{certification.issuer}</p>
               </div>
             ))}
-          </section> : null}
+          </section>
+        ) : null}
 
-        {data.skills && data.skills.length > 0 ? <section className="resume-section">
+        {data.skills && data.skills.length > 0 ? (
+          <section className="resume-section">
             <h2 className="resume-section__title">{t("sectionTitles.skills")}</h2>
             <div className="resume-section__body">
               {data.skills.map((category) => (
@@ -108,9 +129,11 @@ function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
                 </div>
               ))}
             </div>
-          </section> : null}
+          </section>
+        ) : null}
 
-        {data.languages && data.languages.length > 0 ? <section className="resume-section">
+        {data.languages && data.languages.length > 0 ? (
+          <section className="resume-section">
             <h2 className="resume-section__title">{t("sectionTitles.languages")}</h2>
             <ul className="template-executive__languages">
               {data.languages.map((language) => (
@@ -119,7 +142,8 @@ function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
                 </li>
               ))}
             </ul>
-          </section> : null}
+          </section>
+        ) : null}
       </main>
     </div>
   );

@@ -203,9 +203,11 @@ function ResumeBuilderPage() {
             data-theme={isPdfDark ? "dark" : "light"}
             style={pdfThemeStyle}
           >
-            {isFontLoading ? <div className="font-loading-overlay">
+            {isFontLoading ? (
+              <div className="font-loading-overlay">
                 <Spinner size={40} />
-              </div> : null}
+              </div>
+            ) : null}
             <ResumePreview data={resumeData} pdfLocale={activePdfLocale} templateId={templateId} />
           </div>
         ) : (
