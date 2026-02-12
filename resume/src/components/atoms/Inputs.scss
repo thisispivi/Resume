@@ -107,3 +107,45 @@
   color: var(--ink-muted);
   letter-spacing: 0.02em;
 }
+
+// ── Text Input / TextArea ──
+.text-input {
+  @include flex-col($space-1);
+}
+
+.text-input__label {
+  font-size: $fs-sm;
+  font-weight: $fw-medium;
+  color: var(--ink-secondary);
+}
+
+.text-input__field {
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  border: 1px solid var(--border);
+  background: var(--color-surface);
+  color: var(--ink);
+  font-size: $fs-md;
+  font-family: inherit;
+  line-height: 1.5;
+  @include transition(border-color, box-shadow);
+
+  &::placeholder {
+    color: var(--ink-hint);
+  }
+
+  &:hover {
+    border-color: var(--border-ghost);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent), transparent 80%);
+  }
+
+  &--textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+}

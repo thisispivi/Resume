@@ -1,19 +1,20 @@
 interface ToggleProps {
   label: string;
-  checked: boolean;
+  isChecked: boolean;
   onChange: () => void;
 }
 
-function Toggle({ label, checked, onChange }: ToggleProps) {
+/** Labeled on/off switch rendered as an accessible role="switch" button. */
+function Toggle({ label, isChecked, onChange }: ToggleProps) {
   return (
     <label className="toggle">
       <span className="toggle__label">{label}</span>
       <button
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        className={`toggle__track${checked ? " toggle__track--on" : ""}`}
+        aria-checked={isChecked}
+        className={`toggle__track${isChecked ? " toggle__track--on" : ""}`}
         onClick={onChange}
+        role="switch"
+        type="button"
       >
         <span className="toggle__thumb" />
       </button>

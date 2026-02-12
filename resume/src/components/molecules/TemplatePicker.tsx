@@ -9,6 +9,7 @@ interface TemplatePickerProps {
   onChange: (value: TemplateId) => void;
 }
 
+/** Dropdown for selecting a resume layout template. */
 function TemplatePicker({ templates, value, onChange }: TemplatePickerProps) {
   const { t } = useTranslation();
 
@@ -24,9 +25,9 @@ function TemplatePicker({ templates, value, onChange }: TemplatePickerProps) {
   return (
     <Dropdown
       label={t("templateLabel")}
+      onChange={(v) => onChange(v as TemplateId)}
       options={options}
       value={value}
-      onChange={(v) => onChange(v as TemplateId)}
     />
   );
 }

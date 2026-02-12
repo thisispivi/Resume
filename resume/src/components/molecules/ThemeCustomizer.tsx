@@ -7,6 +7,7 @@ interface ThemeCustomizerProps {
   onChange: (colors: ThemeColors) => void;
 }
 
+/** Grid of color inputs for fine-tuning individual theme color values. */
 function ThemeCustomizer({ colors, onChange }: ThemeCustomizerProps) {
   const { t } = useTranslation();
 
@@ -21,38 +22,38 @@ function ThemeCustomizer({ colors, onChange }: ThemeCustomizerProps) {
         <ColorInput
           id="color-primary"
           label={t("primaryColorLabel")}
-          value={colors.primary}
           onChange={(value) => handleChange("primary", value)}
+          value={colors.primary}
         />
         <ColorInput
           id="color-secondary"
           label={t("secondaryColorLabel")}
-          value={colors.secondary}
           onChange={(value) => handleChange("secondary", value)}
+          value={colors.secondary}
         />
         <ColorInput
           id="color-accent"
           label={t("accentColorLabel")}
-          value={colors.accent}
           onChange={(value) => handleChange("accent", value)}
+          value={colors.accent}
         />
         <ColorInput
           id="color-background"
           label={t("backgroundColorLabel")}
-          value={colors.background}
           onChange={(value) => handleChange("background", value)}
+          value={colors.background}
         />
         <ColorInput
           id="color-surface"
           label={t("surfaceColorLabel")}
-          value={colors.surface}
           onChange={(value) => handleChange("surface", value)}
+          value={colors.surface}
         />
         <ColorInput
           id="color-text"
           label={t("textColorLabel")}
-          value={colors.text}
           onChange={(value) => handleChange("text", value)}
+          value={colors.text}
         />
       </div>
     </div>

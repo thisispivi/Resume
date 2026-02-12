@@ -8,6 +8,7 @@ interface FontPickerProps {
   onChange: (font: GoogleFont) => void;
 }
 
+/** Dropdown for selecting a Google Font, auto-loading the chosen font stylesheet. */
 function FontPicker({ value, onChange }: FontPickerProps) {
   const { t } = useTranslation();
 
@@ -34,7 +35,7 @@ function FontPicker({ value, onChange }: FontPickerProps) {
   };
 
   return (
-    <Dropdown label={t("fontLabel")} options={options} value={value} onChange={handleChange} />
+    <Dropdown label={t("fontLabel")} onChange={handleChange} options={options} value={value} />
   );
 }
 

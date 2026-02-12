@@ -4,10 +4,11 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
 }
 
+/** Native HTML select wrapped with an optional label. */
 function Select({ label, className = "", ...props }: SelectProps) {
   return (
     <label className={`select ${className}`.trim()}>
-      {label && <span className="select__label">{label}</span>}
+      {label ? <span className="select__label">{label}</span> : null}
       <select className="select__field" {...props} />
     </label>
   );

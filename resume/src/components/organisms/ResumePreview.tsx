@@ -23,14 +23,15 @@ const templateMap = {
   compact: TemplateCompact,
 };
 
+/** Renders the selected resume template inside a preview container. */
 function ResumePreview({ data, templateId, pdfLocale }: ResumePreviewProps) {
   const Template = templateMap[templateId] ?? TemplateModern;
 
   return (
     <div className="resume-preview">
       <div
-        id="resume-preview"
         className={`resume-preview__page resume-preview__page--${templateId}`}
+        id="resume-preview"
       >
         <Template data={data} pdfLocale={pdfLocale} />
       </div>

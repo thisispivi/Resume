@@ -7,6 +7,7 @@ interface PdfOptions {
   backgroundColor?: string;
 }
 
+/** Captures a DOM element as an image and saves it as a single-page A4 PDF. */
 export const generateSinglePagePdf = async ({
   elementId,
   fileName,

@@ -4,29 +4,32 @@ import Dropdown from "../atoms/Dropdown";
 import { SUPPORTED_LOCALES } from "../../i18n";
 
 interface LocalePickerProps {
-  value: string;
-  onChange: (value: string) => void;
   label?: string;
+  locales?: readonly string[];
+  onChange: (value: string) => void;
+  value: string;
 }
 
-function LocalePicker({ value, onChange, label }: LocalePickerProps) {
+/** Dropdown for choosing a locale. Uses SUPPORTED_LOCALES by default or a custom list. */
+function LocalePicker({ label, locales, onChange, value }: LocalePickerProps) {
   const { t } = useTranslation();
+  const activeLocales = locales ?? SUPPORTED_LOCALES;
 
   const options = useMemo(
     () =>
-      SUPPORTED_LOCALES.map((locale) => ({
+      activeLocales.map((locale) => ({
         value: locale,
-        label: t(`localeNames.${locale}`),
+        label: t(`localeNames.${locale}`, { defaultValue: locale }),
       })),
-    [t],
+    [activeLocales, t],
   );
 
   return (
     <Dropdown
       label={label ?? t("localeLabel")}
+      onChange={onChange}
       options={options}
       value={value}
-      onChange={onChange}
     />
   );
 }

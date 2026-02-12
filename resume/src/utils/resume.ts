@@ -81,6 +81,7 @@ export const buildResumeTemplate = (): Record<string, unknown> => ({
   },
 });
 
+/** Serializes data to JSON and triggers a browser file download. */
 export const downloadJsonFile = (data: unknown, fileName: string) => {
   const json = JSON.stringify(data, null, 2);
   const blob = new Blob([json], { type: "application/json" });
@@ -94,6 +95,7 @@ export const downloadJsonFile = (data: unknown, fileName: string) => {
   URL.revokeObjectURL(url);
 };
 
+/** Extracts up to two uppercase initials from a full name. */
 export const getInitials = (name: string) => {
   if (!name) return "";
   return name
@@ -105,6 +107,7 @@ export const getInitials = (name: string) => {
     .slice(0, 2);
 };
 
+/** Returns the first locale key in the map, or the fallback if the map is empty. */
 export const getFirstLocale = (resumeDataMap: ResumeDataMap, fallback: string) => {
   const locales = Object.keys(resumeDataMap);
   return locales.length > 0 ? locales[0] : fallback;

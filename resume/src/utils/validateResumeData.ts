@@ -105,6 +105,7 @@ const validateResumeData = (value: unknown): value is ResumeData => {
   return true;
 };
 
+/** Validates an unknown payload as a locale-keyed ResumeDataMap, returning parsed data or errors. */
 export const validateResumeDataMap = (payload: unknown): ValidationResult => {
   const errors: string[] = [];
 

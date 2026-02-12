@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 import rawData from "../data.json";
 import Navbar from "../components/organisms/Navbar";
 import Sidebar from "../components/organisms/Sidebar";
 import ResumePreview from "../components/organisms/ResumePreview";
+import ResumeEditorModal from "../components/molecules/ResumeEditorModal";
 import Button from "../components/atoms/Button";
 import Spinner from "../components/atoms/Spinner";
 import { THEME_PALETTES } from "../data/palettes";
@@ -13,7 +14,7 @@ import { GOOGLE_FONTS, loadGoogleFont, buildFontFamily } from "../data/fonts";
 import type { GoogleFont } from "../data/fonts";
 import { DEFAULT_LOCALE } from "../i18n";
 import { useTheme } from "../context/useTheme";
-import type { ResumeDataMap, TemplateId, ThemeColors, ThemePalette } from "../types";
+import type { ResumeData, ResumeDataMap, TemplateId, ThemeColors, ThemePalette } from "../types";
 import { getFirstLocale } from "../utils/resume";
 import { generateSinglePagePdf } from "../utils/pdf";
 import { validateResumeDataMap } from "../utils/validateResumeData";
@@ -28,6 +29,7 @@ const DARK_OVERRIDES = {
 
 const DEFAULT_FONT = GOOGLE_FONTS[0];
 
+/** Main page orchestrating resume data, theming, template selection, and PDF export. */
 function ResumeBuilderPage() {
   const { t, i18n } = useTranslation();
   const [resumeDataMap, setResumeDataMap] = useState<ResumeDataMap>(DEFAULT_DATA);
@@ -36,17 +38,18 @@ function ResumeBuilderPage() {
   const [paletteId, setPaletteId] = useState(THEME_PALETTES[0].id);
   const [colors, setColors] = useState<ThemeColors>(THEME_PALETTES[0].colors);
   const [uploadError, setUploadError] = useState<string | null>(null);
-  const [downloading, setDownloading] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const [isPdfDark, setIsPdfDark] = useState(false);
   const [resumeFont, setResumeFont] = useState<GoogleFont>(DEFAULT_FONT);
-  const [fontLoading, setFontLoading] = useState(false);
+  const [isFontLoading, setIsFontLoading] = useState(false);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
   const { isDark, toggleDark } = useTheme();
 
   const appLocale = i18n.language;
 
   useEffect(() => {
-    setFontLoading(true);
-    loadGoogleFont(resumeFont).then(() => setFontLoading(false));
+    setIsFontLoading(true);
+    loadGoogleFont(resumeFont).then(() => setIsFontLoading(false));
   }, [resumeFont]);
 
   const availableLocales = useMemo(() => Object.keys(resumeDataMap), [resumeDataMap]);
@@ -119,8 +122,22 @@ function ResumeBuilderPage() {
     }
   };
 
+  const handleEditResume = useCallback(() => {
+    setIsEditorOpen(true);
+  }, []);
+
+  const handleEditorSave = useCallback(
+    (updatedData: ResumeData) => {
+      setResumeDataMap((prev) => ({
+        ...prev,
+        [activePdfLocale]: updatedData,
+      }));
+    },
+    [activePdfLocale],
+  );
+
   const handleDownloadPdf = async () => {
-    setDownloading(true);
+    setIsDownloading(true);
     try {
       const fileName = resumeData?.name
         ? `${resumeData.name.replace(/\s+/g, "_")}_Resume.pdf`
@@ -133,7 +150,7 @@ function ResumeBuilderPage() {
     } catch (error) {
       console.error("PDF generation failed:", error);
     } finally {
-      setDownloading(false);
+      setIsDownloading(false);
     }
   };
 
@@ -141,43 +158,43 @@ function ResumeBuilderPage() {
     <div className="app" style={appThemeStyle}>
       <Navbar
         appLocale={appLocale}
-        onAppLocaleChange={handleAppLocaleChange}
         isDark={isDark}
+        onAppLocaleChange={handleAppLocaleChange}
         onToggleDark={toggleDark}
       />
 
       <Sidebar
-        templates={TEMPLATE_OPTIONS}
-        templateId={templateId}
-        onTemplateChange={setTemplateId}
-        palettes={THEME_PALETTES}
-        paletteId={paletteId}
-        onPaletteChange={handlePaletteChange}
+        availableLocales={availableLocales}
         colors={colors}
-        onColorsChange={handleColorsChange}
-        pdfLocale={activePdfLocale}
-        onPdfLocaleChange={handlePdfLocaleChange}
-        uploadError={uploadError}
-        onUploadData={handleUpload}
-        isPdfDark={isPdfDark}
-        onTogglePdfDark={togglePdfDark}
         fontFamily={resumeFont.family}
+        isPdfDark={isPdfDark}
+        onColorsChange={handleColorsChange}
+        onEditResume={handleEditResume}
         onFontChange={handleFontChange}
+        onPaletteChange={handlePaletteChange}
+        onPdfLocaleChange={handlePdfLocaleChange}
+        onTemplateChange={setTemplateId}
+        onTogglePdfDark={togglePdfDark}
+        onUploadData={handleUpload}
+        paletteId={paletteId}
+        palettes={THEME_PALETTES}
+        pdfLocale={activePdfLocale}
+        templateId={templateId}
+        templates={TEMPLATE_OPTIONS}
+        uploadError={uploadError}
       />
 
       <div className="preview-container">
         {resumeData ? (
           <div
             className="preview-wrapper"
-            style={pdfThemeStyle}
             data-theme={isPdfDark ? "dark" : "light"}
+            style={pdfThemeStyle}
           >
-            {fontLoading && (
-              <div className="font-loading-overlay">
+            {isFontLoading ? <div className="font-loading-overlay">
                 <Spinner size={40} />
-              </div>
-            )}
-            <ResumePreview data={resumeData} templateId={templateId} pdfLocale={activePdfLocale} />
+              </div> : null}
+            <ResumePreview data={resumeData} pdfLocale={activePdfLocale} templateId={templateId} />
           </div>
         ) : (
           <div className="preview-empty">{t("uploadErrorMissing")}</div>
@@ -185,10 +202,19 @@ function ResumeBuilderPage() {
       </div>
 
       <div className="fab-download">
-        <Button onClick={handleDownloadPdf} disabled={downloading}>
-          {downloading ? t("generatingLabel") : t("downloadLabel")}
+        <Button disabled={isDownloading} onClick={handleDownloadPdf}>
+          {isDownloading ? t("generatingLabel") : t("downloadLabel")}
         </Button>
       </div>
+
+      {resumeData ? (
+        <ResumeEditorModal
+          data={resumeData}
+          isOpen={isEditorOpen}
+          onClose={() => setIsEditorOpen(false)}
+          onSave={handleEditorSave}
+        />
+      ) : null}
     </div>
   );
 }

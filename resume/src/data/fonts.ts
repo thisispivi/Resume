@@ -1,9 +1,11 @@
+/** Metadata for a Google Font including family name, weights, and category. */
 export interface GoogleFont {
   family: string;
   weights: number[];
   category: "sans-serif" | "serif" | "monospace" | "display" | "handwriting";
 }
 
+/** Curated list of Google Fonts available for the resume. */
 export const GOOGLE_FONTS: GoogleFont[] = [
   { family: "Inter", weights: [300, 400, 500, 600, 700], category: "sans-serif" },
   { family: "Plus Jakarta Sans", weights: [300, 400, 500, 600, 700], category: "sans-serif" },
@@ -31,6 +33,7 @@ export const GOOGLE_FONTS: GoogleFont[] = [
 
 const loadedFonts = new Map<string, Promise<void>>();
 
+/** Loads a Google Font stylesheet into the document head (cached per family). */
 export function loadGoogleFont(font: GoogleFont): Promise<void> {
   const existing = loadedFonts.get(font.family);
   if (existing) return existing;
@@ -53,6 +56,7 @@ export function loadGoogleFont(font: GoogleFont): Promise<void> {
   return promise;
 }
 
+/** Builds a CSS font-family string with appropriate fallbacks for the given font. */
 export function buildFontFamily(font: GoogleFont): string {
   const fallbacks: Record<string, string> = {
     "sans-serif": '"Segoe UI", "Helvetica Neue", sans-serif',

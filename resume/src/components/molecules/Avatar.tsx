@@ -7,6 +7,7 @@ interface AvatarProps {
   className?: string;
 }
 
+/** Displays a user photo or falls back to initials when the image is unavailable. */
 function Avatar({ name, photo, className = "" }: AvatarProps) {
   const [hasError, setHasError] = useState(false);
   const initials = getInitials(name);
@@ -15,7 +16,7 @@ function Avatar({ name, photo, className = "" }: AvatarProps) {
   return (
     <div className={`avatar ${className}`.trim()}>
       {showPhoto ? (
-        <img src={photo} alt={name} className="avatar__img" onError={() => setHasError(true)} />
+        <img alt={name} className="avatar__img" onError={() => setHasError(true)} src={photo} />
       ) : (
         <span className="avatar__initials">{initials}</span>
       )}

@@ -1,5 +1,6 @@
 import type { TemplateOption } from "../types";
 
+/** Available resume layout templates with i18n label keys. */
 export const TEMPLATE_OPTIONS: TemplateOption[] = [
   { id: "modern", labelKey: "template.modern", fallbackLabel: "Modern" },
   { id: "classic", labelKey: "template.classic", fallbackLabel: "Classic" },

@@ -10,12 +10,14 @@
 @use "../components/atoms/Inputs";
 @use "../components/atoms/Toggle";
 @use "../components/atoms/Spinner";
+@use "../components/atoms/Modal";
 
 // Molecules
 @use "../components/molecules/ColorPalettePicker";
 @use "../components/molecules/ThemeCustomizer";
 @use "../components/molecules/FileUploader";
 @use "../components/molecules/Avatar";
+@use "../components/molecules/ResumeEditorModal";
 
 // Organisms
 @use "../components/organisms/Navbar";

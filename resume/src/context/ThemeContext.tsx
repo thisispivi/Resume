@@ -1,6 +1,7 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { ThemeContext } from "./ThemeContextValue";
 
+/** Provides dark/light theme state and toggle to the component tree. */
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [isDark, setIsDark] = useState(() => {
     const stored = localStorage.getItem("theme");

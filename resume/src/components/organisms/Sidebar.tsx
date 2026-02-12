@@ -12,41 +12,46 @@ import type { GoogleFont } from "../../data/fonts";
 import { buildResumeTemplate, downloadJsonFile } from "../../utils/resume";
 
 interface SidebarProps {
-  templates: TemplateOption[];
-  templateId: TemplateId;
-  onTemplateChange: (value: TemplateId) => void;
-  palettes: ThemePalette[];
-  paletteId: string;
-  onPaletteChange: (palette: ThemePalette) => void;
+  availableLocales: string[];
   colors: ThemeColors;
-  onColorsChange: (colors: ThemeColors) => void;
-  pdfLocale: string;
-  onPdfLocaleChange: (value: string) => void;
-  uploadError: string | null;
-  onUploadData: (file: File | null) => void;
-  isPdfDark: boolean;
-  onTogglePdfDark: () => void;
   fontFamily: string;
+  isPdfDark: boolean;
+  onColorsChange: (colors: ThemeColors) => void;
+  onEditResume: () => void;
   onFontChange: (font: GoogleFont) => void;
+  onPaletteChange: (palette: ThemePalette) => void;
+  onPdfLocaleChange: (value: string) => void;
+  onTemplateChange: (value: TemplateId) => void;
+  onTogglePdfDark: () => void;
+  onUploadData: (file: File | null) => void;
+  paletteId: string;
+  palettes: ThemePalette[];
+  pdfLocale: string;
+  templateId: TemplateId;
+  templates: TemplateOption[];
+  uploadError: string | null;
 }
 
+/** Side panel containing all resume customization controls (template, palette, font, upload, etc.). */
 function Sidebar({
-  templates,
-  templateId,
-  onTemplateChange,
-  palettes,
-  paletteId,
-  onPaletteChange,
+  availableLocales,
   colors,
-  onColorsChange,
-  pdfLocale,
-  onPdfLocaleChange,
-  uploadError,
-  onUploadData,
-  isPdfDark,
-  onTogglePdfDark,
   fontFamily,
+  isPdfDark,
+  onColorsChange,
+  onEditResume,
   onFontChange,
+  onPaletteChange,
+  onPdfLocaleChange,
+  onTemplateChange,
+  onTogglePdfDark,
+  onUploadData,
+  paletteId,
+  palettes,
+  pdfLocale,
+  templateId,
+  templates,
+  uploadError,
 }: SidebarProps) {
   const { t } = useTranslation();
 
@@ -58,46 +63,50 @@ function Sidebar({
     <aside className="sidebar">
       <nav className="sidebar__content">
         <section className="sidebar__section sidebar__actions">
-          <Button variant="ghost" onClick={handleDownloadTemplate}>
+          <Button onClick={onEditResume} variant="ghost">
+            {t("editResumeLabel")}
+          </Button>
+          <Button onClick={handleDownloadTemplate} variant="ghost">
             {t("downloadTemplateLabel")}
           </Button>
         </section>
 
         <section className="sidebar__section">
           <FileUploader
-            label={t("uploadLabel")}
             hint={t("uploadHint")}
+            label={t("uploadLabel")}
             onFileSelect={onUploadData}
           />
-          {uploadError && <span className="sidebar__error">{uploadError}</span>}
+          {uploadError ? <span className="sidebar__error">{uploadError}</span> : null}
         </section>
 
         <section className="sidebar__section">
-          <Toggle label={t("pdfDarkModeLabel")} checked={isPdfDark} onChange={onTogglePdfDark} />
+          <Toggle isChecked={isPdfDark} label={t("pdfDarkModeLabel")} onChange={onTogglePdfDark} />
         </section>
 
         <section className="sidebar__section">
-          <TemplatePicker templates={templates} value={templateId} onChange={onTemplateChange} />
+          <TemplatePicker onChange={onTemplateChange} templates={templates} value={templateId} />
         </section>
 
         <section className="sidebar__section">
-          <FontPicker value={fontFamily} onChange={onFontChange} />
+          <FontPicker onChange={onFontChange} value={fontFamily} />
         </section>
 
         <section className="sidebar__section">
           <LocalePicker
             label={t("pdfLanguageLabel")}
-            value={pdfLocale}
+            locales={availableLocales}
             onChange={onPdfLocaleChange}
+            value={pdfLocale}
           />
         </section>
 
         <section className="sidebar__section">
           <ColorPalettePicker
             label={t("paletteLabel")}
+            onSelect={onPaletteChange}
             palettes={palettes}
             selectedId={paletteId}
-            onSelect={onPaletteChange}
           />
         </section>
 

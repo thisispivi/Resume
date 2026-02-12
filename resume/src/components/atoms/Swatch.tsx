@@ -5,15 +5,16 @@ interface SwatchProps {
   onClick: () => void;
 }
 
+/** Small colored circle button used for palette selection. */
 function Swatch({ color, isActive, label, onClick }: SwatchProps) {
   return (
     <button
-      type="button"
-      className={`swatch${isActive ? " swatch--active" : ""}`}
-      style={{ backgroundColor: color }}
-      onClick={onClick}
-      title={label}
       aria-label={label}
+      className={`swatch${isActive ? " swatch--active" : ""}`}
+      onClick={onClick}
+      style={{ backgroundColor: color }}
+      title={label}
+      type="button"
     />
   );
 }

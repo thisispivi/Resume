@@ -6,6 +6,7 @@ interface FileUploaderProps {
   onFileSelect: (file: File | null) => void;
 }
 
+/** File input for uploading JSON resume data, with a label and hint text. */
 function FileUploader({ label, hint, onFileSelect }: FileUploaderProps) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] ?? null;
@@ -17,10 +18,10 @@ function FileUploader({ label, hint, onFileSelect }: FileUploaderProps) {
     <label className="file-uploader">
       <span className="file-uploader__label">{label}</span>
       <input
-        className="file-uploader__input"
-        type="file"
         accept=".json,application/json"
+        className="file-uploader__input"
         onChange={handleChange}
+        type="file"
       />
       <span className="file-uploader__hint">{hint}</span>
     </label>

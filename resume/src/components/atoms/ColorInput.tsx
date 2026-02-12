@@ -7,6 +7,7 @@ interface ColorInputProps {
   onChange: (value: string) => void;
 }
 
+/** Labeled color picker input that displays the selected hex value. */
 function ColorInput({ id, label, value, onChange }: ColorInputProps) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -16,11 +17,11 @@ function ColorInput({ id, label, value, onChange }: ColorInputProps) {
     <label className="color-input" htmlFor={id}>
       <span className="color-input__label">{label}</span>
       <input
-        id={id}
         className="color-input__field"
+        id={id}
+        onChange={handleChange}
         type="color"
         value={value}
-        onChange={handleChange}
       />
       <span className="color-input__value">{value}</span>
     </label>

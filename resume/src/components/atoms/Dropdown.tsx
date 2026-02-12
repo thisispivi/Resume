@@ -1,6 +1,7 @@
 import { useId, useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 
+/** A single option within a Dropdown, holding a value and display label. */
 export interface DropdownOption {
   value: string;
   label: string;
@@ -14,6 +15,7 @@ interface DropdownProps {
   className?: string;
 }
 
+/** Accessible custom dropdown (combobox) with keyboard navigation and portal-based menu. */
 function Dropdown({ label, options, value, onChange, className = "" }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -204,12 +206,12 @@ function Dropdown({ label, options, value, onChange, className = "" }: DropdownP
     isOpen && menuStyle
       ? createPortal(
           <ul
-            ref={listRef}
-            id={listboxId}
-            role="listbox"
-            className="dropdown__menu"
-            style={menuStyle}
             aria-labelledby={label ? labelId : undefined}
+            className="dropdown__menu"
+            id={listboxId}
+            ref={listRef}
+            role="listbox"
+            style={menuStyle}
           >
             {options.map((option, index) => {
               const isSelected = option.value === value;
@@ -220,13 +222,13 @@ function Dropdown({ label, options, value, onChange, className = "" }: DropdownP
 
               return (
                 <li
-                  key={option.value}
-                  id={optionId(index)}
-                  role="option"
                   aria-selected={isSelected}
                   className={optionClass}
+                  id={optionId(index)}
+                  key={option.value}
                   onClick={() => selectOption(option.value)}
                   onKeyDown={(e) => handleOptionKeyDown(e, option.value)}
+                  role="option"
                   tabIndex={isHighlighted ? 0 : -1}
                 >
                   {option.label}
@@ -240,42 +242,40 @@ function Dropdown({ label, options, value, onChange, className = "" }: DropdownP
 
   return (
     <div
-      ref={wrapperRef}
       className={`dropdown${isOpen ? " dropdown--open" : ""} ${className}`.trim()}
+      ref={wrapperRef}
     >
-      {label && (
-        <span id={labelId} className="dropdown__label">
+      {label ? <span className="dropdown__label" id={labelId}>
           {label}
-        </span>
-      )}
+        </span> : null}
       <button
-        ref={triggerRef}
-        type="button"
-        className="dropdown__trigger"
-        role="combobox"
+        aria-activedescendant={activeDescendant}
+        aria-controls={listboxId}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        aria-controls={listboxId}
-        aria-activedescendant={activeDescendant}
         aria-labelledby={label ? labelId : undefined}
+        className="dropdown__trigger"
         onClick={toggleMenu}
         onKeyDown={handleTriggerKeyDown}
+        ref={triggerRef}
+        role="combobox"
+        type="button"
       >
         <span>{selectedLabel}</span>
         <svg
+          aria-hidden="true"
           className="dropdown__chevron"
-          width="10"
           height="6"
           viewBox="0 0 10 6"
-          aria-hidden="true"
+          width="10"
         >
           <path
             d="M1 1l4 4 4-4"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
+            strokeWidth="1.5"
           />
         </svg>
       </button>

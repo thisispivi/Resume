@@ -1,4 +1,4 @@
 cd "$(dirname "$0")/../resume"
 
-npx tsc
-npm run lint
+pnpm tsc
+pnpm run lint
