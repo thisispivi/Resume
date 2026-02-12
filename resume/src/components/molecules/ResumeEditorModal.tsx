@@ -14,6 +14,7 @@ import type {
   ResumeData,
   SkillCategory,
 } from "../../types";
+import TrashIcon from "../../assets/icons/trash.svg?react";
 
 type SectionId =
   | "personal"
@@ -100,17 +101,16 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
         </nav>
 
         <div className="resume-editor__content">
-          {activeSection === "personal" ? <PersonalSection
-              draft={draft}
-              onUpdate={updateField}
-            /> : null}
+          {activeSection === "personal" ? (
+            <PersonalSection draft={draft} onUpdate={updateField} />
+          ) : null}
 
-          {activeSection === "contact" ? <ContactSection
-              contact={draft.contact}
-              onUpdate={updateContact}
-            /> : null}
+          {activeSection === "contact" ? (
+            <ContactSection contact={draft.contact} onUpdate={updateContact} />
+          ) : null}
 
-          {activeSection === "experience" ? <ListSection<Experience>
+          {activeSection === "experience" ? (
+            <ListSection<Experience>
               emptyItem={EMPTY_EXPERIENCE}
               items={draft.experience ?? []}
               onUpdate={(items) => updateField("experience", items)}
@@ -118,9 +118,11 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
                 <ExperienceFields index={index} item={item} onChange={onChange} />
               )}
               sectionKey="experience"
-            /> : null}
+            />
+          ) : null}
 
-          {activeSection === "education" ? <ListSection<Education>
+          {activeSection === "education" ? (
+            <ListSection<Education>
               emptyItem={EMPTY_EDUCATION}
               items={draft.education ?? []}
               onUpdate={(items) => updateField("education", items)}
@@ -128,9 +130,11 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
                 <EducationFields index={index} item={item} onChange={onChange} />
               )}
               sectionKey="education"
-            /> : null}
+            />
+          ) : null}
 
-          {activeSection === "skills" ? <ListSection<SkillCategory>
+          {activeSection === "skills" ? (
+            <ListSection<SkillCategory>
               emptyItem={EMPTY_SKILL}
               items={draft.skills ?? []}
               onUpdate={(items) => updateField("skills", items)}
@@ -138,9 +142,11 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
                 <SkillFields index={index} item={item} onChange={onChange} />
               )}
               sectionKey="skills"
-            /> : null}
+            />
+          ) : null}
 
-          {activeSection === "languages" ? <ListSection<Language>
+          {activeSection === "languages" ? (
+            <ListSection<Language>
               emptyItem={EMPTY_LANGUAGE}
               items={draft.languages ?? []}
               onUpdate={(items) => updateField("languages", items)}
@@ -148,9 +154,11 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
                 <LanguageFields index={index} item={item} onChange={onChange} />
               )}
               sectionKey="languages"
-            /> : null}
+            />
+          ) : null}
 
-          {activeSection === "projects" ? <ListSection<Project>
+          {activeSection === "projects" ? (
+            <ListSection<Project>
               emptyItem={EMPTY_PROJECT}
               items={draft.projects ?? []}
               onUpdate={(items) => updateField("projects", items)}
@@ -158,9 +166,11 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
                 <ProjectFields index={index} item={item} onChange={onChange} />
               )}
               sectionKey="projects"
-            /> : null}
+            />
+          ) : null}
 
-          {activeSection === "certifications" ? <ListSection<Certification>
+          {activeSection === "certifications" ? (
+            <ListSection<Certification>
               emptyItem={EMPTY_CERTIFICATION}
               items={draft.certifications ?? []}
               onUpdate={(items) => updateField("certifications", items)}
@@ -168,7 +178,8 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
                 <CertificationFields index={index} item={item} onChange={onChange} />
               )}
               sectionKey="certifications"
-            /> : null}
+            />
+          ) : null}
         </div>
 
         <div className="modal__footer">
@@ -263,7 +274,13 @@ interface ListSectionProps<T> {
   sectionKey: string;
 }
 
-function ListSection<T>({ emptyItem, items, onUpdate, renderItem, sectionKey }: ListSectionProps<T>) {
+function ListSection<T>({
+  emptyItem,
+  items,
+  onUpdate,
+  renderItem,
+  sectionKey,
+}: ListSectionProps<T>) {
   const { t } = useTranslation();
 
   const handleAdd = () => {
@@ -292,19 +309,7 @@ function ListSection<T>({ emptyItem, items, onUpdate, renderItem, sectionKey }: 
               onClick={() => handleRemove(index)}
               type="button"
             >
-              <svg
-                aria-hidden="true"
-                fill="none"
-                height="14"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                width="14"
-              >
-                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
-              </svg>
+              <TrashIcon aria-hidden="true" height={14} width={14} />
             </button>
           </div>
           <div className="resume-editor__fields">

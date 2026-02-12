@@ -1,5 +1,6 @@
 import { useId, useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
+import ChevronDownIcon from "@/assets/icons/chevron-down.svg?react";
 
 /** A single option within a Dropdown, holding a value and display label. */
 export interface DropdownOption {
@@ -245,9 +246,11 @@ function Dropdown({ label, options, value, onChange, className = "" }: DropdownP
       className={`dropdown${isOpen ? " dropdown--open" : ""} ${className}`.trim()}
       ref={wrapperRef}
     >
-      {label ? <span className="dropdown__label" id={labelId}>
+      {label ? (
+        <span className="dropdown__label" id={labelId}>
           {label}
-        </span> : null}
+        </span>
+      ) : null}
       <button
         aria-activedescendant={activeDescendant}
         aria-controls={listboxId}
@@ -262,22 +265,7 @@ function Dropdown({ label, options, value, onChange, className = "" }: DropdownP
         type="button"
       >
         <span>{selectedLabel}</span>
-        <svg
-          aria-hidden="true"
-          className="dropdown__chevron"
-          height="6"
-          viewBox="0 0 10 6"
-          width="10"
-        >
-          <path
-            d="M1 1l4 4 4-4"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-          />
-        </svg>
+        <ChevronDownIcon aria-hidden="true" className="dropdown__chevron" height={6} width={10} />
       </button>
       {menu}
     </div>

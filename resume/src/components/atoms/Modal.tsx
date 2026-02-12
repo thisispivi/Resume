@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
+import CloseIcon from "../../assets/icons/close.svg?react";
 
 interface ModalProps {
   children: ReactNode;
@@ -73,34 +74,12 @@ function Modal({ children, isOpen, onClose, title }: ModalProps) {
   if (!isOpen) return null;
 
   return createPortal(
-    <div
-      aria-modal="true"
-      className="modal-backdrop"
-      onClick={handleBackdropClick}
-      role="dialog"
-    >
+    <div aria-modal="true" className="modal-backdrop" onClick={handleBackdropClick} role="dialog">
       <div className="modal" ref={dialogRef}>
         <div className="modal__header">
           <h2 className="modal__title">{title}</h2>
-          <button
-            aria-label="Close"
-            className="modal__close"
-            onClick={onClose}
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              fill="none"
-              height="18"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="18"
-            >
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
+          <button aria-label="Close" className="modal__close" onClick={onClose} type="button">
+            <CloseIcon aria-hidden="true" height={18} width={18} />
           </button>
         </div>
         <div className="modal__body">{children}</div>

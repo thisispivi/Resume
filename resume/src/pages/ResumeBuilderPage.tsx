@@ -203,7 +203,7 @@ function ResumeBuilderPage() {
 
       <div className="fab-download">
         <Button disabled={isDownloading} onClick={handleDownloadPdf}>
-          {isDownloading ? t("generatingLabel") : t("downloadLabel")}
+          {isDownloading ? <Spinner size={24} /> : t("downloadLabel")}
         </Button>
       </div>
 
