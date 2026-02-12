@@ -1,9 +1,9 @@
-import type { Contact } from "../../types";
-import MailIcon from "../../assets/icons/mail.svg?react";
-import PhoneIcon from "../../assets/icons/phone.svg?react";
-import LinkedInIcon from "../../assets/icons/linkedin.svg?react";
-import GitHubIcon from "../../assets/icons/github.svg?react";
-import GlobeIcon from "../../assets/icons/globe.svg?react";
+import type { Contact } from "@/types";
+import MailIcon from "@/assets/icons/mail.svg?react";
+import PhoneIcon from "@/assets/icons/phone.svg?react";
+import LinkedInIcon from "@/assets/icons/linkedin.svg?react";
+import GitHubIcon from "@/assets/icons/github.svg?react";
+import GlobeIcon from "@/assets/icons/globe.svg?react";
 
 interface ContactListProps {
   contact: Contact;

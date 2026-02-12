@@ -1,4 +1,4 @@
-import type { ThemePalette } from "../types";
+import type { ThemePalette } from "@/types";
 
 /** Built-in color palettes available for resume theming. */
 export const THEME_PALETTES: ThemePalette[] = [

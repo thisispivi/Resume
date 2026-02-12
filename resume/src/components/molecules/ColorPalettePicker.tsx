@@ -1,5 +1,5 @@
-import Swatch from "../atoms/Swatch";
-import type { ThemePalette } from "../../types";
+import Swatch from "@/components/atoms/Swatch";
+import type { ThemePalette } from "@/types";
 
 interface ColorPalettePickerProps {
   label: string;

@@ -1,4 +1,4 @@
-import type { ResumeDataMap } from "../types";
+import type { ResumeDataMap } from "@/types";
 
 /**
  * Returns a template ResumeDataMap with example values for every supported

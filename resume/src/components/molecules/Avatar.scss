@@ -2,17 +2,17 @@
 @use "../../styles/base/mixins" as *;
 
 .avatar {
-  width: 96px;
-  height: 96px;
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid rgba(255, 255, 255, 0.5);
+  border: 0.1875rem solid rgba(255, 255, 255, 0.5);
   @include flex-center;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
   font-weight: $fw-bold;
   color: #ffffff;
   box-shadow:
-    0 4px 16px -2px rgba(0, 0, 0, 0.2),
+    0 0.25rem 1rem -0.125rem rgba(0, 0, 0, 0.2),
     0 0 0 1px rgba(255, 255, 255, 0.15) inset;
   flex-shrink: 0;
 }
@@ -26,7 +26,7 @@
 
 .avatar__initials {
   font-size: $fs-resume-name-lg;
-  letter-spacing: 2px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.125rem;
+  text-shadow: 0 1px 0.1875rem rgba(0, 0, 0, 0.15);
   user-select: none;
 }

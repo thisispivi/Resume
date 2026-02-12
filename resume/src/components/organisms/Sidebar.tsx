@@ -1,21 +1,23 @@
 import { useTranslation } from "react-i18next";
-import Button from "../atoms/Button";
-import Toggle from "../atoms/Toggle";
-import ColorPalettePicker from "../molecules/ColorPalettePicker";
-import FileUploader from "../molecules/FileUploader";
-import FontPicker from "../molecules/FontPicker";
-import LocalePicker from "../molecules/LocalePicker";
-import TemplatePicker from "../molecules/TemplatePicker";
-import ThemeCustomizer from "../molecules/ThemeCustomizer";
-import type { TemplateId, TemplateOption, ThemeColors, ThemePalette } from "../../types";
-import type { GoogleFont } from "../../data/fonts";
-import { buildResumeTemplate, downloadJsonFile } from "../../utils/resume";
+import Button from "@/components/atoms/Button";
+import Toggle from "@/components/atoms/Toggle";
+import ColorPalettePicker from "@/components/molecules/ColorPalettePicker";
+import FileUploader from "@/components/molecules/FileUploader";
+import FontPicker from "@/components/molecules/FontPicker";
+import LocalePicker from "@/components/molecules/LocalePicker";
+import TemplatePicker from "@/components/molecules/TemplatePicker";
+import ThemeCustomizer from "@/components/molecules/ThemeCustomizer";
+import type { TemplateId, TemplateOption, ThemeColors, ThemePalette } from "@/types";
+import type { GoogleFont } from "@/data/fonts";
+import { buildResumeTemplate, downloadJsonFile } from "@/utils/resume";
 
 interface SidebarProps {
   availableLocales: string[];
   colors: ThemeColors;
   fontFamily: string;
+  isSidebarOpen: boolean;
   isPdfDark: boolean;
+  onCloseSidebar: () => void;
   onColorsChange: (colors: ThemeColors) => void;
   onEditResume: () => void;
   onFontChange: (font: GoogleFont) => void;
@@ -37,7 +39,9 @@ function Sidebar({
   availableLocales,
   colors,
   fontFamily,
+  isSidebarOpen,
   isPdfDark,
+  onCloseSidebar,
   onColorsChange,
   onEditResume,
   onFontChange,
@@ -60,8 +64,10 @@ function Sidebar({
   };
 
   return (
-    <aside className="sidebar">
-      <nav className="sidebar__content">
+    <>
+      {isSidebarOpen ? <div className="sidebar-overlay" onClick={onCloseSidebar} /> : null}
+      <aside className={`sidebar${isSidebarOpen ? " sidebar--open" : ""}`}>
+        <nav className="sidebar__content">
         <section className="sidebar__section sidebar__actions">
           <Button onClick={onEditResume} variant="ghost">
             {t("editResumeLabel")}
@@ -114,7 +120,8 @@ function Sidebar({
           <ThemeCustomizer colors={colors} onChange={onColorsChange} />
         </section>
       </nav>
-    </aside>
+      </aside>
+    </>
   );
 }
 

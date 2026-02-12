@@ -17,6 +17,7 @@
   "downloadLabel": "Download PDF",
   "downloadTemplateLabel": "Download Template",
   "darkModeLabel": "Dark Mode",
+  "menuLabel": "Menu",
   "pdfDarkModeLabel": "PDF Dark Mode",
   "generatingLabel": "Generating...",
   "uploadErrorInvalid": "Invalid JSON. Please upload a valid resume data file.",

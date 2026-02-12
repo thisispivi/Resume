@@ -4,7 +4,7 @@
 // ── Select ──
 .select {
   @include flex-col($space-1);
-  min-width: 140px;
+  min-width: 8.75rem;
   font-size: $fs-sm;
 }
 
@@ -44,7 +44,7 @@
   &:focus {
     outline: none;
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent), transparent 80%);
+    box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--color-accent), transparent 80%);
   }
 
   &:focus-visible {
@@ -55,7 +55,7 @@
 // ── Color Input ──
 .color-input {
   display: grid;
-  grid-template-columns: auto 36px auto;
+  grid-template-columns: auto 2.25rem auto;
   gap: $space-2;
   align-items: center;
   font-size: $fs-sm;
@@ -67,12 +67,12 @@
 }
 
 .color-input__field {
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
   border: 2px solid var(--border-light);
   border-radius: $radius-sm;
   background: transparent;
-  padding: 2px;
+  padding: 0.125rem;
   cursor: pointer;
   @include transition(border-color, box-shadow, transform);
 
@@ -93,7 +93,7 @@
   &:hover {
     border-color: var(--border-ghost);
     transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
   }
 
   &:focus-visible {
@@ -103,7 +103,7 @@
 
 .color-input__value {
   font-family: $font-mono;
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--ink-muted);
   letter-spacing: 0.02em;
 }
@@ -141,11 +141,11 @@
   &:focus {
     outline: none;
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent), transparent 80%);
+    box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--color-accent), transparent 80%);
   }
 
   &--textarea {
-    min-height: 80px;
+    min-height: 5rem;
     resize: vertical;
   }
 }

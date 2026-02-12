@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Modal from "../atoms/Modal";
-import TextInput from "../atoms/TextInput";
-import TextArea from "../atoms/TextArea";
-import Button from "../atoms/Button";
+import Modal from "@/components/atoms/Modal";
+import TextInput from "@/components/atoms/TextInput";
+import TextArea from "@/components/atoms/TextArea";
+import Button from "@/components/atoms/Button";
 import type {
   Certification,
   Contact,
@@ -13,8 +13,8 @@ import type {
   Project,
   ResumeData,
   SkillCategory,
-} from "../../types";
-import TrashIcon from "../../assets/icons/trash.svg?react";
+} from "@/types";
+import TrashIcon from "@/assets/icons/trash.svg?react";
 
 type SectionId =
   | "personal"

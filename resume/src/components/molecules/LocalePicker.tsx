@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import Dropdown from "../atoms/Dropdown";
-import { SUPPORTED_LOCALES } from "../../i18n";
+import Dropdown from "@/components/atoms/Dropdown";
+import { SUPPORTED_LOCALES } from "@/i18n";
 
 interface LocalePickerProps {
   label?: string;

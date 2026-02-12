@@ -16,8 +16,8 @@
     color-mix(in srgb, var(--color-surface), var(--color-background) 8%) 100%
   );
   box-shadow:
-    0 1px 0 0 var(--border-lighter),
-    0 4px 16px -4px var(--shadow-lighter);
+    0 0.0625rem 0 0 var(--border-lighter),
+    0 0.25rem 1rem -0.25rem var(--shadow-lighter);
   animation: drop-in $duration-slow $ease-out both;
 
   &::after {
@@ -58,9 +58,13 @@
 .navbar__name {
   font-size: $fs-xl;
   font-weight: $fw-bold;
-  letter-spacing: -0.4px;
-  color: var(--ink);
+  letter-spacing: -0.025rem;
+  color: var(--color-primary);
   @include truncate;
+
+  @include below($bp-sm) {
+    display: none;
+  }
 }
 
 .navbar__spacer {
@@ -78,8 +82,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
   border: 1px solid transparent;
   border-radius: $radius-sm;
   background: transparent;
@@ -109,6 +113,36 @@
   }
 }
 
+// ── Hamburger menu button (mobile) ──
+.navbar__menu-btn {
+  display: none;
+
+  @include below($bp-lg) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid transparent;
+    border-radius: $radius-sm;
+    background: transparent;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    @include transition(background, color);
+
+    &:hover {
+      background: var(--fill-subtle);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+}
+
 // ── Language dropdown menu ──
 .navbar-lang-menu {
   z-index: $z-navbar + 10;
@@ -117,11 +151,11 @@
   border: 1px solid var(--border-light);
   border-radius: $radius-md;
   box-shadow:
-    0 8px 24px -4px rgba(0, 0, 0, 0.12),
-    0 4px 8px -2px rgba(0, 0, 0, 0.06);
+    0 0.5rem 1.5rem -0.25rem rgba(0, 0, 0, 0.12),
+    0 0.25rem 0.5rem -0.125rem rgba(0, 0, 0, 0.06);
   list-style: none;
   margin: 0;
-  min-width: 160px;
+  min-width: 10rem;
   animation: slide-down $duration-normal $ease-out both;
 }
 

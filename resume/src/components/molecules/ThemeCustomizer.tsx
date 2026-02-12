@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import ColorInput from "../atoms/ColorInput";
-import type { ThemeColors } from "../../types";
+import ColorInput from "@/components/atoms/ColorInput";
+import type { ThemeColors } from "@/types";
 
 interface ThemeCustomizerProps {
   colors: ThemeColors;

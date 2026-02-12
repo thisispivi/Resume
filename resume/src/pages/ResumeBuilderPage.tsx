@@ -1,23 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
-import rawData from "../data.json";
-import Navbar from "../components/organisms/Navbar";
-import Sidebar from "../components/organisms/Sidebar";
-import ResumePreview from "../components/organisms/ResumePreview";
-import ResumeEditorModal from "../components/molecules/ResumeEditorModal";
-import Button from "../components/atoms/Button";
-import Spinner from "../components/atoms/Spinner";
-import { THEME_PALETTES } from "../data/palettes";
-import { TEMPLATE_OPTIONS } from "../data/templates";
-import { GOOGLE_FONTS, loadGoogleFont, buildFontFamily } from "../data/fonts";
-import type { GoogleFont } from "../data/fonts";
-import { DEFAULT_LOCALE } from "../i18n";
-import { useTheme } from "../context/useTheme";
-import type { ResumeData, ResumeDataMap, TemplateId, ThemeColors, ThemePalette } from "../types";
-import { getFirstLocale } from "../utils/resume";
-import { generateSinglePagePdf } from "../utils/pdf";
-import { validateResumeDataMap } from "../utils/validateResumeData";
+import rawData from "@/data.json";
+import Navbar from "@/components/organisms/Navbar";
+import Sidebar from "@/components/organisms/Sidebar";
+import ResumePreview from "@/components/organisms/ResumePreview";
+import ResumeEditorModal from "@/components/molecules/ResumeEditorModal";
+import Button from "@/components/atoms/Button";
+import Spinner from "@/components/atoms/Spinner";
+import { THEME_PALETTES } from "@/data/palettes";
+import { TEMPLATE_OPTIONS } from "@/data/templates";
+import { GOOGLE_FONTS, loadGoogleFont, buildFontFamily } from "@/data/fonts";
+import type { GoogleFont } from "@/data/fonts";
+import { DEFAULT_LOCALE } from "@/i18n";
+import { useTheme } from "@/context/useTheme";
+import type { ResumeData, ResumeDataMap, TemplateId, ThemeColors, ThemePalette } from "@/types";
+import { getFirstLocale } from "@/utils/resume";
+import { generateSinglePagePdf } from "@/utils/pdf";
+import { validateResumeDataMap } from "@/utils/validateResumeData";
 
 const DEFAULT_DATA = rawData as ResumeDataMap;
 
@@ -43,6 +43,7 @@ function ResumeBuilderPage() {
   const [resumeFont, setResumeFont] = useState<GoogleFont>(DEFAULT_FONT);
   const [isFontLoading, setIsFontLoading] = useState(false);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { isDark, toggleDark } = useTheme();
 
   const appLocale = i18n.language;
@@ -122,6 +123,14 @@ function ResumeBuilderPage() {
     }
   };
 
+  const handleToggleSidebar = useCallback(() => {
+    setIsSidebarOpen((prev) => !prev);
+  }, []);
+
+  const handleCloseSidebar = useCallback(() => {
+    setIsSidebarOpen(false);
+  }, []);
+
   const handleEditResume = useCallback(() => {
     setIsEditorOpen(true);
   }, []);
@@ -161,13 +170,16 @@ function ResumeBuilderPage() {
         isDark={isDark}
         onAppLocaleChange={handleAppLocaleChange}
         onToggleDark={toggleDark}
+        onToggleSidebar={handleToggleSidebar}
       />
 
       <Sidebar
         availableLocales={availableLocales}
         colors={colors}
         fontFamily={resumeFont.family}
+        isSidebarOpen={isSidebarOpen}
         isPdfDark={isPdfDark}
+        onCloseSidebar={handleCloseSidebar}
         onColorsChange={handleColorsChange}
         onEditResume={handleEditResume}
         onFontChange={handleFontChange}

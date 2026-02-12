@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getInitials } from "../../utils/resume";
+import { getInitials } from "@/utils/resume";
 
 interface AvatarProps {
   name: string;

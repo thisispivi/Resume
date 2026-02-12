@@ -1,4 +1,4 @@
-import SpinnerIcon from "../../assets/icons/spinner.svg?react";
+import SpinnerIcon from "@/assets/icons/spinner.svg?react";
 
 interface SpinnerProps {
   size?: number;

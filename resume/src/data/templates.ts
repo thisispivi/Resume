@@ -1,4 +1,4 @@
-import type { TemplateOption } from "../types";
+import type { TemplateOption } from "@/types";
 
 /** Available resume layout templates with i18n label keys. */
 export const TEMPLATE_OPTIONS: TemplateOption[] = [

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import Avatar from "../molecules/Avatar";
-import ContactList from "../molecules/ContactList";
-import type { ResumeData } from "../../types";
+import Avatar from "@/components/molecules/Avatar";
+import ContactList from "@/components/molecules/ContactList";
+import type { ResumeData } from "@/types";
 
 interface TemplateModernProps {
   data: ResumeData;

@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import Dropdown from "../atoms/Dropdown";
-import { GOOGLE_FONTS, loadGoogleFont, type GoogleFont } from "../../data/fonts";
+import Dropdown from "@/components/atoms/Dropdown";
+import { GOOGLE_FONTS, loadGoogleFont, type GoogleFont } from "@/data/fonts";
 
 interface FontPickerProps {
   value: string;

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
-import CloseIcon from "../../assets/icons/close.svg?react";
+import CloseIcon from "@/assets/icons/close.svg?react";
 
 interface ModalProps {
   children: ReactNode;

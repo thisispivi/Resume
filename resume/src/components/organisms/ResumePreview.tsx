@@ -1,11 +1,11 @@
-import TemplateClassic from "../templates/TemplateClassic";
-import TemplateMinimal from "../templates/TemplateMinimal";
-import TemplateModern from "../templates/TemplateModern";
-import TemplateSplit from "../templates/TemplateSplit";
-import TemplateExecutive from "../templates/TemplateExecutive";
-import TemplateCreative from "../templates/TemplateCreative";
-import TemplateCompact from "../templates/TemplateCompact";
-import type { ResumeData, TemplateId } from "../../types";
+import TemplateClassic from "@/components/templates/TemplateClassic";
+import TemplateMinimal from "@/components/templates/TemplateMinimal";
+import TemplateModern from "@/components/templates/TemplateModern";
+import TemplateSplit from "@/components/templates/TemplateSplit";
+import TemplateExecutive from "@/components/templates/TemplateExecutive";
+import TemplateCreative from "@/components/templates/TemplateCreative";
+import TemplateCompact from "@/components/templates/TemplateCompact";
+import type { ResumeData, TemplateId } from "@/types";
 
 interface ResumePreviewProps {
   data: ResumeData;

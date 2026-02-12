@@ -14,8 +14,8 @@
 
 .toggle__track {
   position: relative;
-  width: 42px;
-  height: 24px;
+  width: 2.625rem;
+  height: 1.5rem;
   border-radius: $radius-full;
   border: none;
   background: linear-gradient(
@@ -47,7 +47,7 @@
     color-mix(in srgb, var(--color-primary), #fff 12%) 0%,
     var(--color-primary) 100%
   );
-  box-shadow: 0 2px 8px -1px color-mix(in srgb, var(--color-primary), transparent 50%);
+  box-shadow: 0 0.125rem 0.5rem -0.0625rem color-mix(in srgb, var(--color-primary), transparent 50%);
 
   &:hover {
     background: linear-gradient(
@@ -60,23 +60,23 @@
 
 .toggle__thumb {
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 18px;
-  height: 18px;
+  top: 0.1875rem;
+  left: 0.1875rem;
+  width: 1.125rem;
+  height: 1.125rem;
   border-radius: 50%;
   background: #ffffff;
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.15),
-    0 1px 1px rgba(0, 0, 0, 0.06);
+    0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.15),
+    0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.06);
   transition:
     transform $duration-normal $ease-out,
     box-shadow $duration-normal $ease-out;
 }
 
 .toggle__track--on .toggle__thumb {
-  transform: translateX(18px);
+  transform: translateX(1.125rem);
   box-shadow:
-    0 1px 4px rgba(0, 0, 0, 0.2),
-    0 1px 1px rgba(0, 0, 0, 0.08);
+    0 0.0625rem 0.25rem rgba(0, 0, 0, 0.2),
+    0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.08);
 }

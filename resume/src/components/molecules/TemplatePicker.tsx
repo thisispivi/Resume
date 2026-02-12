@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import Dropdown from "../atoms/Dropdown";
-import type { TemplateId, TemplateOption } from "../../types";
+import Dropdown from "@/components/atoms/Dropdown";
+import type { TemplateId, TemplateOption } from "@/types";
 
 interface TemplatePickerProps {
   templates: TemplateOption[];

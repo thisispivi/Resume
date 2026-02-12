@@ -15,9 +15,33 @@
   );
   box-shadow:
     1px 0 0 0 var(--border-lighter),
-    4px 0 20px -4px var(--shadow-light);
+    0.25rem 0 1.25rem -0.25rem var(--shadow-light);
   display: flex;
   flex-direction: column;
+  @include transition(transform);
+
+  @include below($bp-lg) {
+    transform: translateX(-100%);
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
+}
+
+// ── Sidebar overlay (mobile backdrop) ──
+.sidebar-overlay {
+  display: none;
+
+  @include below($bp-lg) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: $z-sidebar - 1;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(0.25rem);
+    animation: fade-in $duration-fast $ease-out both;
+  }
 }
 
 .sidebar__content {
@@ -28,7 +52,7 @@
 
   // Refined scrollbar styling
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 0.375rem;
   }
 
   &::-webkit-scrollbar-track {

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import ContactList from "../molecules/ContactList";
-import type { ResumeData } from "../../types";
+import ContactList from "@/components/molecules/ContactList";
+import type { ResumeData } from "@/types";
 
 interface TemplateMinimalProps {
   data: ResumeData;
