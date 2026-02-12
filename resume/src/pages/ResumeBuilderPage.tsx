@@ -177,8 +177,8 @@ function ResumeBuilderPage() {
         availableLocales={availableLocales}
         colors={colors}
         fontFamily={resumeFont.family}
-        isSidebarOpen={isSidebarOpen}
         isPdfDark={isPdfDark}
+        isSidebarOpen={isSidebarOpen}
         onCloseSidebar={handleCloseSidebar}
         onColorsChange={handleColorsChange}
         onEditResume={handleEditResume}

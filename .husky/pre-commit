@@ -1,4 +1,6 @@
+#!/usr/bin/env sh
 cd "$(dirname "$0")/../resume"
 
-pnpm tsc
+npx tsc --noEmit
+npx lint-staged
 pnpm run lint

@@ -51,42 +51,39 @@ export default [
       },
     },
     rules: {
-      // TypeScript
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-      ],
-      "@typescript-eslint/consistent-type-imports": [
-        "warn",
-        { prefer: "type-imports", fixStyle: "inline-type-imports" },
-      ],
-      "@typescript-eslint/no-unused-expressions": "off",
-
-      // React hooks
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-
-      // React best practices
       "react/jsx-pascal-case": "error",
       "react/button-has-type": "error",
       "react/jsx-no-script-url": "error",
       "react/no-children-prop": "error",
       "react/no-danger": "error",
       "react/no-danger-with-children": "error",
+
       "react/no-unstable-nested-components": [
         "error",
-        { allowAsProps: true },
+        {
+          allowAsProps: true,
+        },
       ],
+
       "react/jsx-fragments": "error",
+
       "react/destructuring-assignment": [
         "error",
         "always",
-        { destructureInSignature: "always" },
+        {
+          destructureInSignature: "always",
+        },
       ],
+
       "react/jsx-no-leaked-render": [
         "error",
-        { validStrategies: ["ternary"] },
+        {
+          validStrategies: ["ternary"],
+        },
       ],
+
       "react/jsx-key": [
         "error",
         {
@@ -95,6 +92,7 @@ export default [
           warnOnDuplicates: true,
         },
       ],
+
       "react/jsx-no-useless-fragment": "warn",
       "react/jsx-curly-brace-presence": "warn",
       "react/no-typos": "warn",
@@ -103,11 +101,7 @@ export default [
       "react/jsx-sort-props": "warn",
       "react/react-in-jsx-scope": "off",
 
-      // React Refresh (Vite)
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
+      "@typescript-eslint/no-unused-expressions": "off",
     },
   },
   eslintConfigPrettier,
