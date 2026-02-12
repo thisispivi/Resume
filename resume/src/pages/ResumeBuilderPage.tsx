@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
-import rawData from "@/data.json";
+import rawData from "@/assets/template/data.json";
 import Navbar from "@/components/organisms/Navbar";
 import Sidebar from "@/components/organisms/Sidebar";
 import ResumePreview from "@/components/organisms/ResumePreview";
