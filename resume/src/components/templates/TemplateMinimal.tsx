@@ -7,6 +7,7 @@ interface TemplateMinimalProps {
   pdfLocale: string;
 }
 
+/** Minimal resume layout with reduced visual elements for an understated look. */
 function TemplateMinimal({ data, pdfLocale }: TemplateMinimalProps) {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(pdfLocale);

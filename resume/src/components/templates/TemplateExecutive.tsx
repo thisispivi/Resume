@@ -7,6 +7,7 @@ interface TemplateExecutiveProps {
   pdfLocale: string;
 }
 
+/** Executive resume layout with a clean single-column design for senior roles. */
 function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(pdfLocale);

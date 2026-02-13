@@ -8,6 +8,7 @@ interface TemplateSplitProps {
   pdfLocale: string;
 }
 
+/** Split resume layout with a side panel for profile and skills alongside a main content area. */
 function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(pdfLocale);

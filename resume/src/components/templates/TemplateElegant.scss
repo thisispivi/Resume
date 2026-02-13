@@ -1,0 +1,128 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+// ── Elegant Template ──
+// Centered header with decorative divider and a refined
+// two-column layout: wide left for experience, narrow right for skills.
+
+.template--elegant {
+  @include flex-col;
+  height: 100%;
+  padding: 32px 36px;
+  border-top: 3px solid var(--color-primary);
+}
+
+// ── Header ──
+
+.template-elegant__header {
+  text-align: center;
+  padding-bottom: $space-5;
+  margin-bottom: $space-5;
+}
+
+.template-elegant__name {
+  font-size: 22px;
+  font-weight: $fw-bold;
+  color: var(--ink);
+  margin-bottom: $space-2;
+}
+
+.template-elegant__divider {
+  width: 80px;
+  max-width: 80px;
+  height: 1px;
+  background: var(--color-primary);
+  margin: $space-2 auto;
+}
+
+.template-elegant__title {
+  font-size: $fs-resume-base;
+  color: var(--ink-muted);
+  font-weight: $fw-light;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: $space-3;
+}
+
+.template-elegant__contact {
+  @include flex-center;
+  flex-wrap: wrap;
+  gap: $space-4;
+  margin-top: $space-3;
+}
+
+// ── Body – two-column grid ──
+
+.template-elegant__body {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: $space-6;
+  flex: 1;
+}
+
+.template-elegant__main {
+  @include flex-col($space-4);
+}
+
+.template-elegant__side {
+  @include flex-col($space-4);
+}
+
+// ── Skills ──
+
+.template-elegant__skills {
+  @include flex-col($space-3);
+}
+
+.template-elegant__skill-name {
+  font-size: $fs-resume-sm;
+  font-weight: $fw-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--ink-muted);
+  margin-bottom: 2px;
+}
+
+.template-elegant__skill-items {
+  font-size: $fs-resume-sm;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+// ── Languages ──
+
+.template-elegant__languages {
+  list-style: none;
+  @include flex-col($space-2);
+  font-size: $fs-resume-base;
+}
+
+.template-elegant__language {
+  display: flex;
+  justify-content: space-between;
+}
+
+.template-elegant__language-level {
+  color: var(--ink-muted);
+}
+
+// ── Shared class overrides scoped to this template ──
+
+.template--elegant .contact-list {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $space-2 $space-4;
+  font-size: $fs-resume-md;
+}
+
+.template--elegant .resume-section__title {
+  letter-spacing: 2.5px;
+}
+
+.template--elegant .resume-entry {
+  margin-bottom: $space-3;
+}
+
+.template--elegant .resume-section__body {
+  line-height: 1.6;
+}

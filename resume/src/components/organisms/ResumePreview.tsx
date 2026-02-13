@@ -5,6 +5,8 @@ import TemplateSplit from "@/components/templates/TemplateSplit";
 import TemplateExecutive from "@/components/templates/TemplateExecutive";
 import TemplateCreative from "@/components/templates/TemplateCreative";
 import TemplateCompact from "@/components/templates/TemplateCompact";
+import TemplateElegant from "@/components/templates/TemplateElegant";
+import TemplateTimeline from "@/components/templates/TemplateTimeline";
 import type { ResumeData, TemplateId } from "@/types";
 
 interface ResumePreviewProps {
@@ -21,6 +23,8 @@ const templateMap = {
   executive: TemplateExecutive,
   creative: TemplateCreative,
   compact: TemplateCompact,
+  elegant: TemplateElegant,
+  timeline: TemplateTimeline,
 };
 
 /** Renders the selected resume template inside a preview container. */

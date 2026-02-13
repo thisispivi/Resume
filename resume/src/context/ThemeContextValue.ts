@@ -5,6 +5,7 @@ export interface ThemeContextValue {
   toggleDark: () => void;
 }
 
+/** React context providing the current dark mode state and toggle callback. */
 export const ThemeContext = createContext<ThemeContextValue>({
   isDark: false,
   toggleDark: () => {},

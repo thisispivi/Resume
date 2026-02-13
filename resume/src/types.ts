@@ -77,7 +77,9 @@ export type TemplateId =
   | "split"
   | "executive"
   | "creative"
-  | "compact";
+  | "compact"
+  | "elegant"
+  | "timeline";
 
 /** Color values used to style the resume theme. */
 export interface ThemeColors {

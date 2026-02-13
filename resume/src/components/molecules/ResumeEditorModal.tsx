@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "@/components/atoms/Modal";
 import TextInput from "@/components/atoms/TextInput";
@@ -57,6 +57,11 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
   const { t } = useTranslation();
   const [draft, setDraft] = useState<ResumeData>(structuredClone(data));
   const [activeSection, setActiveSection] = useState<SectionId>("personal");
+
+  /** Re-sync draft whenever external data changes (e.g. JSON upload or locale switch). */
+  useEffect(() => {
+    setDraft(structuredClone(data));
+  }, [data]);
 
   const updateField = useCallback(<K extends keyof ResumeData>(key: K, value: ResumeData[K]) => {
     setDraft((prev) => ({ ...prev, [key]: value }));

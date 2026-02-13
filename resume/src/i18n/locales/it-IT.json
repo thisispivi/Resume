@@ -17,6 +17,7 @@
   "downloadLabel": "Scarica PDF",
   "downloadTemplateLabel": "Scarica Template",
   "darkModeLabel": "Modalità Scura",
+  "menuLabel": "Menu",
   "pdfDarkModeLabel": "Modalità Scura PDF",
   "generatingLabel": "Generazione...",
   "uploadErrorInvalid": "JSON non valido. Carica un file dati valido.",
@@ -28,7 +29,9 @@
     "split": "Split",
     "executive": "Esecutivo",
     "creative": "Creativo",
-    "compact": "Compatto"
+    "compact": "Compatto",
+    "elegant": "Elegante",
+    "timeline": "Cronologico"
   },
   "sectionTitles": {
     "profile": "Profilo",

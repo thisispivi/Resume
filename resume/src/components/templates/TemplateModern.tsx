@@ -8,6 +8,7 @@ interface TemplateModernProps {
   pdfLocale: string;
 }
 
+/** Modern resume layout with a colored sidebar containing avatar, contact, and skills. */
 function TemplateModern({ data, pdfLocale }: TemplateModernProps) {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(pdfLocale);

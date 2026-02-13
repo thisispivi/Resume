@@ -1,69 +1,30 @@
 import { useTranslation } from "react-i18next";
-import Avatar from "@/components/molecules/Avatar";
 import ContactList from "@/components/molecules/ContactList";
 import type { ResumeData } from "@/types";
 
-interface TemplateCreativeProps {
+interface TemplateElegantProps {
   data: ResumeData;
   pdfLocale: string;
 }
 
-/** Creative resume layout with a bold banner header and colored sidebar for skills. */
-function TemplateCreative({ data, pdfLocale }: TemplateCreativeProps) {
+/** Elegant template with centered header, decorative line, and balanced two-column layout. */
+function TemplateElegant({ data, pdfLocale }: TemplateElegantProps) {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(pdfLocale);
 
   return (
-    <div className="template template--creative">
-      <header className="template-creative__banner">
-        <Avatar className="template-creative__avatar" name={data.name} photo={data.photo} />
-        <h1 className="template-creative__name">{data.name}</h1>
-        <p className="template-creative__title">{data.jobTitle}</p>
-        <div className="template-creative__contact">
+    <div className="template template--elegant">
+      <header className="template-elegant__header">
+        <h1 className="template-elegant__name">{data.name}</h1>
+        <div className="template-elegant__divider" />
+        <p className="template-elegant__title">{data.jobTitle}</p>
+        <div className="template-elegant__contact">
           <ContactList contact={data.contact} />
         </div>
       </header>
 
-      <div className="template-creative__body">
-        <aside className="template-creative__sidebar">
-          {data.skills && data.skills.length > 0 ? (
-            <section className="template-creative__section">
-              <h2 className="template-creative__section-title">{t("sectionTitles.skills")}</h2>
-              <div className="template-creative__skills">
-                {data.skills.map((category) => (
-                  <div key={category.category}>
-                    <h3 className="template-creative__skill-name">{category.category}</h3>
-                    <div className="resume-tags">
-                      {category.items.map((item) => (
-                        <span className="resume-tag" key={`${category.category}-${item}`}>
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {data.languages && data.languages.length > 0 ? (
-            <section className="template-creative__section">
-              <h2 className="template-creative__section-title">{t("sectionTitles.languages")}</h2>
-              <ul className="template-creative__languages">
-                {data.languages.map((language) => (
-                  <li className="template-creative__language" key={language.language}>
-                    <span className="template-creative__language-name">{language.language}</span>
-                    <span className="template-creative__language-level">
-                      {language.proficiency}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-        </aside>
-
-        <main className="template-creative__main">
+      <div className="template-elegant__body">
+        <main className="template-elegant__main">
           {data.summary ? (
             <section className="resume-section">
               <h2 className="resume-section__title">{t("sectionTitles.profile")}</h2>
@@ -142,6 +103,36 @@ function TemplateCreative({ data, pdfLocale }: TemplateCreativeProps) {
               ))}
             </section>
           ) : null}
+        </main>
+
+        <aside className="template-elegant__side">
+          {data.skills && data.skills.length > 0 ? (
+            <section className="resume-section">
+              <h2 className="resume-section__title">{t("sectionTitles.skills")}</h2>
+              <div className="template-elegant__skills">
+                {data.skills.map((category) => (
+                  <div className="template-elegant__skill" key={category.category}>
+                    <h3 className="template-elegant__skill-name">{category.category}</h3>
+                    <p className="template-elegant__skill-items">{category.items.join(", ")}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {data.languages && data.languages.length > 0 ? (
+            <section className="resume-section">
+              <h2 className="resume-section__title">{t("sectionTitles.languages")}</h2>
+              <ul className="template-elegant__languages">
+                {data.languages.map((language) => (
+                  <li className="template-elegant__language" key={language.language}>
+                    <span className="template-elegant__language-name">{language.language}</span>
+                    <span className="template-elegant__language-level">{language.proficiency}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           {data.certifications && data.certifications.length > 0 ? (
             <section className="resume-section">
@@ -159,10 +150,10 @@ function TemplateCreative({ data, pdfLocale }: TemplateCreativeProps) {
               ))}
             </section>
           ) : null}
-        </main>
+        </aside>
       </div>
     </div>
   );
 }
 
-export default TemplateCreative;
+export default TemplateElegant;

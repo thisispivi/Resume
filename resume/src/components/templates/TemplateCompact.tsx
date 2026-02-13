@@ -7,6 +7,7 @@ interface TemplateCompactProps {
   pdfLocale: string;
 }
 
+/** Compact resume layout that maximizes content density with a narrow sidebar. */
 function TemplateCompact({ data, pdfLocale }: TemplateCompactProps) {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(pdfLocale);

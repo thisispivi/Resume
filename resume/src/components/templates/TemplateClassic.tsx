@@ -8,6 +8,7 @@ interface TemplateClassicProps {
   pdfLocale: string;
 }
 
+/** Classic resume layout with a centered header, avatar, and two-column body. */
 function TemplateClassic({ data, pdfLocale }: TemplateClassicProps) {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(pdfLocale);
