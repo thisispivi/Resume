@@ -31,29 +31,16 @@ function TemplateTimeline({ data, pdfLocale }: TemplateTimelineProps) {
 
       {data.experience && data.experience.length > 0 ? (
         <section className="template-timeline__section">
-          <h2 className="template-timeline__section-title">
-            {t("sectionTitles.experience")}
-          </h2>
+          <h2 className="template-timeline__section-title">{t("sectionTitles.experience")}</h2>
           <div className="template-timeline__entries">
             {data.experience.map((experience, index) => (
-              <div
-                className="template-timeline__entry"
-                key={`${experience.company}-${index}`}
-              >
+              <div className="template-timeline__entry" key={`${experience.company}-${index}`}>
                 <div className="resume-entry__header">
-                  <h3 className="template-timeline__entry-title">
-                    {experience.position}
-                  </h3>
-                  <span className="template-timeline__entry-date">
-                    {experience.duration}
-                  </span>
+                  <h3 className="template-timeline__entry-title">{experience.position}</h3>
+                  <span className="template-timeline__entry-date">{experience.duration}</span>
                 </div>
-                <p className="template-timeline__entry-subtitle">
-                  {experience.company}
-                </p>
-                <p className="template-timeline__entry-body">
-                  {experience.description}
-                </p>
+                <p className="template-timeline__entry-subtitle">{experience.company}</p>
+                <p className="template-timeline__entry-body">{experience.description}</p>
               </div>
             ))}
           </div>
@@ -62,26 +49,15 @@ function TemplateTimeline({ data, pdfLocale }: TemplateTimelineProps) {
 
       {data.education && data.education.length > 0 ? (
         <section className="template-timeline__section">
-          <h2 className="template-timeline__section-title">
-            {t("sectionTitles.education")}
-          </h2>
+          <h2 className="template-timeline__section-title">{t("sectionTitles.education")}</h2>
           <div className="template-timeline__entries">
             {data.education.map((education, index) => (
-              <div
-                className="template-timeline__entry"
-                key={`${education.institution}-${index}`}
-              >
+              <div className="template-timeline__entry" key={`${education.institution}-${index}`}>
                 <div className="resume-entry__header">
-                  <h3 className="template-timeline__entry-title">
-                    {education.degree}
-                  </h3>
-                  <span className="template-timeline__entry-date">
-                    {education.duration}
-                  </span>
+                  <h3 className="template-timeline__entry-title">{education.degree}</h3>
+                  <span className="template-timeline__entry-date">{education.duration}</span>
                 </div>
-                <p className="template-timeline__entry-subtitle">
-                  {education.institution}
-                </p>
+                <p className="template-timeline__entry-subtitle">{education.institution}</p>
                 {education.grades ? (
                   <p className="resume-entry__detail">
                     {t("fieldLabels.grade")}: {education.grades}
@@ -159,9 +135,7 @@ function TemplateTimeline({ data, pdfLocale }: TemplateTimelineProps) {
 
       {data.certifications && data.certifications.length > 0 ? (
         <section className="resume-section">
-          <h2 className="resume-section__title">
-            {t("sectionTitles.certifications")}
-          </h2>
+          <h2 className="resume-section__title">{t("sectionTitles.certifications")}</h2>
           {data.certifications.map((certification, index) => (
             <div className="resume-entry" key={`${certification.name}-${index}`}>
               <div className="resume-entry__header">

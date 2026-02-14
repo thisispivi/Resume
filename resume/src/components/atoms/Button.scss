@@ -60,6 +60,10 @@
   border: 1px solid var(--border-ghost);
   padding: $space-3 $space-4;
 
+  [data-theme="dark"] & {
+    color: color-mix(in srgb, var(--color-primary), #fff 35%);
+  }
+
   &:not(:disabled):hover {
     background: var(--fill-subtle);
     border-color: var(--border);

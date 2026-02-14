@@ -12,6 +12,39 @@
   font-family: var(--font-sans);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
+
+  // Isolate PDF from app dark mode — always use light defaults.
+  // PDF dark mode is controlled separately via data-theme on .preview-wrapper.
+  --ink: #111827;
+  --ink-secondary: rgba(15, 23, 42, 0.72);
+  --ink-muted: rgba(15, 23, 42, 0.56);
+  --ink-hint: rgba(15, 23, 42, 0.48);
+  --ink-tag: rgba(15, 23, 42, 0.8);
+  --border: rgba(15, 23, 42, 0.1);
+  --border-light: rgba(15, 23, 42, 0.08);
+  --border-lighter: rgba(15, 23, 42, 0.05);
+  --border-ghost: rgba(15, 23, 42, 0.16);
+  --fill-subtle: rgba(15, 23, 42, 0.04);
+  --fill-tag: rgba(15, 23, 42, 0.06);
+  --fill-ring: rgba(15, 23, 42, 0.4);
+  --fill-hover: rgba(15, 23, 42, 0.03);
+}
+
+// PDF dark mode overrides — scoped to .preview-wrapper, not <html>
+.preview-wrapper[data-theme="dark"] .resume-preview__page {
+  --ink: #e2e8f0;
+  --ink-secondary: rgba(226, 232, 240, 0.8);
+  --ink-muted: rgba(226, 232, 240, 0.55);
+  --ink-hint: rgba(226, 232, 240, 0.45);
+  --ink-tag: rgba(226, 232, 240, 0.85);
+  --border: rgba(226, 232, 240, 0.1);
+  --border-light: rgba(226, 232, 240, 0.08);
+  --border-lighter: rgba(226, 232, 240, 0.05);
+  --border-ghost: rgba(226, 232, 240, 0.16);
+  --fill-subtle: rgba(226, 232, 240, 0.05);
+  --fill-tag: rgba(226, 232, 240, 0.08);
+  --fill-ring: rgba(226, 232, 240, 0.5);
+  --fill-hover: rgba(226, 232, 240, 0.04);
 }
 
 .template {

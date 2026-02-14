@@ -95,13 +95,6 @@
 
 .sidebar__actions {
   @include flex-col($space-3);
-  padding: $space-4 $space-5;
-  border-top: 1px solid var(--border-lighter);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--color-surface), var(--color-background) 6%) 0%,
-    var(--color-surface) 100%
-  );
 
   .btn {
     width: 100%;
@@ -115,4 +108,8 @@
   color: #b91c1c;
   font-weight: $fw-medium;
   animation: fade-in $duration-fast $ease-out both;
+
+  [data-theme="dark"] & {
+    color: #fca5a5;
+  }
 }

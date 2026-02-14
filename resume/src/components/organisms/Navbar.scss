@@ -55,6 +55,12 @@
   }
 }
 
+[data-theme="dark"] {
+  .navbar__name {
+    color: var(--color-text-dark);
+  }
+}
+
 .navbar__name {
   font-size: $fs-xl;
   font-weight: $fw-bold;

@@ -68,47 +68,12 @@ function Sidebar({
       {isSidebarOpen ? <div className="sidebar-overlay" onClick={onCloseSidebar} /> : null}
       <aside className={`sidebar${isSidebarOpen ? " sidebar--open" : ""}`}>
         <nav className="sidebar__content">
-          <section className="sidebar__section sidebar__actions">
-            <Button onClick={onEditResume} variant="ghost">
-              {t("editResumeLabel")}
-            </Button>
-            <Button onClick={handleDownloadTemplate} variant="ghost">
-              {t("downloadTemplateLabel")}
-            </Button>
-          </section>
-
-          <section className="sidebar__section">
-            <FileUploader
-              hint={t("uploadHint")}
-              label={t("uploadLabel")}
-              onFileSelect={onUploadData}
-            />
-            {uploadError ? <span className="sidebar__error">{uploadError}</span> : null}
-          </section>
-
-          <section className="sidebar__section">
-            <Toggle
-              isChecked={isPdfDark}
-              label={t("pdfDarkModeLabel")}
-              onChange={onTogglePdfDark}
-            />
-          </section>
-
           <section className="sidebar__section">
             <TemplatePicker onChange={onTemplateChange} templates={templates} value={templateId} />
           </section>
 
           <section className="sidebar__section">
             <FontPicker onChange={onFontChange} value={fontFamily} />
-          </section>
-
-          <section className="sidebar__section">
-            <LocalePicker
-              label={t("pdfLanguageLabel")}
-              locales={availableLocales}
-              onChange={onPdfLocaleChange}
-              value={pdfLocale}
-            />
           </section>
 
           <section className="sidebar__section">
@@ -122,6 +87,41 @@ function Sidebar({
 
           <section className="sidebar__section">
             <ThemeCustomizer colors={colors} onChange={onColorsChange} />
+          </section>
+
+          <section className="sidebar__section">
+            <Toggle
+              isChecked={isPdfDark}
+              label={t("pdfDarkModeLabel")}
+              onChange={onTogglePdfDark}
+            />
+          </section>
+
+          <section className="sidebar__section">
+            <LocalePicker
+              label={t("pdfLanguageLabel")}
+              locales={availableLocales}
+              onChange={onPdfLocaleChange}
+              value={pdfLocale}
+            />
+          </section>
+
+          <section className="sidebar__section">
+            <FileUploader
+              hint={t("uploadHint")}
+              label={t("uploadLabel")}
+              onFileSelect={onUploadData}
+            />
+            {uploadError ? <span className="sidebar__error">{uploadError}</span> : null}
+          </section>
+
+          <section className="sidebar__section sidebar__actions">
+            <Button onClick={onEditResume} variant="ghost">
+              {t("editResumeLabel")}
+            </Button>
+            <Button onClick={handleDownloadTemplate} variant="ghost">
+              {t("downloadTemplateLabel")}
+            </Button>
           </section>
         </nav>
       </aside>
