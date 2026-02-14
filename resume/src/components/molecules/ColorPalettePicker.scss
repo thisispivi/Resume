@@ -3,16 +3,16 @@
 
 .palette-picker {
   @include flex-col($space-2);
-}
 
-.palette-picker__label {
-  @include section-label;
-}
+  &__label {
+    @include section-label;
+  }
 
-.palette-picker__swatches {
-  display: flex;
-  gap: $space-2;
-  flex-wrap: wrap;
+  &__swatches {
+    display: flex;
+    gap: $space-2;
+    flex-wrap: wrap;
+  }
 }
 
 .swatch {
@@ -24,7 +24,6 @@
   position: relative;
   @include transition(transform, box-shadow, border-color);
 
-  // Subtle inner highlight for depth
   &::after {
     content: "";
     position: absolute;
@@ -46,16 +45,16 @@
   &:active {
     transform: scale(1.05);
   }
-}
 
-.swatch--active {
-  border-color: var(--color-surface);
-  box-shadow:
-    0 0 0 0.125rem var(--fill-ring),
-    0 0.125rem 0.5rem -1px rgba(0, 0, 0, 0.15);
-  transform: scale(1.1);
+  &--active {
+    border-color: var(--color-surface);
+    box-shadow:
+      0 0 0 0.125rem var(--fill-ring),
+      0 0.125rem 0.5rem -1px rgba(0, 0, 0, 0.15);
+    transform: scale(1.1);
 
-  &:hover {
-    transform: scale(1.15);
+    &:hover {
+      transform: scale(1.15);
+    }
   }
 }

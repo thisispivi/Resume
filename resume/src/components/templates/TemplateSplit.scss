@@ -1,91 +1,79 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
 .template--split {
   display: grid;
   grid-template-columns: 34% 1fr;
   height: 100%;
+
+  .contact-list,
+  .contact-link {
+    color: #ffffff;
+  }
 }
 
-.template-split__side {
-  background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
-  color: #ffffff;
-  padding: 28px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
+.template-split {
+  &__side {
+    background: linear-gradient(160deg, var(--color-primary), var(--color-secondary));
+    color: #ffffff;
+    padding: 28px 22px;
+    @include flex-col(18px);
+  }
 
-.template-split__avatar {
-  width: 88px;
-  height: 88px;
-}
+  &__avatar {
+    width: 88px;
+    height: 88px;
+  }
 
-.template-split__name {
-  font-size: 19px;
-  font-weight: 700;
-}
+  &__name {
+    font-size: 19px;
+    font-weight: $fw-bold;
+  }
 
-.template-split__title {
-  font-size: 11px;
-  opacity: 0.85;
-}
+  &__title {
+    font-size: $fs-resume-base;
+    opacity: 0.85;
+  }
 
-.template-split__section {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+  &__section {
+    @include flex-col(6px);
+  }
 
-.template-split__section-title {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 4px;
-  margin-bottom: 6px;
-}
+  &__section-title {
+    @include resume-sidebar-title;
+    margin-bottom: 6px;
+  }
 
-.template-split__summary {
-  font-size: 10px;
-  line-height: 1.6;
-  opacity: 0.9;
-}
+  &__summary {
+    font-size: $fs-resume-md;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
 
-.template-split__skills {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+  &__skills {
+    @include flex-col(8px);
+  }
 
-.template-split__skill-name {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  opacity: 0.7;
-}
+  &__skill-name {
+    font-size: $fs-resume-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.7;
+  }
 
-.template-split__skill-items {
-  font-size: 9px;
-  opacity: 0.9;
-}
+  &__skill-items {
+    font-size: $fs-resume-sm;
+    opacity: 0.9;
+  }
 
-.template-split__main {
-  padding: 30px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+  &__main {
+    padding: 30px 28px;
+    @include flex-col(16px);
+  }
 
-.template-split__languages {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 11px;
-}
-
-.template--split .contact-list {
-  color: #ffffff;
-}
-
-.template--split .contact-link {
-  color: #ffffff;
+  &__languages {
+    list-style: none;
+    @include flex-col(6px);
+    font-size: $fs-resume-base;
+  }
 }

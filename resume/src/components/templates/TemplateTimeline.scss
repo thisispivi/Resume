@@ -2,114 +2,105 @@
 @use "../../styles/base/mixins" as *;
 
 .template--timeline {
-  display: flex;
-  flex-direction: column;
+  @include flex-col(14px);
   height: 100%;
   padding: 28px 32px;
-  gap: 14px;
 }
 
-// ── Header ──
-
-.template-timeline__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--color-primary);
-}
-
-.template-timeline__name {
-  font-size: 22px;
-  font-weight: $fw-bold;
-  color: var(--ink-primary);
-}
-
-.template-timeline__title {
-  font-size: $fs-resume-base;
-  color: var(--ink-muted);
-  margin-top: 2px;
-}
-
-// ── Timeline sections (experience & education) ──
-
-.template-timeline__section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.template-timeline__section-title {
-  @include resume-section-title;
-}
-
-.template-timeline__entries {
-  position: relative;
-  padding-left: 20px;
-  border-left: 2px solid var(--color-primary);
-}
-
-.template-timeline__entry {
-  position: relative;
-  padding-left: 12px;
-  margin-bottom: 14px;
-
-  &:last-child {
-    margin-bottom: 0;
+.template-timeline {
+  // ── Header ──
+  &__header {
+    @include flex-between;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-primary);
   }
 
-  &::before {
-    content: "";
-    position: absolute;
-    left: -27px;
-    top: 3px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--color-primary);
-    border: 2px solid var(--color-surface);
+  &__name {
+    font-size: 22px;
+    font-weight: $fw-bold;
+    color: var(--ink-primary);
   }
-}
 
-.template-timeline__entry-title {
-  font-size: $fs-resume-lg;
-  font-weight: $fw-semibold;
-  color: var(--ink-primary);
-}
+  &__title {
+    font-size: $fs-resume-base;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
 
-.template-timeline__entry-date {
-  font-size: $fs-resume-md;
-  color: var(--ink-hint);
-}
+  // ── Timeline sections ──
+  &__section {
+    @include flex-col(8px);
+  }
 
-.template-timeline__entry-subtitle {
-  font-size: $fs-resume-base;
-  color: var(--color-secondary);
-  margin-top: 1px;
-}
+  &__section-title {
+    @include resume-section-title;
+  }
 
-.template-timeline__entry-body {
-  font-size: 10.5px;
-  color: var(--ink-secondary);
-  margin-top: 4px;
-  line-height: 1.45;
-}
+  &__entries {
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid var(--color-primary);
+  }
 
-// ── Non-timeline sections ──
+  &__entry {
+    position: relative;
+    padding-left: 12px;
+    margin-bottom: 14px;
 
-.template-timeline__skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+    &:last-child {
+      margin-bottom: 0;
+    }
 
-.template-timeline__languages {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: $fs-resume-base;
-  color: var(--ink-secondary);
-  padding: 0;
-  margin: 0;
+    &::before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      border: 2px solid var(--color-surface);
+    }
+  }
+
+  &__entry-title {
+    font-size: $fs-resume-lg;
+    font-weight: $fw-semibold;
+    color: var(--ink-primary);
+  }
+
+  &__entry-date {
+    font-size: $fs-resume-md;
+    color: var(--ink-hint);
+  }
+
+  &__entry-subtitle {
+    font-size: $fs-resume-base;
+    color: var(--color-secondary);
+    margin-top: 1px;
+  }
+
+  &__entry-body {
+    font-size: 10.5px;
+    color: var(--ink-secondary);
+    margin-top: 4px;
+    line-height: 1.45;
+  }
+
+  // ── Non-timeline sections ──
+  &__skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__languages {
+    list-style: none;
+    @include flex-col(4px);
+    font-size: $fs-resume-base;
+    color: var(--ink-secondary);
+    padding: 0;
+    margin: 0;
+  }
 }

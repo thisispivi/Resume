@@ -1,40 +1,40 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
 .template--minimal {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  @include flex-col(18px);
   padding: 30px 34px;
   height: 100%;
+
+  .contact-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: $fs-resume-md;
+  }
 }
 
-.template-minimal__header {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-light);
-}
+.template-minimal {
+  &__header {
+    @include flex-between;
+    gap: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-light);
+  }
 
-.template-minimal__name {
-  font-size: 24px;
-  font-weight: 700;
-}
+  &__name {
+    font-size: $fs-resume-name-lg;
+    font-weight: $fw-bold;
+  }
 
-.template-minimal__title {
-  font-size: 12px;
-  color: var(--ink-muted);
-}
+  &__title {
+    font-size: $fs-resume-lg;
+    color: var(--ink-muted);
+  }
 
-.template-minimal__languages {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 11px;
-}
-
-.template--minimal .contact-list {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-  font-size: 10px;
+  &__languages {
+    list-style: none;
+    @include flex-col(4px);
+    font-size: $fs-resume-base;
+  }
 }

@@ -3,128 +3,121 @@
 
 // ── Creative Template ──
 // Eye-catching coloured top banner with a two-column body.
-// Designed for roles where personality and visual flair matter.
 
 .template--creative {
   @include flex-col;
   height: 100%;
+
+  .resume-tag {
+    background: rgba(var(--color-primary-rgb, 99, 102, 241), 0.12);
+    color: var(--color-primary);
+    font-weight: $fw-medium;
+  }
+
+  .contact-list {
+    font-size: $fs-resume-md;
+  }
 }
 
-// ── Banner ──
-.template-creative__banner {
-  background: var(--color-primary);
-  color: #ffffff;
-  padding: 28px $space-7;
-  display: flex;
-  align-items: center;
-  gap: $space-5;
-}
+.template-creative {
+  // ── Banner ──
+  &__banner {
+    background: var(--color-primary);
+    color: #ffffff;
+    padding: 28px $space-7;
+    display: flex;
+    align-items: center;
+    gap: $space-5;
 
-.template-creative__avatar {
-  flex-shrink: 0;
-}
+    .contact-list,
+    .contact-link {
+      color: #ffffff;
+    }
+  }
 
-.template-creative__banner-info {
-  display: flex;
-  flex-direction: column;
-  gap: $space-1;
-}
+  &__avatar {
+    flex-shrink: 0;
+  }
 
-.template-creative__name {
-  font-size: $fs-2xl;
-  font-weight: $fw-bold;
-}
+  &__banner-info {
+    @include flex-col($space-1);
+  }
 
-.template-creative__title {
-  font-size: $fs-resume-base;
-  opacity: 0.85;
-  font-weight: $fw-light;
-}
+  &__name {
+    font-size: $fs-2xl;
+    font-weight: $fw-bold;
+  }
 
-// White contact items inside the banner
-.template-creative__banner .contact-list {
-  color: #ffffff;
-}
+  &__title {
+    font-size: $fs-resume-base;
+    opacity: 0.85;
+    font-weight: $fw-light;
+  }
 
-.template-creative__banner .contact-link {
-  color: #ffffff;
-}
+  // ── Body ──
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: $space-6;
+    padding: $space-6 $space-7;
+    flex: 1;
+  }
 
-// ── Body ──
-.template-creative__body {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: $space-6;
-  padding: $space-6 $space-7;
-  flex: 1;
-}
+  &__sidebar {
+    @include flex-col($space-4);
+  }
 
-.template-creative__sidebar {
-  @include flex-col($space-4);
-}
+  &__main {
+    @include flex-col($space-4);
+  }
 
-.template-creative__main {
-  @include flex-col($space-4);
-}
+  // ── Sidebar sections ──
+  &__section {
+    @include flex-col($space-2);
+  }
 
-// ── Sidebar sections ──
-.template-creative__section {
-  @include flex-col($space-2);
-}
+  &__section-title {
+    font-size: $fs-resume-md;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: $fw-bold;
+    color: var(--color-primary);
+    padding-bottom: $space-1;
+    border-bottom: 2px solid var(--color-primary);
+  }
 
-.template-creative__section-title {
-  font-size: $fs-resume-md;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: $fw-bold;
-  color: var(--color-primary);
-  padding-bottom: $space-1;
-  border-bottom: 2px solid var(--color-primary);
-}
+  &__skills {
+    @include flex-col($space-2);
+  }
 
-// Skills tags — semi-transparent primary background
-.template--creative .resume-tag {
-  background: rgba(var(--color-primary-rgb, 99, 102, 241), 0.12);
-  color: var(--color-primary);
-  font-weight: $fw-medium;
-}
+  &__skill-category {
+    @include flex-col($space-1);
+  }
 
-.template-creative__skills {
-  @include flex-col($space-2);
-}
+  &__skill-name {
+    font-size: $fs-resume-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--ink-muted);
+    font-weight: $fw-semibold;
+  }
 
-.template-creative__skill-category {
-  @include flex-col($space-1);
-}
+  &__skill-items {
+    font-size: $fs-resume-sm;
+    color: var(--ink-secondary);
+  }
 
-.template-creative__skill-name {
-  font-size: $fs-resume-sm;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--ink-muted);
-  font-weight: $fw-semibold;
-}
+  &__languages {
+    list-style: none;
+    @include flex-col($space-2);
+    font-size: $fs-resume-base;
+  }
 
-.template-creative__skill-items {
-  font-size: $fs-resume-sm;
-  color: var(--ink-secondary);
-}
+  &__language {
+    @include flex-between;
+  }
 
-.template-creative__languages {
-  list-style: none;
-  @include flex-col($space-2);
-  font-size: $fs-resume-base;
-}
-
-.template-creative__language {
-  @include flex-between;
-}
-
-.template-creative__language-level {
-  color: var(--ink-hint);
-}
-
-// Contact list inside sidebar body area
-.template--creative .contact-list {
-  font-size: $fs-resume-md;
+  &__language-level {
+    color: var(--ink-hint);
+  }
 }

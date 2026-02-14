@@ -1,65 +1,63 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
 .template--classic {
-  display: flex;
-  flex-direction: column;
+  @include flex-col;
   height: 100%;
   padding: 28px 32px;
+
+  .contact-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: $fs-resume-md;
+  }
 }
 
-.template-classic__header {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  align-items: center;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-}
+.template-classic {
+  &__header {
+    @include flex-between;
+    gap: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
 
-.template-classic__identity {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
+  &__identity {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
 
-.template-classic__avatar {
-  border-color: var(--border-ghost);
-  color: var(--color-primary);
-  background: var(--fill-subtle);
-}
+  &__avatar {
+    border-color: var(--border-ghost);
+    color: var(--color-primary);
+    background: var(--fill-subtle);
+  }
 
-.template-classic__name {
-  font-size: 22px;
-  font-weight: 700;
-}
+  &__name {
+    font-size: 22px;
+    font-weight: $fw-bold;
+  }
 
-.template-classic__title {
-  font-size: 12px;
-  color: var(--ink-muted);
-}
+  &__title {
+    font-size: $fs-resume-lg;
+    color: var(--ink-muted);
+  }
 
-.template-classic__body {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 24px;
-  margin-top: 20px;
-}
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 24px;
+    margin-top: 20px;
+  }
 
-.template-classic__column {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+  &__column {
+    @include flex-col(16px);
+  }
 
-.template-classic__languages {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 11px;
-}
-
-.template--classic .contact-list {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-  font-size: 10px;
+  &__languages {
+    list-style: none;
+    @include flex-col(6px);
+    font-size: $fs-resume-base;
+  }
 }

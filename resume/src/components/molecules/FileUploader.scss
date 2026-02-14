@@ -4,82 +4,82 @@
 .file-uploader {
   @include flex-col($space-2);
   font-size: $fs-sm;
-}
 
-.file-uploader__label {
-  @include section-label;
-}
-
-.file-uploader__dropzone {
-  position: relative;
-  padding: $space-4 $space-3;
-  border: 2px dashed var(--border);
-  border-radius: $radius-md;
-  background: var(--fill-subtle);
-  text-align: center;
-  cursor: pointer;
-  @include transition(border-color, background, box-shadow);
-
-  &:hover {
-    border-color: var(--color-accent);
-    background: color-mix(in srgb, var(--color-accent), transparent 94%);
-    box-shadow: 0 0.125rem 0.75rem -0.25rem color-mix(in srgb, var(--color-accent), transparent 70%);
+  &__label {
+    @include section-label;
   }
 
-  &--active {
-    border-color: var(--color-primary);
-    background: color-mix(in srgb, var(--color-primary), transparent 92%);
-    border-style: solid;
-  }
-}
-
-.file-uploader__input {
-  font-size: $fs-sm;
-  color: var(--color-text);
-  cursor: pointer;
-
-  &::file-selector-button {
-    font-family: inherit;
-    font-size: $fs-sm;
-    font-weight: $fw-medium;
-    padding: $space-1 $space-3;
-    margin-right: $space-2;
-    border: 1px solid var(--border);
-    border-radius: $radius-sm;
-    background: linear-gradient(
-      180deg,
-      var(--color-surface) 0%,
-      color-mix(in srgb, var(--color-surface), var(--color-background) 40%) 100%
-    );
-    color: var(--color-text);
+  &__dropzone {
+    position: relative;
+    padding: $space-4 $space-3;
+    border: 2px dashed var(--border);
+    border-radius: $radius-md;
+    background: var(--fill-subtle);
+    text-align: center;
     cursor: pointer;
     @include transition(border-color, background, box-shadow);
 
     &:hover {
-      border-color: var(--border-ghost);
-      background: var(--color-surface);
-      box-shadow: 0 1px 0.25rem rgba(0, 0, 0, 0.06);
+      border-color: var(--color-accent);
+      background: color-mix(in srgb, var(--color-accent), transparent 94%);
+      box-shadow: 0 0.125rem 0.75rem -0.25rem color-mix(in srgb, var(--color-accent), transparent 70%);
+    }
+
+    &--active {
+      border-color: var(--color-primary);
+      background: color-mix(in srgb, var(--color-primary), transparent 92%);
+      border-style: solid;
     }
   }
-}
 
-.file-uploader__hint {
-  font-size: 0.6875rem;
-  color: var(--ink-hint);
-  line-height: 1.4;
-}
+  &__input {
+    font-size: $fs-sm;
+    color: var(--color-text);
+    cursor: pointer;
 
-.file-uploader__preview {
-  @include flex-center;
-  padding: $space-2;
-  border-radius: $radius-sm;
-  background: var(--fill-subtle);
-  border: 1px solid var(--border-lighter);
+    &::file-selector-button {
+      font-family: inherit;
+      font-size: $fs-sm;
+      font-weight: $fw-medium;
+      padding: $space-1 $space-3;
+      margin-right: $space-2;
+      border: 1px solid var(--border);
+      border-radius: $radius-sm;
+      background: linear-gradient(
+        180deg,
+        var(--color-surface) 0%,
+        color-mix(in srgb, var(--color-surface), var(--color-background) 40%) 100%
+      );
+      color: var(--color-text);
+      cursor: pointer;
+      @include transition(border-color, background, box-shadow);
 
-  img {
-    max-width: 100%;
-    max-height: 5rem;
-    border-radius: $radius-xs;
-    object-fit: contain;
+      &:hover {
+        border-color: var(--border-ghost);
+        background: var(--color-surface);
+        box-shadow: 0 1px 0.25rem rgba(0, 0, 0, 0.06);
+      }
+    }
+  }
+
+  &__hint {
+    font-size: 0.6875rem;
+    color: var(--ink-hint);
+    line-height: 1.4;
+  }
+
+  &__preview {
+    @include flex-center;
+    padding: $space-2;
+    border-radius: $radius-sm;
+    background: var(--fill-subtle);
+    border: 1px solid var(--border-lighter);
+
+    img {
+      max-width: 100%;
+      max-height: 5rem;
+      border-radius: $radius-xs;
+      object-fit: contain;
+    }
   }
 }

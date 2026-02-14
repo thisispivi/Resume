@@ -4,6 +4,17 @@
 }
 
 @media print {
+  // Force light theme for printing
+  :root {
+    --color-background: #ffffff;
+    --color-surface: #ffffff;
+    --color-text: #1f2937;
+    --ink: #111827;
+    --ink-secondary: rgba(15, 23, 42, 0.72);
+    --ink-muted: rgba(15, 23, 42, 0.7);
+    --ink-hint: rgba(15, 23, 42, 0.6);
+  }
+
   body {
     background: none;
   }

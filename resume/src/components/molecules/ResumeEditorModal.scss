@@ -3,92 +3,92 @@
 
 .resume-editor {
   @include flex-col;
-}
 
-.resume-editor__tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-1;
-  padding-bottom: $space-5;
-  border-bottom: 1px solid var(--border-lighter);
-  margin-bottom: $space-5;
-}
-
-.resume-editor__tab {
-  padding: $space-2 $space-3;
-  border: 1px solid var(--border);
-  border-radius: $radius-full;
-  background: transparent;
-  color: var(--ink-muted);
-  font-size: $fs-sm;
-  font-family: inherit;
-  font-weight: $fw-medium;
-  cursor: pointer;
-  @include transition(color, background, border-color);
-
-  &:hover {
-    color: var(--ink);
-    background: var(--fill-subtle);
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-1;
+    padding-bottom: $space-5;
+    border-bottom: 1px solid var(--border-lighter);
+    margin-bottom: $space-5;
   }
 
-  &--active {
-    color: var(--color-surface);
-    background: var(--color-primary);
-    border-color: var(--color-primary);
+  &__tab {
+    padding: $space-2 $space-3;
+    border: 1px solid var(--border);
+    border-radius: $radius-full;
+    background: transparent;
+    color: var(--ink-muted);
+    font-size: $fs-sm;
+    font-family: inherit;
+    font-weight: $fw-medium;
+    cursor: pointer;
+    @include transition(color, background, border-color);
+
+    &:hover {
+      color: var(--ink);
+      background: var(--fill-subtle);
+    }
+
+    &--active {
+      color: var(--color-surface);
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
   }
 
-  &:focus-visible {
-    @include focus-ring;
-  }
-}
-
-.resume-editor__content {
-  min-height: 12.5rem;
-}
-
-.resume-editor__fields {
-  @include flex-col($space-4);
-}
-
-.resume-editor__list {
-  @include flex-col($space-5);
-}
-
-.resume-editor__list-item {
-  padding: $space-4;
-  border: 1px solid var(--border-lighter);
-  border-radius: $radius-md;
-  background: color-mix(in srgb, var(--color-surface), var(--color-background) 30%);
-}
-
-.resume-editor__list-item-header {
-  @include flex-between;
-  margin-bottom: $space-3;
-}
-
-.resume-editor__list-item-number {
-  font-size: $fs-sm;
-  font-weight: $fw-semibold;
-  color: var(--ink-muted);
-}
-
-.resume-editor__remove-btn {
-  @include flex-center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border: none;
-  border-radius: $radius-sm;
-  background: transparent;
-  color: var(--ink-hint);
-  cursor: pointer;
-  @include transition(color, background);
-
-  &:hover {
-    color: #b91c1c;
-    background: rgba(185, 28, 28, 0.08);
+  &__content {
+    min-height: 12.5rem;
   }
 
-  &:focus-visible {
-    @include focus-ring;
+  &__fields {
+    @include flex-col($space-4);
+  }
+
+  &__list {
+    @include flex-col($space-5);
+  }
+
+  &__list-item {
+    padding: $space-4;
+    border: 1px solid var(--border-lighter);
+    border-radius: $radius-md;
+    background: color-mix(in srgb, var(--color-surface), var(--color-background) 30%);
+
+    &-header {
+      @include flex-between;
+      margin-bottom: $space-3;
+    }
+
+    &-number {
+      font-size: $fs-sm;
+      font-weight: $fw-semibold;
+      color: var(--ink-muted);
+    }
+  }
+
+  &__remove-btn {
+    @include flex-center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: none;
+    border-radius: $radius-sm;
+    background: transparent;
+    color: var(--ink-hint);
+    cursor: pointer;
+    @include transition(color, background);
+
+    &:hover {
+      color: #b91c1c;
+      background: rgba(185, 28, 28, 0.08);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
   }
 }
