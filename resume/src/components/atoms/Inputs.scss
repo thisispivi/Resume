@@ -14,7 +14,7 @@
   &__field {
     padding: $space-2 $space-3;
     border-radius: $radius-sm;
-    border: 1px solid var(--border);
+    border: 0.0625rem solid var(--border);
     background: linear-gradient(
       180deg,
       var(--color-surface) 0%,
@@ -72,7 +72,7 @@
   &__field {
     width: 2.25rem;
     height: 2.25rem;
-    border: 2px solid var(--border-light);
+    border: 0.125rem solid var(--border-light);
     border-radius: $radius-sm;
     background: transparent;
     padding: 0.125rem;
@@ -125,7 +125,7 @@
   &__field {
     padding: $space-2 $space-3;
     border-radius: $radius-sm;
-    border: 1px solid var(--border);
+    border: 0.0625rem solid var(--border);
     background: var(--color-surface);
     color: var(--ink);
     font-size: $fs-md;

@@ -19,7 +19,7 @@
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  border: 2px solid transparent;
+  border: 0.125rem solid transparent;
   cursor: pointer;
   position: relative;
   @include transition(transform, box-shadow, border-color);
@@ -50,7 +50,7 @@
     border-color: var(--color-surface);
     box-shadow:
       0 0 0 0.125rem var(--fill-ring),
-      0 0.125rem 0.5rem -1px rgba(0, 0, 0, 0.15);
+      0 0.125rem 0.5rem -0.0625rem rgba(0, 0, 0, 0.15);
     transform: scale(1.1);
 
     &:hover {

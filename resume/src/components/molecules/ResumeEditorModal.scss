@@ -9,13 +9,13 @@
     flex-wrap: wrap;
     gap: $space-1;
     padding-bottom: $space-5;
-    border-bottom: 1px solid var(--border-lighter);
+    border-bottom: 0.0625rem solid var(--border-lighter);
     margin-bottom: $space-5;
   }
 
   &__tab {
     padding: $space-2 $space-3;
-    border: 1px solid var(--border);
+    border: 0.0625rem solid var(--border);
     border-radius: $radius-full;
     background: transparent;
     color: var(--ink-muted);
@@ -55,7 +55,7 @@
 
   &__list-item {
     padding: $space-4;
-    border: 1px solid var(--border-lighter);
+    border: 0.0625rem solid var(--border-lighter);
     border-radius: $radius-md;
     background: color-mix(in srgb, var(--color-surface), var(--color-background) 30%);
 

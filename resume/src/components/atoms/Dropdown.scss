@@ -15,7 +15,7 @@
     @include flex-between;
     gap: $space-2;
     padding: $space-2 $space-3;
-    border: 1px solid var(--border);
+    border: 0.0625rem solid var(--border);
     border-radius: $radius-sm;
     background: linear-gradient(
       180deg,
@@ -62,7 +62,7 @@
     z-index: $z-navbar + 10;
     padding: $space-1 0;
     background: var(--color-surface);
-    border: 1px solid var(--border-light);
+    border: 0.0625rem solid var(--border-light);
     border-radius: $radius-md;
     box-shadow:
       0 0.5rem 1.5rem -0.25rem rgba(0, 0, 0, 0.12),

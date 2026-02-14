@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 import rawData from "@/assets/template/data.json";
@@ -29,6 +29,11 @@ const DARK_OVERRIDES = {
 
 const DEFAULT_FONT = GOOGLE_FONTS[0];
 
+/** A4 page width in px — must match $resume-width in _variables.scss */
+const A4_WIDTH = 794;
+/** A4 page height in px — must match $resume-height in _variables.scss */
+const A4_HEIGHT = 1123;
+
 /** Main page orchestrating resume data, theming, template selection, and PDF export. */
 function ResumeBuilderPage() {
   const { t, i18n } = useTranslation();
@@ -45,6 +50,8 @@ function ResumeBuilderPage() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { isDark, toggleDark } = useTheme();
+  const previewContainerRef = useRef<HTMLDivElement>(null);
+  const [previewScale, setPreviewScale] = useState(1);
 
   const appLocale = i18n.language;
 
@@ -52,6 +59,20 @@ function ResumeBuilderPage() {
     setIsFontLoading(true);
     loadGoogleFont(resumeFont).then(() => setIsFontLoading(false));
   }, [resumeFont]);
+
+  // Scale the A4 preview to fit the container on smaller screens
+  useEffect(() => {
+    const container = previewContainerRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      const availableWidth = entry.contentRect.width;
+      setPreviewScale(Math.min(1, availableWidth / A4_WIDTH));
+    });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   const availableLocales = useMemo(() => Object.keys(resumeDataMap), [resumeDataMap]);
 
@@ -196,12 +217,22 @@ function ResumeBuilderPage() {
         uploadError={uploadError}
       />
 
-      <div className="preview-container">
+      <div className="preview-container" ref={previewContainerRef}>
         {resumeData ? (
           <div
             className="preview-wrapper"
             data-theme={isPdfDark ? "dark" : "light"}
-            style={pdfThemeStyle}
+            style={{
+              ...pdfThemeStyle,
+              ...(previewScale < 1
+                ? {
+                    transform: `scale(${previewScale})`,
+                    transformOrigin: "top center",
+                    width: A4_WIDTH,
+                    height: A4_HEIGHT * previewScale,
+                  }
+                : {}),
+            }}
           >
             {isFontLoading ? (
               <div className="font-loading-overlay">

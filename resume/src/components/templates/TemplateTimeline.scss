@@ -54,7 +54,11 @@
     &::before {
       content: "";
       position: absolute;
-      left: -27px;
+      // Center dot on the border-left line:
+      // entry left edge is 20px (entries padding) from border inner edge,
+      // plus 1px to reach center of 2px border = -19px from entry edge.
+      // Dot total width = 10 + 2*2 = 14px, half = 7px → left = -19 - 7 = -26px
+      left: -26px;
       top: 3px;
       width: 10px;
       height: 10px;

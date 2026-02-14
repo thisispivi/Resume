@@ -12,7 +12,7 @@
   &__dropzone {
     position: relative;
     padding: $space-4 $space-3;
-    border: 2px dashed var(--border);
+    border: 0.125rem dashed var(--border);
     border-radius: $radius-md;
     background: var(--fill-subtle);
     text-align: center;
@@ -43,7 +43,7 @@
       font-weight: $fw-medium;
       padding: $space-1 $space-3;
       margin-right: $space-2;
-      border: 1px solid var(--border);
+      border: 0.0625rem solid var(--border);
       border-radius: $radius-sm;
       background: linear-gradient(
         180deg,
@@ -57,7 +57,7 @@
       &:hover {
         border-color: var(--border-ghost);
         background: var(--color-surface);
-        box-shadow: 0 1px 0.25rem rgba(0, 0, 0, 0.06);
+        box-shadow: 0 0.0625rem 0.25rem rgba(0, 0, 0, 0.06);
       }
     }
   }
@@ -73,7 +73,7 @@
     padding: $space-2;
     border-radius: $radius-sm;
     background: var(--fill-subtle);
-    border: 1px solid var(--border-lighter);
+    border: 0.0625rem solid var(--border-lighter);
 
     img {
       max-width: 100%;

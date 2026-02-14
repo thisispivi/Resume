@@ -14,7 +14,7 @@
     color-mix(in srgb, var(--color-surface), var(--color-background) 5%) 100%
   );
   box-shadow:
-    1px 0 0 0 var(--border-lighter),
+    0.0625rem 0 0 0 var(--border-lighter),
     0.25rem 0 1.25rem -0.25rem var(--shadow-light);
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@
 
   &__section {
     padding-bottom: $space-5;
-    border-bottom: 1px solid var(--border-lighter);
+    border-bottom: 0.0625rem solid var(--border-lighter);
     animation: fade-in $duration-normal $ease-out both;
 
     &:last-child {

@@ -41,12 +41,12 @@
   --border-ghost: rgba(15, 23, 42, 0.16);
 
   // Shadows
-  --shadow-soft: 0 4px 24px rgba(15, 23, 42, 0.08);
-  --shadow-medium: 0 8px 32px rgba(15, 23, 42, 0.12);
+  --shadow-soft: 0 0.25rem 1.5rem rgba(15, 23, 42, 0.08);
+  --shadow-medium: 0 0.5rem 2rem rgba(15, 23, 42, 0.12);
   --shadow-strong: rgba(15, 23, 42, 0.18);
   --shadow-light: rgba(15, 23, 42, 0.06);
   --shadow-lighter: rgba(15, 23, 42, 0.04);
-  --shadow-elevated: 0 12px 40px rgba(15, 23, 42, 0.15);
+  --shadow-elevated: 0 0.75rem 2.5rem rgba(15, 23, 42, 0.15);
 
   // Fills
   --fill-subtle: rgba(15, 23, 42, 0.04);
@@ -75,12 +75,12 @@
   --border-lighter: rgba(226, 232, 240, 0.05);
   --border-ghost: rgba(226, 232, 240, 0.16);
 
-  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
-  --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --shadow-soft: 0 0.25rem 1.5rem rgba(0, 0, 0, 0.25);
+  --shadow-medium: 0 0.5rem 2rem rgba(0, 0, 0, 0.35);
   --shadow-strong: rgba(0, 0, 0, 0.4);
   --shadow-light: rgba(0, 0, 0, 0.2);
   --shadow-lighter: rgba(0, 0, 0, 0.15);
-  --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.4);
 
   --fill-subtle: rgba(226, 232, 240, 0.05);
   --fill-tag: rgba(226, 232, 240, 0.08);

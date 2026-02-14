@@ -31,7 +31,7 @@
   &__header {
     @include flex-between;
     padding: $space-5 $space-6;
-    border-bottom: 1px solid var(--border-lighter);
+    border-bottom: 0.0625rem solid var(--border-lighter);
     flex-shrink: 0;
   }
 
@@ -96,7 +96,7 @@
   &__footer {
     @include flex-between;
     padding: $space-4 $space-6;
-    border-top: 1px solid var(--border-lighter);
+    border-top: 0.0625rem solid var(--border-lighter);
     flex-shrink: 0;
     gap: $space-3;
     justify-content: flex-end;
