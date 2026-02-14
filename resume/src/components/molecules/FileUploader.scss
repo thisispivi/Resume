@@ -22,7 +22,8 @@
     &:hover {
       border-color: var(--color-accent);
       background: color-mix(in srgb, var(--color-accent), transparent 94%);
-      box-shadow: 0 0.125rem 0.75rem -0.25rem color-mix(in srgb, var(--color-accent), transparent 70%);
+      box-shadow: 0 0.125rem 0.75rem -0.25rem
+        color-mix(in srgb, var(--color-accent), transparent 70%);
     }
 
     &--active {

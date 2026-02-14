@@ -1,89 +1,66 @@
-# Resume Builder
+<div align="center">
+   <div style="display: flex;padding-block:40px;margin-bottom:20px;background-color:#1f1f1f">
+      <picture>
+         <source media="(prefers-color-scheme: dark)" srcset="./logos/logo_dark.png">
+         <source media="(prefers-color-scheme: light)" srcset="./logos/logo_light.png">
+         <img alt="logo" src="./logos/logo_dark.png" height="75">
+      </picture>
+   </div>
+</div>
 
-A browser-based resume builder that lets you customise templates, colours, fonts, and export to PDF. Supports multiple languages and dark mode.
+# [Resume Builder](https://resume.pivi.dev/)
 
-**Live:** [resume.pivi.dev](https://resume.pivi.dev)
+Resume Builder is a web app that allows users to create and customize their resumes with ease. It offers a variety of templates (9 to be precise), colour palettes, and fonts (25 google fonts) to choose from, enabling users to create a professional-looking resume that stands out. The app also supports dark mode and internationalization, making it accessible to a wider audience. Users can import and export their resume data in JSON format, and generate a PDF version of their resume directly from the app. The project is available at this [link](https://resume.pivi.dev/)
 
-## Features
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
-- **9 templates** — Modern, Classic, Minimal, Split, Executive, Creative, Compact, Elegant, Timeline
-- **12 colour palettes** — Quickly switch the accent colours of your resume
-- **Google Fonts** — Pick from a curated set of fonts loaded at runtime
-- **Dark mode** — Toggle dark theme for the app and optionally for the PDF
-- **i18n** — App UI available in English and Italian; resume content uses a separate locale picker
-- **JSON import/export** — Upload a `data.json` to populate the editor or download your current data
-- **PDF export** — Single-page PDF generated client-side with jsPDF + html2canvas
-- **Responsive** — Mobile-friendly layout with a collapsible sidebar
+## Project structure
 
-## Tech Stack
-
-| Layer     | Technology                   |
-| --------- | ---------------------------- |
-| Framework | React 19 + TypeScript        |
-| Bundler   | Vite (rolldown-vite)         |
-| Styles    | SCSS + CSS custom properties |
-| i18n      | i18next / react-i18next      |
-| PDF       | jsPDF + html2canvas          |
-| Linting   | ESLint + Prettier            |
-| Hooks     | Husky + lint-staged          |
-
-## Getting Started
-
-### Prerequisites
-
-- **Node.js** >= 18
-- **pnpm** (recommended)
-
-### Install & Run
-
-```bash
-# Install dependencies
-pnpm install
-
-# Start dev server
-pnpm dev
-
-# Lint
-pnpm lint
-
-# Build for production
-pnpm build
-
-# Preview production build
-pnpm preview
+```text
+.
+├── logos
+└── resume
 ```
 
-## Project Structure
+- `logos`: Contains all the assets used in the app.
+- `resume`: houses the React app for the Resume Builder project.
 
-```
-src/
-  assets/          # Static assets (icons, template JSON)
-  components/
-    atoms/         # Button, Toggle, Modal, TextInput, ...
-    molecules/     # Avatar, ColorPalettePicker, FontPicker, ...
-    organisms/     # Navbar, Sidebar, ResumePreview, ResumeEditorModal
-    templates/     # TemplateModern, TemplateClassic, ... (PDF layouts)
-  context/         # ThemeContext (dark mode)
-  data/            # palettes, fonts, templates config
-  i18n/            # i18next setup + en-US / it-IT locale files
-  pages/           # ResumeBuilderPage
-  styles/          # Global SCSS (variables, mixins, reset, animations)
-  utils/           # PDF generation, resume helpers, validation
-  types.ts         # Shared TypeScript interfaces
-```
+## How to use it
 
-## Scripts
+1. Clone the repository
 
-| Command         | Description                          |
-| --------------- | ------------------------------------ |
-| `pnpm dev`      | Start development server with HMR    |
-| `pnpm build`    | Type-check and build for production  |
-| `pnpm lint`     | Run ESLint with zero-warning policy  |
-| `pnpm lint:fix` | Auto-fix lint issues                 |
-| `pnpm format`   | Format with Prettier                 |
-| `pnpm preview`  | Preview the production build locally |
-| `pnpm deploygh` | Deploy to GitHub Pages               |
+   ```bash
+   git clone https://github.com/thisispivi/ResumeBuilder.git
+   ```
 
-## License
+2. Navigate to the `resume` folder
 
-MIT
+   ```bash
+   cd resume
+   ```
+
+3. Install the dependencies with:
+
+   ```bash
+   pnpm i
+   ```
+
+4. Run the app with
+
+   ```bash
+   pnpm dev
+   ```
+
+## How to deploy
+
+1. Navigate to the `resume` folder
+
+   ```bash
+   cd resume
+   ```
+
+2. Run the deploy command
+
+   ```bash
+   pnpm run deploygh
+   ```
