@@ -36,94 +36,52 @@
       transparent 100%
     );
   }
-}
 
-// ── Brand (logo + name) ──
-.navbar__brand {
-  display: flex;
-  align-items: center;
-  gap: $space-3;
-  flex-shrink: 0;
-}
-
-.navbar__logo {
-  flex-shrink: 0;
-  @include transition(transform);
-
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
-[data-theme="dark"] {
-  .navbar__name {
-    color: var(--color-text-dark);
-  }
-}
-
-.navbar__name {
-  font-size: $fs-xl;
-  font-weight: $fw-bold;
-  letter-spacing: -0.025rem;
-  color: var(--color-primary);
-  @include truncate;
-
-  @include below($bp-sm) {
-    display: none;
-  }
-}
-
-.navbar__spacer {
-  flex: 1;
-}
-
-.navbar__actions {
-  display: flex;
-  align-items: center;
-  gap: $space-1;
-}
-
-// ── Icon button ──
-.navbar__icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border: 1px solid transparent;
-  border-radius: $radius-sm;
-  background: transparent;
-  color: var(--ink-secondary);
-  cursor: pointer;
-  padding: 0;
-  flex-shrink: 0;
-  @include transition(background, color, border-color, box-shadow);
-
-  &:hover {
-    background: var(--fill-subtle);
-    color: var(--ink);
+  // ── Brand (logo + name) ──
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    flex-shrink: 0;
   }
 
-  &:active {
-    background: var(--fill-tag);
+  &__logo {
+    flex-shrink: 0;
+    @include transition(transform);
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
-  &:focus-visible {
-    @include focus-ring;
-  }
-
-  &--active {
-    background: var(--fill-subtle);
+  &__name {
+    font-size: $fs-xl;
+    font-weight: $fw-bold;
+    letter-spacing: -0.025rem;
     color: var(--color-primary);
-    border-color: var(--border-light);
+    @include truncate;
+
+    [data-theme="dark"] & {
+      color: color-mix(in srgb, var(--color-primary), #fff 35%);
+    }
+
+    @include below($bp-sm) {
+      display: none;
+    }
   }
-}
 
-// ── Hamburger menu button (mobile) ──
-.navbar__menu-btn {
-  display: none;
+  &__spacer {
+    flex: 1;
+  }
 
-  @include below($bp-lg) {
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+  }
+
+  // ── Icon button ──
+  &__icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -136,15 +94,55 @@
     cursor: pointer;
     padding: 0;
     flex-shrink: 0;
-    @include transition(background, color);
+    @include transition(background, color, border-color, box-shadow);
 
     &:hover {
       background: var(--fill-subtle);
       color: var(--ink);
     }
 
+    &:active {
+      background: var(--fill-tag);
+    }
+
     &:focus-visible {
       @include focus-ring;
+    }
+
+    &--active {
+      background: var(--fill-subtle);
+      color: var(--color-primary);
+      border-color: var(--border-light);
+    }
+  }
+
+  // ── Hamburger menu button (mobile) ──
+  &__menu-btn {
+    display: none;
+
+    @include below($bp-lg) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1px solid transparent;
+      border-radius: $radius-sm;
+      background: transparent;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      @include transition(background, color);
+
+      &:hover {
+        background: var(--fill-subtle);
+        color: var(--ink);
+      }
+
+      &:focus-visible {
+        @include focus-ring;
+      }
     }
   }
 }
@@ -163,35 +161,35 @@
   margin: 0;
   min-width: 10rem;
   animation: slide-down $duration-normal $ease-out both;
-}
 
-.navbar-lang-menu__item {
-  display: flex;
-  align-items: center;
-  gap: $space-2;
-  padding: $space-2 $space-3;
-  font-size: $fs-md;
-  color: var(--color-text);
-  cursor: pointer;
-  @include transition(background, color);
-
-  &:hover {
-    background: var(--fill-subtle);
-    color: var(--ink);
-  }
-
-  &--active {
-    color: var(--color-primary);
-    font-weight: $fw-medium;
-    background: color-mix(in srgb, var(--color-primary), transparent 94%);
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-3;
+    font-size: $fs-md;
+    color: var(--color-text);
+    cursor: pointer;
+    @include transition(background, color);
 
     &:hover {
-      background: color-mix(in srgb, var(--color-primary), transparent 90%);
+      background: var(--fill-subtle);
+      color: var(--ink);
+    }
+
+    &--active {
+      color: var(--color-primary);
+      font-weight: $fw-medium;
+      background: color-mix(in srgb, var(--color-primary), transparent 94%);
+
+      &:hover {
+        background: color-mix(in srgb, var(--color-primary), transparent 90%);
+      }
     }
   }
-}
 
-.navbar-lang-menu__flag {
-  font-size: $fs-lg;
-  line-height: 1;
+  &__flag {
+    font-size: $fs-lg;
+    line-height: 1;
+  }
 }

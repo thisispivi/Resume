@@ -6,53 +6,53 @@
   @include flex-col($space-1);
   min-width: 8.75rem;
   font-size: $fs-sm;
-}
 
-.select__label {
-  @include section-label;
-}
-
-.select__field {
-  padding: $space-2 $space-3;
-  border-radius: $radius-sm;
-  border: 1px solid var(--border);
-  background: linear-gradient(
-    180deg,
-    var(--color-surface) 0%,
-    color-mix(in srgb, var(--color-surface), var(--color-background) 30%) 100%
-  );
-  color: var(--color-text);
-  font-size: $fs-md;
-  font-family: inherit;
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right $space-2 center;
-  padding-right: $space-7;
-
-  [data-theme="dark"] & {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  &__label {
+    @include section-label;
   }
-  @include transition(border-color, box-shadow, background);
 
-  &:hover {
-    border-color: var(--border-ghost);
+  &__field {
+    padding: $space-2 $space-3;
+    border-radius: $radius-sm;
+    border: 1px solid var(--border);
     background: linear-gradient(
       180deg,
       var(--color-surface) 0%,
-      color-mix(in srgb, var(--color-surface), var(--color-background) 50%) 100%
+      color-mix(in srgb, var(--color-surface), var(--color-background) 30%) 100%
     );
-  }
+    color: var(--color-text);
+    font-size: $fs-md;
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right $space-2 center;
+    padding-right: $space-7;
+    @include transition(border-color, box-shadow, background);
 
-  &:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--color-accent), transparent 80%);
-  }
+    [data-theme="dark"] & {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    }
 
-  &:focus-visible {
-    @include focus-ring;
+    &:hover {
+      border-color: var(--border-ghost);
+      background: linear-gradient(
+        180deg,
+        var(--color-surface) 0%,
+        color-mix(in srgb, var(--color-surface), var(--color-background) 50%) 100%
+      );
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--color-accent), transparent 80%);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
   }
 }
 
@@ -63,93 +63,93 @@
   gap: $space-2;
   align-items: center;
   font-size: $fs-sm;
-}
 
-.color-input__label {
-  font-weight: $fw-semibold;
-  color: var(--ink-muted);
-}
-
-.color-input__field {
-  width: 2.25rem;
-  height: 2.25rem;
-  border: 2px solid var(--border-light);
-  border-radius: $radius-sm;
-  background: transparent;
-  padding: 0.125rem;
-  cursor: pointer;
-  @include transition(border-color, box-shadow, transform);
-
-  &::-webkit-color-swatch-wrapper {
-    padding: 0;
+  &__label {
+    font-weight: $fw-semibold;
+    color: var(--ink-muted);
   }
 
-  &::-webkit-color-swatch {
-    border: none;
-    border-radius: $radius-xs;
+  &__field {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 2px solid var(--border-light);
+    border-radius: $radius-sm;
+    background: transparent;
+    padding: 0.125rem;
+    cursor: pointer;
+    @include transition(border-color, box-shadow, transform);
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: none;
+      border-radius: $radius-xs;
+    }
+
+    &::-moz-color-swatch {
+      border: none;
+      border-radius: $radius-xs;
+    }
+
+    &:hover {
+      border-color: var(--border-ghost);
+      transform: scale(1.05);
+      box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
   }
 
-  &::-moz-color-swatch {
-    border: none;
-    border-radius: $radius-xs;
+  &__value {
+    font-family: $font-mono;
+    font-size: 0.6875rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
   }
-
-  &:hover {
-    border-color: var(--border-ghost);
-    transform: scale(1.05);
-    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
-  }
-
-  &:focus-visible {
-    @include focus-ring;
-  }
-}
-
-.color-input__value {
-  font-family: $font-mono;
-  font-size: 0.6875rem;
-  color: var(--ink-muted);
-  letter-spacing: 0.02em;
 }
 
 // ── Text Input / TextArea ──
 .text-input {
   @include flex-col($space-1);
-}
 
-.text-input__label {
-  font-size: $fs-sm;
-  font-weight: $fw-medium;
-  color: var(--ink-secondary);
-}
-
-.text-input__field {
-  padding: $space-2 $space-3;
-  border-radius: $radius-sm;
-  border: 1px solid var(--border);
-  background: var(--color-surface);
-  color: var(--ink);
-  font-size: $fs-md;
-  font-family: inherit;
-  line-height: 1.5;
-  @include transition(border-color, box-shadow);
-
-  &::placeholder {
-    color: var(--ink-hint);
+  &__label {
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: var(--ink-secondary);
   }
 
-  &:hover {
-    border-color: var(--border-ghost);
-  }
+  &__field {
+    padding: $space-2 $space-3;
+    border-radius: $radius-sm;
+    border: 1px solid var(--border);
+    background: var(--color-surface);
+    color: var(--ink);
+    font-size: $fs-md;
+    font-family: inherit;
+    line-height: 1.5;
+    @include transition(border-color, box-shadow);
 
-  &:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--color-accent), transparent 80%);
-  }
+    &::placeholder {
+      color: var(--ink-hint);
+    }
 
-  &--textarea {
-    min-height: 5rem;
-    resize: vertical;
+    &:hover {
+      border-color: var(--border-ghost);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--color-accent), transparent 80%);
+    }
+
+    &--textarea {
+      min-height: 5rem;
+      resize: vertical;
+    }
   }
 }

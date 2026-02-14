@@ -1,13 +1,16 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
 .spinner {
   animation: spinner-rotate 0.8s linear infinite;
-}
 
-.spinner__track {
-  opacity: 0.2;
-}
+  &__track {
+    opacity: 0.2;
+  }
 
-.spinner__arc {
-  opacity: 1;
+  &__arc {
+    opacity: 1;
+  }
 }
 
 @keyframes spinner-rotate {
@@ -22,13 +25,11 @@
 .font-loading-overlay {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
   background: rgba(255, 255, 255, 0.6);
   z-index: 5;
   border-radius: inherit;
-  animation: fade-in 0.15s ease-out both;
+  animation: fade-in $duration-fast $ease-out both;
   pointer-events: none;
 
   [data-theme="dark"] & {

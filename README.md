@@ -1,4 +1,12 @@
 <div align="center">
+   <div style="display: flex;padding-block:40px;margin-bottom:20px;background-color:#1f1f1f">
+      <picture>
+         <source media="(prefers-color-scheme: dark)" srcset="./logos/logo_dark.png">
+         <source media="(prefers-color-scheme: light)" srcset="./logos/logo_light.png">
+         <img alt="logo" src="./logos/logo_dark.png" height="75">
+      </picture>
+   </div>
+</div>
 
 # Resume Builder
 

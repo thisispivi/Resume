@@ -27,80 +27,80 @@
     max-height: 100vh;
     border-radius: 0;
   }
-}
 
-.modal__header {
-  @include flex-between;
-  padding: $space-5 $space-6;
-  border-bottom: 1px solid var(--border-lighter);
-  flex-shrink: 0;
-}
+  &__header {
+    @include flex-between;
+    padding: $space-5 $space-6;
+    border-bottom: 1px solid var(--border-lighter);
+    flex-shrink: 0;
+  }
 
-.modal__title {
-  font-size: $fs-lg;
-  font-weight: $fw-semibold;
-  color: var(--ink);
-  margin: 0;
-}
-
-.modal__close {
-  @include flex-center;
-  width: 2rem;
-  height: 2rem;
-  border: none;
-  border-radius: $radius-sm;
-  background: transparent;
-  color: var(--ink-muted);
-  cursor: pointer;
-  @include transition(color, background);
-
-  &:hover {
-    background: var(--fill-subtle);
+  &__title {
+    font-size: $fs-lg;
+    font-weight: $fw-semibold;
     color: var(--ink);
+    margin: 0;
   }
 
-  &:focus-visible {
-    @include focus-ring;
-  }
-}
-
-.modal__body {
-  flex: 1;
-  overflow-y: auto;
-  padding: $space-6;
-
-  &::-webkit-scrollbar {
-    width: 0.375rem;
-  }
-
-  &::-webkit-scrollbar-track {
+  &__close {
+    @include flex-center;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: $radius-sm;
     background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: $radius-full;
+    color: var(--ink-muted);
+    cursor: pointer;
+    @include transition(color, background);
 
     &:hover {
-      background: var(--border-ghost);
+      background: var(--fill-subtle);
+      color: var(--ink);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
     }
   }
 
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: $space-6;
 
-  @include below($bp-sm) {
-    padding: $space-4;
+    &::-webkit-scrollbar {
+      width: 0.375rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: $radius-full;
+
+      &:hover {
+        background: var(--border-ghost);
+      }
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+
+    @include below($bp-sm) {
+      padding: $space-4;
+    }
   }
-}
 
-.modal__footer {
-  @include flex-between;
-  padding: $space-4 $space-6;
-  border-top: 1px solid var(--border-lighter);
-  flex-shrink: 0;
-  gap: $space-3;
-  justify-content: flex-end;
+  &__footer {
+    @include flex-between;
+    padding: $space-4 $space-6;
+    border-top: 1px solid var(--border-lighter);
+    flex-shrink: 0;
+    gap: $space-3;
+    justify-content: flex-end;
+  }
 }
 
 @keyframes slide-up {

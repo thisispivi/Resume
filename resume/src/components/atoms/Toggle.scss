@@ -5,78 +5,78 @@
   @include flex-between;
   gap: $space-3;
   cursor: pointer;
-}
 
-.toggle__label {
-  @include section-label;
-  user-select: none;
-}
-
-.toggle__track {
-  position: relative;
-  width: 2.625rem;
-  height: 1.5rem;
-  border-radius: $radius-full;
-  border: none;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--border-ghost), transparent 10%) 0%,
-    var(--border-ghost) 100%
-  );
-  cursor: pointer;
-  padding: 0;
-  flex-shrink: 0;
-  @include transition(background, box-shadow);
-
-  &:focus-visible {
-    @include focus-ring;
+  &__label {
+    @include section-label;
+    user-select: none;
   }
 
-  &:hover {
+  &__track {
+    position: relative;
+    width: 2.625rem;
+    height: 1.5rem;
+    border-radius: $radius-full;
+    border: none;
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--border-ghost), #000 5%) 0%,
-      color-mix(in srgb, var(--border-ghost), #000 8%) 100%
+      color-mix(in srgb, var(--border-ghost), transparent 10%) 0%,
+      var(--border-ghost) 100%
     );
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    @include transition(background, box-shadow);
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    &:hover {
+      background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--border-ghost), #000 5%) 0%,
+        color-mix(in srgb, var(--border-ghost), #000 8%) 100%
+      );
+    }
+
+    &--on {
+      background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--color-primary), #fff 12%) 0%,
+        var(--color-primary) 100%
+      );
+      box-shadow: 0 0.125rem 0.5rem -0.0625rem color-mix(in srgb, var(--color-primary), transparent 50%);
+
+      &:hover {
+        background: linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--color-primary), #fff 18%) 0%,
+          color-mix(in srgb, var(--color-primary), #000 5%) 100%
+        );
+      }
+
+      .toggle__thumb {
+        transform: translateX(1.125rem);
+        box-shadow:
+          0 0.0625rem 0.25rem rgba(0, 0, 0, 0.2),
+          0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.08);
+      }
+    }
   }
-}
 
-.toggle__track--on {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--color-primary), #fff 12%) 0%,
-    var(--color-primary) 100%
-  );
-  box-shadow: 0 0.125rem 0.5rem -0.0625rem color-mix(in srgb, var(--color-primary), transparent 50%);
-
-  &:hover {
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-primary), #fff 18%) 0%,
-      color-mix(in srgb, var(--color-primary), #000 5%) 100%
-    );
+  &__thumb {
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow:
+      0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.15),
+      0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.06);
+    transition:
+      transform $duration-normal $ease-out,
+      box-shadow $duration-normal $ease-out;
   }
-}
-
-.toggle__thumb {
-  position: absolute;
-  top: 0.1875rem;
-  left: 0.1875rem;
-  width: 1.125rem;
-  height: 1.125rem;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow:
-    0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.15),
-    0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.06);
-  transition:
-    transform $duration-normal $ease-out,
-    box-shadow $duration-normal $ease-out;
-}
-
-.toggle__track--on .toggle__thumb {
-  transform: translateX(1.125rem);
-  box-shadow:
-    0 0.0625rem 0.25rem rgba(0, 0, 0, 0.2),
-    0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.08);
 }
