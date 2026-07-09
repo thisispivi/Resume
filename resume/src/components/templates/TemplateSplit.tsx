@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Avatar from "@/components/molecules/Avatar";
 import ContactList from "@/components/molecules/ContactList";
+import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateSplitProps {
@@ -20,6 +21,13 @@ function TemplateSplit({ data, pdfLocale }: TemplateSplitProps) {
         <h1 className="template-split__name">{data.name}</h1>
         <p className="template-split__title">{data.jobTitle}</p>
         <ContactList contact={data.contact} />
+
+        {hasPersonalDetails(data.personalDetails) ? (
+          <section className="template-split__section">
+            <h2 className="template-split__section-title">{t("sectionTitles.details")}</h2>
+            <PersonalDetailsList details={data.personalDetails} pdfLocale={pdfLocale} />
+          </section>
+        ) : null}
 
         {data.summary ? (
           <section className="template-split__section">

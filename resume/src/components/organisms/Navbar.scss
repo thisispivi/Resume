@@ -58,12 +58,8 @@
     font-size: $fs-xl;
     font-weight: $fw-bold;
     letter-spacing: -0.025rem;
-    color: var(--color-primary);
+    color: var(--color-primary-ink);
     @include truncate;
-
-    [data-theme="dark"] & {
-      color: color-mix(in srgb, var(--color-primary), #fff 35%);
-    }
 
     @include below($bp-sm) {
       display: none;
@@ -111,7 +107,7 @@
 
     &--active {
       background: var(--fill-subtle);
-      color: var(--color-primary);
+      color: var(--color-primary-ink);
       border-color: var(--border-light);
     }
   }
@@ -178,7 +174,7 @@
     }
 
     &--active {
-      color: var(--color-primary);
+      color: var(--color-primary-ink);
       font-weight: $fw-medium;
       background: color-mix(in srgb, var(--color-primary), transparent 94%);
 

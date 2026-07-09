@@ -7,7 +7,7 @@ import autoprefixer from "autoprefixer";
 
 export default defineConfig({
   plugins: [react(), svgr(), qrcode()],
-  base: "/",
+  base: "./",
   server: { watch: { usePolling: true }, host: true },
   css: { postcss: { plugins: [autoprefixer({})] } },
   resolve: {

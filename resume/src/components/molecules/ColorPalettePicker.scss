@@ -2,40 +2,58 @@
 @use "../../styles/base/mixins" as *;
 
 .palette-picker {
-  @include flex-col($space-2);
+  @include flex-col($space-3);
+
+  &__header {
+    @include flex-between;
+    gap: $space-2;
+  }
 
   &__label {
     @include section-label;
   }
 
+  &__selected {
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: var(--ink-muted);
+    @include truncate;
+    max-width: 55%;
+  }
+
+  &__group {
+    @include flex-col($space-2);
+  }
+
+  &__group-label {
+    font-size: $fs-xs;
+    font-weight: $fw-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+    color: var(--ink-hint);
+  }
+
   &__swatches {
     display: flex;
-    gap: $space-2;
+    gap: $space-2 * 1.25;
     flex-wrap: wrap;
   }
 }
 
 .swatch {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 50%;
-  border: 0.125rem solid transparent;
+  width: 2.125rem;
+  height: 2.125rem;
+  border-radius: $radius-md;
+  border: 0.125rem solid var(--border-lighter);
   cursor: pointer;
   position: relative;
+  padding: 0;
+  @include flex-center;
   @include transition(transform, box-shadow, border-color);
 
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0.125rem;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
   &:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0.1875rem 0.625rem -0.125rem rgba(0, 0, 0, 0.2);
+    transform: scale(1.08);
+    box-shadow: var(--shadow-soft);
   }
 
   &:focus-visible {
@@ -43,18 +61,27 @@
   }
 
   &:active {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 
   &--active {
     border-color: var(--color-surface);
     box-shadow:
       0 0 0 0.125rem var(--fill-ring),
-      0 0.125rem 0.5rem -0.0625rem rgba(0, 0, 0, 0.15);
-    transform: scale(1.1);
+      var(--shadow-soft);
 
     &:hover {
-      transform: scale(1.15);
+      transform: scale(1.08);
     }
+  }
+
+  &__check {
+    @include flex-center;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: $radius-full;
+    background: rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+    backdrop-filter: blur(2px);
   }
 }

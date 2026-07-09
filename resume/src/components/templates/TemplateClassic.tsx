@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Avatar from "@/components/molecules/Avatar";
 import ContactList from "@/components/molecules/ContactList";
+import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateClassicProps {
@@ -24,6 +25,9 @@ function TemplateClassic({ data, pdfLocale }: TemplateClassicProps) {
           </div>
         </div>
         <ContactList contact={data.contact} />
+        {hasPersonalDetails(data.personalDetails) ? (
+          <PersonalDetailsList compact details={data.personalDetails} pdfLocale={pdfLocale} />
+        ) : null}
       </header>
 
       <div className="template-classic__body">

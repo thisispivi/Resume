@@ -27,6 +27,12 @@
   --color-surface: #ffffff;
   --color-text: #1f2937;
 
+  // Fixed app brand color (matches the logo) — independent of the selected resume palette
+  --brand-primary: #0f4c5c;
+
+  // Palette primary, adjusted to stay readable as UI text (see dark override below)
+  --color-primary-ink: var(--color-primary);
+
   // Ink – text variants
   --ink: #111827;
   --ink-secondary: rgba(15, 23, 42, 0.72);
@@ -63,6 +69,9 @@
   --color-background: #0f172a;
   --color-surface: #1e293b;
   --color-text: #e2e8f0;
+
+  // Lightened so even a near-black bold-palette primary clears WCAG AA here
+  --color-primary-ink: color-mix(in srgb, var(--color-primary), #fff 55%);
 
   --ink: #e2e8f0;
   --ink-secondary: rgba(226, 232, 240, 0.8);

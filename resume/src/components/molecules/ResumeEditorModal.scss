@@ -31,7 +31,7 @@
     }
 
     &--active {
-      color: var(--color-surface);
+      color: #ffffff;
       background: var(--color-primary);
       border-color: var(--color-primary);
     }
@@ -47,6 +47,21 @@
 
   &__fields {
     @include flex-col($space-4);
+  }
+
+  &__photo {
+    @include flex-col($space-2);
+  }
+
+  &__photo-row {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+  }
+
+  &__photo-actions {
+    display: flex;
+    gap: $space-2;
   }
 
   &__list {

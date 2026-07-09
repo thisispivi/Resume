@@ -1,0 +1,121 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+// ── Banner Template ──
+// Full-width colored header band with a slim sidebar below.
+
+.template--banner {
+  @include flex-col;
+  height: 100%;
+}
+
+.template-banner {
+  &__header {
+    background: var(--color-primary);
+    color: #ffffff;
+    padding: 28px $space-7;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $space-5;
+
+    .contact-list,
+    .contact-link,
+    .personal-details {
+      color: #ffffff;
+    }
+
+    .personal-details__label {
+      color: rgba(255, 255, 255, 0.62);
+    }
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+  }
+
+  &__name {
+    font-size: $fs-2xl;
+    font-weight: $fw-bold;
+  }
+
+  &__title {
+    font-size: $fs-resume-base;
+    opacity: 0.85;
+    font-weight: $fw-light;
+  }
+
+  &__meta {
+    @include flex-col($space-2);
+    margin-left: auto;
+
+    .contact-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: $space-2 $space-4;
+    }
+
+    .personal-details--compact {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    gap: $space-6;
+    padding: $space-6 $space-7;
+    flex: 1;
+  }
+
+  &__side {
+    @include flex-col($space-5);
+    border-right: 1px solid var(--border-light);
+    padding-right: $space-5;
+  }
+
+  &__main {
+    @include flex-col($space-4);
+  }
+
+  &__section {
+    @include flex-col($space-2);
+  }
+
+  &__section-title {
+    font-size: $fs-resume-md;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: $fw-bold;
+    color: var(--color-primary);
+    padding-bottom: $space-1;
+    border-bottom: 2px solid var(--color-primary);
+  }
+
+  &__skills {
+    @include flex-col($space-2);
+  }
+
+  &__skill-name {
+    font-size: $fs-resume-sm;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--ink-muted);
+    font-weight: $fw-semibold;
+  }
+
+  &__skill-items {
+    font-size: $fs-resume-sm;
+    color: var(--ink-secondary);
+  }
+
+  &__languages {
+    list-style: none;
+    @include flex-col($space-2);
+    font-size: $fs-resume-base;
+  }
+
+  &__language {
+    @include flex-between;
+  }
+}

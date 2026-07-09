@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ContactList from "@/components/molecules/ContactList";
+import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateCompactProps {
@@ -24,6 +25,13 @@ function TemplateCompact({ data, pdfLocale }: TemplateCompactProps) {
           <h2 className="template-compact__section-title">{t("sectionTitles.contact")}</h2>
           <ContactList contact={data.contact} />
         </div>
+
+        {hasPersonalDetails(data.personalDetails) ? (
+          <div className="template-compact__section">
+            <h2 className="template-compact__section-title">{t("sectionTitles.details")}</h2>
+            <PersonalDetailsList details={data.personalDetails} pdfLocale={pdfLocale} />
+          </div>
+        ) : null}
 
         {data.skills && data.skills.length > 0 ? (
           <div className="template-compact__section">

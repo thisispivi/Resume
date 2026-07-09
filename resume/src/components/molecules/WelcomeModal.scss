@@ -1,0 +1,20 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.welcome-modal {
+  @include flex-col($space-5);
+
+  &__body {
+    font-size: $fs-base;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+  }
+
+  &__actions {
+    @include flex-col($space-3);
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

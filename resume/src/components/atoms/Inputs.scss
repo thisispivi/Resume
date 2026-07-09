@@ -1,61 +1,6 @@
 @use "../../styles/base/variables" as *;
 @use "../../styles/base/mixins" as *;
 
-// ── Select ──
-.select {
-  @include flex-col($space-1);
-  min-width: 8.75rem;
-  font-size: $fs-sm;
-
-  &__label {
-    @include section-label;
-  }
-
-  &__field {
-    padding: $space-2 $space-3;
-    border-radius: $radius-sm;
-    border: 0.0625rem solid var(--border);
-    background: linear-gradient(
-      180deg,
-      var(--color-surface) 0%,
-      color-mix(in srgb, var(--color-surface), var(--color-background) 30%) 100%
-    );
-    color: var(--color-text);
-    font-size: $fs-md;
-    font-family: inherit;
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right $space-2 center;
-    padding-right: $space-7;
-    @include transition(border-color, box-shadow, background);
-
-    [data-theme="dark"] & {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    }
-
-    &:hover {
-      border-color: var(--border-ghost);
-      background: linear-gradient(
-        180deg,
-        var(--color-surface) 0%,
-        color-mix(in srgb, var(--color-surface), var(--color-background) 50%) 100%
-      );
-    }
-
-    &:focus {
-      outline: none;
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 0.1875rem color-mix(in srgb, var(--color-accent), transparent 80%);
-    }
-
-    &:focus-visible {
-      @include focus-ring;
-    }
-  }
-}
-
 // ── Color Input ──
 .color-input {
   display: grid;

@@ -1,68 +1,46 @@
-import type { Contact } from "@/types";
-import MailIcon from "@/assets/icons/mail.svg?react";
-import PhoneIcon from "@/assets/icons/phone.svg?react";
-import LinkedInIcon from "@/assets/icons/linkedin.svg?react";
-import GitHubIcon from "@/assets/icons/github.svg?react";
-import GlobeIcon from "@/assets/icons/globe.svg?react";
+import type { ContactLink } from "@/types";
+import { getContactTypeConfig } from "@/data/contactTypes";
 
 interface ContactListProps {
-  contact: Contact;
+  contact: ContactLink[];
 }
 
-/** Renders a list of contact entries with SVG icons and clickable mailto/tel/href links. */
+/** Renders a list of contact entries with icons and clickable mailto/tel/href links. */
 function ContactList({ contact }: ContactListProps) {
   return (
     <ul className="contact-list">
-      {contact.email ? (
-        <li className="contact-item">
-          <span className="contact-icon">
-            <MailIcon aria-hidden="true" height={14} width={14} />
-          </span>
-          <a className="contact-link" href={`mailto:${contact.email}`}>
-            {contact.email}
-          </a>
-        </li>
-      ) : null}
-      {contact.phone ? (
-        <li className="contact-item">
-          <span className="contact-icon">
-            <PhoneIcon aria-hidden="true" height={14} width={14} />
-          </span>
-          <a className="contact-link" href={`tel:${contact.phone.replace(/\s+/g, "")}`}>
-            {contact.phone}
-          </a>
-        </li>
-      ) : null}
-      {contact.linkedin ? (
-        <li className="contact-item">
-          <span className="contact-icon">
-            <LinkedInIcon aria-hidden="true" height={14} width={14} />
-          </span>
-          <a className="contact-link" href={contact.linkedin} rel="noreferrer" target="_blank">
-            {contact.linkedin.replace(/^https?:\/\/(www\.)?/, "")}
-          </a>
-        </li>
-      ) : null}
-      {contact.github ? (
-        <li className="contact-item">
-          <span className="contact-icon">
-            <GitHubIcon aria-hidden="true" height={14} width={14} />
-          </span>
-          <a className="contact-link" href={contact.github} rel="noreferrer" target="_blank">
-            {contact.github.replace(/^https?:\/\//, "")}
-          </a>
-        </li>
-      ) : null}
-      {contact.website ? (
-        <li className="contact-item">
-          <span className="contact-icon">
-            <GlobeIcon aria-hidden="true" height={14} width={14} />
-          </span>
-          <a className="contact-link" href={contact.website} rel="noreferrer" target="_blank">
-            {contact.website.replace(/^https?:\/\//, "")}
-          </a>
-        </li>
-      ) : null}
+      {contact
+        .filter((link) => link.value)
+        .map((link, index) => {
+          const config = getContactTypeConfig(link.type);
+          const Icon = config.icon;
+          const href = config.buildHref?.(link.value);
+          const isExternal = href?.startsWith("http");
+          const text =
+            link.type === "custom" && link.label
+              ? link.label
+              : (config.formatDisplay?.(link.value) ?? link.value);
+
+          return (
+            <li className="contact-item" key={`${link.type}-${String(index)}`}>
+              <span className="contact-icon">
+                <Icon aria-hidden="true" height={14} width={14} />
+              </span>
+              {href ? (
+                <a
+                  className="contact-link"
+                  href={href}
+                  rel={isExternal ? "noreferrer" : undefined}
+                  target={isExternal ? "_blank" : undefined}
+                >
+                  {text}
+                </a>
+              ) : (
+                <span className="contact-link">{text}</span>
+              )}
+            </li>
+          );
+        })}
     </ul>
   );
 }

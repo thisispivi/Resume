@@ -52,23 +52,15 @@ export const generateSinglePagePdf = async ({
     "FAST",
   );
 
-  // Add links
+  // Overlay invisible link boxes so contact/project URLs stay clickable in the PDF
   const elementRect = element.getBoundingClientRect();
   const links = element.querySelectorAll("a");
-
-  // Calculate scale factor from DOM pixels to PDF units (mm)
-  // renderWidth is the width of the image on the PDF in mm
-  // element.offsetWidth is the width of the DOM element in px
   const domToPdfScale = renderWidth / element.offsetWidth;
 
   links.forEach((link) => {
     const linkRect = link.getBoundingClientRect();
-
-    // Calculate position relative to the captured element
     const relativeX = linkRect.left - elementRect.left;
     const relativeY = linkRect.top - elementRect.top;
-
-    // Convert to PDF coordinates
     const pdfX = xOffset + relativeX * domToPdfScale;
     const pdfY = yOffset + relativeY * domToPdfScale;
     const pdfW = linkRect.width * domToPdfScale;

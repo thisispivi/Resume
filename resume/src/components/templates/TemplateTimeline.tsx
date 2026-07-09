@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ContactList from "@/components/molecules/ContactList";
+import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateTimelineProps {
@@ -20,6 +21,9 @@ function TemplateTimeline({ data, pdfLocale }: TemplateTimelineProps) {
           <p className="template-timeline__title">{data.jobTitle}</p>
         </div>
         <ContactList contact={data.contact} />
+        {hasPersonalDetails(data.personalDetails) ? (
+          <PersonalDetailsList compact details={data.personalDetails} pdfLocale={pdfLocale} />
+        ) : null}
       </header>
 
       {data.summary ? (

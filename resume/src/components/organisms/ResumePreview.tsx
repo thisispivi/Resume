@@ -7,6 +7,12 @@ import TemplateCreative from "@/components/templates/TemplateCreative";
 import TemplateCompact from "@/components/templates/TemplateCompact";
 import TemplateElegant from "@/components/templates/TemplateElegant";
 import TemplateTimeline from "@/components/templates/TemplateTimeline";
+import TemplatePortfolio from "@/components/templates/TemplatePortfolio";
+import TemplateEditorial from "@/components/templates/TemplateEditorial";
+import TemplateBold from "@/components/templates/TemplateBold";
+import TemplateBanner from "@/components/templates/TemplateBanner";
+import TemplateGeometric from "@/components/templates/TemplateGeometric";
+import TemplateNeo from "@/components/templates/TemplateNeo";
 import type { ResumeData, TemplateId } from "@/types";
 
 interface ResumePreviewProps {
@@ -25,6 +31,12 @@ const templateMap = {
   compact: TemplateCompact,
   elegant: TemplateElegant,
   timeline: TemplateTimeline,
+  portfolio: TemplatePortfolio,
+  editorial: TemplateEditorial,
+  bold: TemplateBold,
+  banner: TemplateBanner,
+  geometric: TemplateGeometric,
+  neo: TemplateNeo,
 };
 
 /** Renders the selected resume template inside a preview container. */

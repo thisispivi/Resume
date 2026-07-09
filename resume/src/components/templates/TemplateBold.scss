@@ -1,0 +1,72 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+// ── Bold Template ──
+// Oversized editorial type with a heavy accent rule.
+
+.template--bold {
+  @include flex-col;
+  height: 100%;
+  padding: 40px $space-8;
+
+  .resume-section__title {
+    font-size: $fs-resume-md;
+    letter-spacing: 3px;
+  }
+
+  .contact-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: $space-2 $space-4;
+    font-size: $fs-resume-md;
+  }
+
+  .personal-details {
+    margin-top: $space-2;
+  }
+}
+
+.template-bold {
+  &__header {
+    margin-bottom: $space-6;
+  }
+
+  &__name {
+    font-size: 34px;
+    font-weight: $fw-bold;
+    letter-spacing: -0.5px;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+
+  &__title {
+    font-size: $fs-lg;
+    color: var(--color-accent);
+    font-weight: $fw-semibold;
+    margin-top: $space-1;
+  }
+
+  &__rule {
+    height: 5px;
+    width: 64px;
+    background: var(--color-primary);
+    margin: $space-4 0;
+  }
+
+  &__meta {
+    @include flex-col($space-2);
+  }
+
+  &__footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-6;
+    margin-top: auto;
+  }
+
+  &__languages {
+    list-style: none;
+    @include flex-col($space-2);
+    font-size: $fs-resume-base;
+  }
+}

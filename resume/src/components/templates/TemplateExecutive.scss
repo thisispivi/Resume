@@ -16,7 +16,7 @@
   }
 
   .resume-entry {
-    margin-bottom: $space-4;
+    margin-bottom: $space-3;
   }
 
   .contact-list {
@@ -34,13 +34,13 @@
 .template-executive {
   &__header {
     text-align: center;
-    padding-bottom: $space-6;
-    margin-bottom: $space-5;
+    padding-bottom: $space-4;
+    margin-bottom: $space-3;
     border-bottom: 1px solid var(--border-light);
   }
 
   &__avatar {
-    margin: 0 auto $space-3;
+    margin: 0 auto $space-2;
   }
 
   &__name {
@@ -60,16 +60,40 @@
   &__contact {
     @include flex-center;
     flex-wrap: wrap;
-    gap: $space-4;
-    padding-bottom: $space-5;
-    margin-bottom: $space-4;
+    gap: $space-3;
+    padding-bottom: $space-3;
+    margin-bottom: $space-2;
     border-bottom: 1px solid var(--border-light);
   }
 
   &__body {
-    @include flex-col($space-5);
-    margin-top: $space-5;
+    @include flex-col($space-4);
+    margin-top: $space-3;
     flex: 1;
+  }
+
+  &__footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: $space-6;
+  }
+
+  &__skills {
+    @include flex-col($space-2);
+  }
+
+  &__skill-row {
+    font-size: $fs-resume-sm;
+    line-height: 1.5;
+  }
+
+  &__skill-name {
+    font-weight: $fw-semibold;
+    color: var(--ink);
+  }
+
+  &__skill-items {
+    color: var(--ink-secondary);
   }
 
   &__languages {

@@ -1,0 +1,86 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+// ── Geometric Template ──
+// Angled accent shape behind the header, accent-bordered sections.
+
+.template--geometric {
+  position: relative;
+  @include flex-col;
+  height: 100%;
+  padding: 40px $space-8;
+  overflow: hidden;
+
+  .contact-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: $space-2 $space-4;
+    font-size: $fs-resume-md;
+  }
+
+  .personal-details {
+    margin-top: $space-2;
+  }
+}
+
+.template-geometric {
+  &__shape {
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 320px;
+    height: 320px;
+    background: var(--color-accent);
+    opacity: 0.14;
+    clip-path: polygon(100% 0, 100% 100%, 0 0);
+    pointer-events: none;
+  }
+
+  &__header {
+    position: relative;
+    margin-bottom: $space-6;
+  }
+
+  &__avatar {
+    margin-bottom: $space-3;
+  }
+
+  &__name {
+    font-size: $fs-resume-name-lg;
+    font-weight: $fw-bold;
+    color: var(--ink);
+  }
+
+  &__title {
+    font-size: $fs-md;
+    color: var(--color-primary);
+    font-weight: $fw-semibold;
+    letter-spacing: 0.5px;
+    margin: $space-1 0 $space-4;
+  }
+
+  &__section {
+    @include flex-col($space-2);
+    margin-bottom: $space-5;
+    padding-left: $space-4;
+    border-left: 3px solid var(--color-accent);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    font-size: $fs-resume-md;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: $fw-bold;
+    color: var(--ink);
+  }
+
+  &__languages {
+    list-style: none;
+    @include flex-col($space-2);
+    font-size: $fs-resume-base;
+  }
+}

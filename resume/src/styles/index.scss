@@ -18,6 +18,8 @@
 @use "../components/molecules/FileUploader";
 @use "../components/molecules/Avatar";
 @use "../components/molecules/ResumeEditorModal";
+@use "../components/molecules/WelcomeModal";
+@use "../components/molecules/PhotoEditorModal";
 
 // Organisms
 @use "../components/organisms/Navbar";
@@ -34,6 +36,12 @@
 @use "../components/templates/TemplateCompact";
 @use "../components/templates/TemplateElegant";
 @use "../components/templates/TemplateTimeline";
+@use "../components/templates/TemplatePortfolio";
+@use "../components/templates/TemplateEditorial";
+@use "../components/templates/TemplateBold";
+@use "../components/templates/TemplateBanner";
+@use "../components/templates/TemplateGeometric";
+@use "../components/templates/TemplateNeo";
 
 // Pages
 @use "../pages/ResumeBuilderPage";

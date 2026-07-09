@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ContactList from "@/components/molecules/ContactList";
+import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateElegantProps {
@@ -20,6 +21,9 @@ function TemplateElegant({ data, pdfLocale }: TemplateElegantProps) {
         <p className="template-elegant__title">{data.jobTitle}</p>
         <div className="template-elegant__contact">
           <ContactList contact={data.contact} />
+          {hasPersonalDetails(data.personalDetails) ? (
+            <PersonalDetailsList compact details={data.personalDetails} pdfLocale={pdfLocale} />
+          ) : null}
         </div>
       </header>
 

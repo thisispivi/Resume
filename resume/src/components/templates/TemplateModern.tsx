@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Avatar from "@/components/molecules/Avatar";
 import ContactList from "@/components/molecules/ContactList";
+import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateModernProps {
@@ -26,6 +27,13 @@ function TemplateModern({ data, pdfLocale }: TemplateModernProps) {
           <h2 className="template-modern__section-title">{t("sectionTitles.contact")}</h2>
           <ContactList contact={data.contact} />
         </div>
+
+        {hasPersonalDetails(data.personalDetails) ? (
+          <div className="template-modern__section">
+            <h2 className="template-modern__section-title">{t("sectionTitles.details")}</h2>
+            <PersonalDetailsList details={data.personalDetails} pdfLocale={pdfLocale} />
+          </div>
+        ) : null}
 
         {data.skills && data.skills.length > 0 ? (
           <div className="template-modern__section">

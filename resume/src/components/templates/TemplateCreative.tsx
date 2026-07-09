@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Avatar from "@/components/molecules/Avatar";
 import ContactList from "@/components/molecules/ContactList";
+import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateCreativeProps {
@@ -43,6 +44,13 @@ function TemplateCreative({ data, pdfLocale }: TemplateCreativeProps) {
                   </div>
                 ))}
               </div>
+            </section>
+          ) : null}
+
+          {hasPersonalDetails(data.personalDetails) ? (
+            <section className="template-creative__section">
+              <h2 className="template-creative__section-title">{t("sectionTitles.details")}</h2>
+              <PersonalDetailsList details={data.personalDetails} pdfLocale={pdfLocale} />
             </section>
           ) : null}
 

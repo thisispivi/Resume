@@ -118,7 +118,7 @@
     }
 
     &--active {
-      color: var(--color-primary);
+      color: var(--color-primary-ink);
       font-weight: $fw-medium;
       background: color-mix(in srgb, var(--color-primary), transparent 94%);
 

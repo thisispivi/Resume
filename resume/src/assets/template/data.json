@@ -3,12 +3,22 @@
     "name": "Luca Ferri",
     "jobTitle": "Software Engineer, Machine Learning Specialist",
     "photo": "",
-    "contact": {
-      "email": "luca.ferri@example.com",
-      "phone": "+39 333 000 0000",
-      "linkedin": "https://www.linkedin.com/in/lucaferri",
-      "github": "https://github.com/lucaferri",
-      "website": "https://www.lucaferri.dev"
+    "contact": [
+      { "type": "email", "value": "luca.ferri@example.com" },
+      { "type": "phone", "value": "+39 333 000 0000" },
+      { "type": "linkedin", "value": "https://www.linkedin.com/in/lucaferri" },
+      { "type": "github", "value": "https://github.com/lucaferri" },
+      { "type": "website", "value": "https://www.lucaferri.dev" }
+    ],
+    "personalDetails": {
+      "location": "Milano, Italia",
+      "birthDate": "12/04/1995",
+      "age": "31",
+      "nationality": "Italiana",
+      "drivingLicense": "B",
+      "workAuthorization": "Cittadino UE",
+      "availability": "30 giorni",
+      "pronouns": ""
     },
     "summary": "Ingegnere del software con esperienza nello sviluppo di applicazioni web full-stack e nella progettazione di soluzioni di machine learning. Specializzato nella realizzazione di sistemi scalabili, data-driven e nell’integrazione di modelli di intelligenza artificiale per supportare processi decisionali e analisi avanzate.",
     "experience": [
@@ -75,12 +85,22 @@
     "name": "Lucas Ferris",
     "jobTitle": "Software Engineer, Machine Learning Specialist",
     "photo": "",
-    "contact": {
-      "email": "lucas.ferris@example.com",
-      "phone": "+1 555 000 0000",
-      "linkedin": "https://www.linkedin.com/in/lucasferris",
-      "github": "https://github.com/lucasferris",
-      "website": "https://www.lucasferris.dev"
+    "contact": [
+      { "type": "email", "value": "lucas.ferris@example.com" },
+      { "type": "phone", "value": "+1 555 000 0000" },
+      { "type": "linkedin", "value": "https://www.linkedin.com/in/lucasferris" },
+      { "type": "github", "value": "https://github.com/lucasferris" },
+      { "type": "website", "value": "https://www.lucasferris.dev" }
+    ],
+    "personalDetails": {
+      "location": "Berlin, Germany",
+      "birthDate": "04/12/1995",
+      "age": "31",
+      "nationality": "Italian",
+      "drivingLicense": "B",
+      "workAuthorization": "EU citizen",
+      "availability": "30 days",
+      "pronouns": ""
     },
     "summary": "Software engineer with experience in full-stack web development and machine learning solutions. Specialized in building scalable, data-driven systems and integrating AI models to support decision-making, predictive analytics, and business intelligence.",
     "experience": [

@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ContactList from "@/components/molecules/ContactList";
+import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateExecutiveProps {
@@ -19,6 +20,9 @@ function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
         <p className="template-executive__title">{data.jobTitle}</p>
         <div className="template-executive__contact">
           <ContactList contact={data.contact} />
+          {hasPersonalDetails(data.personalDetails) ? (
+            <PersonalDetailsList compact details={data.personalDetails} pdfLocale={pdfLocale} />
+          ) : null}
         </div>
       </header>
 
@@ -119,32 +123,36 @@ function TemplateExecutive({ data, pdfLocale }: TemplateExecutiveProps) {
           </section>
         ) : null}
 
-        {data.skills && data.skills.length > 0 ? (
-          <section className="resume-section">
-            <h2 className="resume-section__title">{t("sectionTitles.skills")}</h2>
-            <div className="resume-section__body">
-              {data.skills.map((category) => (
-                <div className="resume-entry" key={category.category}>
-                  <h3 className="resume-entry__title">{category.category}</h3>
-                  <p className="resume-entry__body">{category.items.join(", ")}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
+        <div className="template-executive__footer-grid">
+          {data.skills && data.skills.length > 0 ? (
+            <section className="resume-section">
+              <h2 className="resume-section__title">{t("sectionTitles.skills")}</h2>
+              <div className="template-executive__skills">
+                {data.skills.map((category) => (
+                  <p className="template-executive__skill-row" key={category.category}>
+                    <span className="template-executive__skill-name">{category.category}:</span>{" "}
+                    <span className="template-executive__skill-items">
+                      {category.items.join(", ")}
+                    </span>
+                  </p>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
-        {data.languages && data.languages.length > 0 ? (
-          <section className="resume-section">
-            <h2 className="resume-section__title">{t("sectionTitles.languages")}</h2>
-            <ul className="template-executive__languages">
-              {data.languages.map((language) => (
-                <li key={language.language}>
-                  {language.language} - {language.proficiency}
-                </li>
-              ))}
-            </ul>
-          </section>
-        ) : null}
+          {data.languages && data.languages.length > 0 ? (
+            <section className="resume-section">
+              <h2 className="resume-section__title">{t("sectionTitles.languages")}</h2>
+              <ul className="template-executive__languages">
+                {data.languages.map((language) => (
+                  <li key={language.language}>
+                    {language.language} - {language.proficiency}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+        </div>
       </main>
     </div>
   );

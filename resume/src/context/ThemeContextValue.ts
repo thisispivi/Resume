@@ -1,5 +1,6 @@
 import { createContext } from "react";
 
+/** Shape of the dark-mode context: current state plus a toggle callback. */
 export interface ThemeContextValue {
   isDark: boolean;
   toggleDark: () => void;

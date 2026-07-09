@@ -7,8 +7,13 @@
   height: 100%;
 
   .contact-list,
-  .contact-link {
+  .contact-link,
+  .personal-details {
     color: #ffffff;
+  }
+
+  .personal-details__label {
+    color: rgba(255, 255, 255, 0.62);
   }
 }
 

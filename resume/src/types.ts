@@ -1,10 +1,40 @@
-/** Contact information fields for the resume. */
-export interface Contact {
-  email?: string;
-  phone?: string;
-  linkedin?: string;
-  github?: string;
-  website?: string;
+/** Identifier for a contact link's platform/kind. */
+export type ContactType =
+  | "email"
+  | "phone"
+  | "location"
+  | "website"
+  | "linkedin"
+  | "github"
+  | "x"
+  | "instagram"
+  | "telegram"
+  | "whatsapp"
+  | "youtube"
+  | "behance"
+  | "dribbble"
+  | "stackoverflow"
+  | "medium"
+  | "mastodon"
+  | "custom";
+
+/** A single contact entry: a platform/kind, its value, and an optional display label. */
+export interface ContactLink {
+  type: ContactType;
+  value: string;
+  label?: string;
+}
+
+/** Optional personal details commonly needed for localized resume formats. */
+export interface PersonalDetails {
+  location?: string;
+  birthDate?: string;
+  age?: string;
+  nationality?: string;
+  drivingLicense?: string;
+  workAuthorization?: string;
+  availability?: string;
+  pronouns?: string;
 }
 
 /** A single work experience entry. */
@@ -56,7 +86,8 @@ export interface ResumeData {
   name: string;
   jobTitle: string;
   photo?: string;
-  contact: Contact;
+  contact: ContactLink[];
+  personalDetails?: PersonalDetails;
   summary?: string;
   experience?: Experience[];
   education?: Education[];
@@ -79,7 +110,13 @@ export type TemplateId =
   | "creative"
   | "compact"
   | "elegant"
-  | "timeline";
+  | "timeline"
+  | "portfolio"
+  | "editorial"
+  | "bold"
+  | "banner"
+  | "geometric"
+  | "neo";
 
 /** Color values used to style the resume theme. */
 export interface ThemeColors {
@@ -96,6 +133,7 @@ export interface ThemePalette {
   id: string;
   name: string;
   colors: ThemeColors;
+  group?: "bold";
 }
 
 /** Metadata for a selectable resume template option. */

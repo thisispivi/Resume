@@ -1,15 +1,18 @@
 import type {
   Certification,
-  Contact,
+  ContactLink,
+  ContactType,
   Education,
   Experience,
   Language,
+  PersonalDetails,
   Project,
   ResumeData,
   ResumeDataMap,
   SkillCategory,
   ValidationResult,
 } from "@/types";
+import { CONTACT_TYPES } from "@/data/contactTypes";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
@@ -19,9 +22,46 @@ const isString = (value: unknown): value is string => typeof value === "string";
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === "string");
 
-const validateContact = (value: unknown): value is Contact => {
+const CONTACT_TYPE_VALUES = new Set<string>(CONTACT_TYPES.map((config) => config.type));
+
+/** Legacy fixed-object contact keys (pre-v3), kept only to migrate old data on load. */
+const LEGACY_CONTACT_KEYS: ContactType[] = ["email", "phone", "linkedin", "github", "website"];
+
+/** Converts a legacy `{ email, phone, ... }` contact object into a ContactLink[]; passes arrays through. */
+const migrateContactField = (value: unknown): unknown => {
+  if (Array.isArray(value)) return value;
+  if (!isRecord(value)) return value;
+
+  const links: ContactLink[] = [];
+  LEGACY_CONTACT_KEYS.forEach((type) => {
+    const fieldValue = value[type];
+    if (typeof fieldValue === "string" && fieldValue.trim()) links.push({ type, value: fieldValue });
+  });
+  return links;
+};
+
+const validateContactLink = (value: unknown): value is ContactLink =>
+  isRecord(value) &&
+  isString(value.type) &&
+  CONTACT_TYPE_VALUES.has(value.type) &&
+  isString(value.value) &&
+  (value.label === undefined || isString(value.label));
+
+const validateContact = (value: unknown): value is ContactLink[] =>
+  Array.isArray(value) && value.every(validateContactLink);
+
+const validatePersonalDetails = (value: unknown): value is PersonalDetails => {
   if (!isRecord(value)) return false;
-  const fields = ["email", "phone", "linkedin", "github", "website"] as const;
+  const fields = [
+    "location",
+    "birthDate",
+    "age",
+    "nationality",
+    "drivingLicense",
+    "workAuthorization",
+    "availability",
+    "pronouns",
+  ] as const;
   return fields.every((field) => (value[field] === undefined ? true : isString(value[field])));
 };
 
@@ -63,6 +103,9 @@ const validateResumeData = (value: unknown): value is ResumeData => {
   if (!isRecord(value)) return false;
   if (!isString(value.name) || !isString(value.jobTitle)) return false;
   if (!validateContact(value.contact)) return false;
+  if (value.personalDetails !== undefined && !validatePersonalDetails(value.personalDetails)) {
+    return false;
+  }
   if (value.photo !== undefined && !isString(value.photo)) return false;
   if (value.summary !== undefined && !isString(value.summary)) return false;
   if (
@@ -121,7 +164,8 @@ export const validateResumeDataMap = (payload: unknown): ValidationResult => {
   const dataMap: ResumeDataMap = {};
 
   locales.forEach((locale) => {
-    const localeValue = payload[locale];
+    const raw = payload[locale];
+    const localeValue = isRecord(raw) ? { ...raw, contact: migrateContactField(raw.contact) } : raw;
     if (!validateResumeData(localeValue)) {
       errors.push(`Invalid resume data for locale: ${locale}`);
       return;

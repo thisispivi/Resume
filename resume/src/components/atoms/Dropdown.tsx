@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg?react";
 
 /** A single option within a Dropdown, holding a value and display label. */
-export interface DropdownOption {
+interface DropdownOption {
   value: string;
   label: string;
 }
@@ -68,7 +68,6 @@ function Dropdown({ label, options, value, onChange, className = "" }: DropdownP
     [onChange, close],
   );
 
-  // Close on click outside
   useEffect(() => {
     if (!isOpen) return;
 
@@ -90,7 +89,6 @@ function Dropdown({ label, options, value, onChange, className = "" }: DropdownP
     };
   }, [isOpen, close]);
 
-  // Reposition on scroll/resize while open
   useEffect(() => {
     if (!isOpen) return;
 
@@ -185,7 +183,6 @@ function Dropdown({ label, options, value, onChange, className = "" }: DropdownP
     [options.length, selectOption, close],
   );
 
-  // Scroll highlighted option into view
   useEffect(() => {
     if (isOpen && highlightedIndex >= 0 && listRef.current) {
       const highlighted = listRef.current.children[highlightedIndex] as HTMLElement | undefined;

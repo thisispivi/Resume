@@ -1,0 +1,144 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.template--editorial {
+  height: 100%;
+  padding: 38px 44px;
+  background:
+    linear-gradient(90deg, transparent 0 68%, color-mix(in srgb, var(--color-accent), transparent 88%) 68% 100%),
+    var(--color-surface);
+
+  .resume-section__title {
+    color: var(--color-secondary);
+    border-bottom-color: var(--color-secondary);
+  }
+
+  .resume-tag {
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--color-accent), var(--color-surface) 82%);
+    color: var(--ink);
+  }
+}
+
+.template-editorial {
+  &__masthead {
+    display: grid;
+    grid-template-columns: 1fr 235px;
+    gap: 28px;
+    padding-bottom: 28px;
+    border-bottom: 5px solid var(--color-primary);
+  }
+
+  &__role {
+    margin-bottom: 10px;
+    color: var(--color-secondary);
+    font-size: 11px;
+    font-weight: $fw-bold;
+    text-transform: uppercase;
+  }
+
+  &__name {
+    max-width: 430px;
+    color: var(--ink);
+    font-size: 48px;
+    line-height: 0.92;
+    font-weight: $fw-bold;
+  }
+
+  &__contact {
+    align-self: end;
+    padding: 14px 0 0 18px;
+    border-left: 1px solid var(--border);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 235px;
+    gap: 28px;
+    padding-top: 24px;
+  }
+
+  &__lead {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 28px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+
+    h2 {
+      color: var(--color-primary);
+      font-size: 10px;
+      font-weight: $fw-bold;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--ink);
+      font-family: Georgia, serif;
+    }
+  }
+
+  &__column {
+    @include flex-col(16px);
+
+    &--wide {
+      padding-right: 4px;
+    }
+  }
+
+  &__side-section {
+    @include flex-col(8px);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-light);
+
+    h2 {
+      color: var(--color-primary);
+      font-size: 10px;
+      font-weight: $fw-bold;
+      text-transform: uppercase;
+    }
+  }
+
+  &__skill,
+  &__mini-entry {
+    @include flex-col(3px);
+
+    h3 {
+      font-size: 11px;
+      color: var(--ink);
+    }
+
+    p {
+      font-size: 9.5px;
+      line-height: 1.42;
+      color: var(--ink-secondary);
+    }
+
+    span {
+      font-size: 9px;
+      color: var(--ink-hint);
+    }
+  }
+
+  &__languages {
+    list-style: none;
+    @include flex-col(6px);
+    font-size: 10px;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    strong {
+      color: var(--ink-hint);
+      font-weight: $fw-semibold;
+      text-align: right;
+    }
+  }
+}

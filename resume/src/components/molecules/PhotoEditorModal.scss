@@ -1,0 +1,26 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.photo-editor {
+  @include flex-col($space-5);
+  align-items: center;
+
+  canvas {
+    border-radius: $radius-md;
+    touch-action: none;
+  }
+
+  &__zoom {
+    @include flex-col($space-2);
+    width: 100%;
+
+    span {
+      @include section-label;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--color-primary);
+    }
+  }
+}

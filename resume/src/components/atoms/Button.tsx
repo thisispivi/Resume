@@ -1,11 +1,11 @@
 import type { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "brand";
   size?: "sm" | "md";
 }
 
-/** Renders a clickable button with primary or ghost variant. */
+/** Renders a clickable button with primary, ghost, or brand (fixed app color) variant. */
 function Button({ variant = "primary", size = "md", className = "", ...props }: ButtonProps) {
   return (
     <button

@@ -1,16 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "@/components/atoms/Modal";
 import TextInput from "@/components/atoms/TextInput";
 import TextArea from "@/components/atoms/TextArea";
 import Button from "@/components/atoms/Button";
+import Dropdown from "@/components/atoms/Dropdown";
+import Avatar from "@/components/molecules/Avatar";
+import PhotoEditorModal from "@/components/molecules/PhotoEditorModal";
+import { CONTACT_TYPES } from "@/data/contactTypes";
 import type {
   Certification,
-  Contact,
+  ContactLink,
   Education,
   Experience,
   Language,
+  PersonalDetails,
   Project,
   ResumeData,
   SkillCategory,
@@ -19,6 +24,7 @@ import TrashIcon from "@/assets/icons/trash.svg?react";
 
 type SectionId =
   | "personal"
+  | "details"
   | "contact"
   | "experience"
   | "education"
@@ -47,6 +53,7 @@ const EMPTY_EDUCATION: Education = {
   institution: "",
 };
 
+const EMPTY_CONTACT: ContactLink = { type: "email", value: "" };
 const EMPTY_SKILL: SkillCategory = { category: "", items: [] };
 const EMPTY_LANGUAGE: Language = { language: "", proficiency: "" };
 const EMPTY_PROJECT: Project = { description: "", name: "" };
@@ -55,22 +62,24 @@ const EMPTY_CERTIFICATION: Certification = { issuer: "", name: "" };
 /** Modal with tabbed form sections for editing all resume data fields. */
 function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalProps) {
   const { t } = useTranslation();
-  const [draft, setDraft] = useState<ResumeData>(structuredClone(data));
+  const [draft, setDraft] = useState<ResumeData>(() => structuredClone(data));
   const [activeSection, setActiveSection] = useState<SectionId>("personal");
 
-  /** Re-sync draft whenever external data changes (e.g. JSON upload or locale switch). */
-  useEffect(() => {
+  // Re-sync draft whenever external data changes (e.g. JSON upload or locale switch).
+  const [prevData, setPrevData] = useState(data);
+  if (data !== prevData) {
+    setPrevData(data);
     setDraft(structuredClone(data));
-  }, [data]);
+  }
 
   const updateField = useCallback(<K extends keyof ResumeData>(key: K, value: ResumeData[K]) => {
     setDraft((prev) => ({ ...prev, [key]: value }));
   }, []);
 
-  const updateContact = useCallback((key: keyof Contact, value: string) => {
+  const updatePersonalDetails = useCallback((key: keyof PersonalDetails, value: string) => {
     setDraft((prev) => ({
       ...prev,
-      contact: { ...prev.contact, [key]: value },
+      personalDetails: { ...prev.personalDetails, [key]: value },
     }));
   }, []);
 
@@ -81,6 +90,7 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
 
   const sections: { id: SectionId; labelKey: string }[] = [
     { id: "personal", labelKey: "editor.personal" },
+    { id: "details", labelKey: "editor.details" },
     { id: "contact", labelKey: "editor.contact" },
     { id: "experience", labelKey: "sectionTitles.experience" },
     { id: "education", labelKey: "sectionTitles.education" },
@@ -111,8 +121,23 @@ function ResumeEditorModal({ data, isOpen, onClose, onSave }: ResumeEditorModalP
             <PersonalSection draft={draft} onUpdate={updateField} />
           ) : null}
 
+          {activeSection === "details" ? (
+            <PersonalDetailsSection
+              details={draft.personalDetails ?? {}}
+              onUpdate={updatePersonalDetails}
+            />
+          ) : null}
+
           {activeSection === "contact" ? (
-            <ContactSection contact={draft.contact} onUpdate={updateContact} />
+            <ListSection<ContactLink>
+              emptyItem={EMPTY_CONTACT}
+              items={draft.contact}
+              onUpdate={(items) => updateField("contact", items)}
+              renderItem={(item, index, onChange) => (
+                <ContactFields index={index} item={item} onChange={onChange} />
+              )}
+              sectionKey="contact"
+            />
           ) : null}
 
           {activeSection === "experience" ? (
@@ -209,6 +234,20 @@ function PersonalSection({
   onUpdate: <K extends keyof ResumeData>(key: K, value: ResumeData[K]) => void;
 }) {
   const { t } = useTranslation();
+  const [pendingPhoto, setPendingPhoto] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+    e.target.value = "";
+    if (file) setPendingPhoto(file);
+  };
+
+  const handlePhotoSave = (dataUrl: string) => {
+    onUpdate("photo", dataUrl);
+    setPendingPhoto(null);
+  };
+
   return (
     <div className="resume-editor__fields">
       <TextInput
@@ -223,12 +262,31 @@ function PersonalSection({
         placeholder={t("editor.jobTitlePlaceholder")}
         value={draft.jobTitle}
       />
-      <TextInput
-        label={t("editor.photo")}
-        onChange={(e) => onUpdate("photo", e.target.value)}
-        placeholder={t("editor.photoPlaceholder")}
-        value={draft.photo ?? ""}
-      />
+
+      <div className="resume-editor__photo">
+        <span className="text-input__label">{t("editor.photo")}</span>
+        <div className="resume-editor__photo-row">
+          <Avatar name={draft.name} photo={draft.photo} />
+          <div className="resume-editor__photo-actions">
+            <Button onClick={() => fileInputRef.current?.click()} size="sm" variant="ghost">
+              {t("editor.uploadPhoto")}
+            </Button>
+            {draft.photo ? (
+              <Button onClick={() => onUpdate("photo", "")} size="sm" variant="ghost">
+                {t("editor.removePhoto")}
+              </Button>
+            ) : null}
+          </div>
+        </div>
+        <input
+          accept="image/*"
+          hidden
+          onChange={handleFileSelect}
+          ref={fileInputRef}
+          type="file"
+        />
+      </div>
+
       <TextArea
         label={t("editor.summary")}
         onChange={(e) => onUpdate("summary", e.target.value)}
@@ -236,24 +294,36 @@ function PersonalSection({
         rows={4}
         value={draft.summary ?? ""}
       />
+
+      {pendingPhoto ? (
+        <PhotoEditorModal
+          image={pendingPhoto}
+          isOpen={Boolean(pendingPhoto)}
+          onCancel={() => setPendingPhoto(null)}
+          onSave={handlePhotoSave}
+        />
+      ) : null}
     </div>
   );
 }
 
-function ContactSection({
-  contact,
+function PersonalDetailsSection({
+  details,
   onUpdate,
 }: {
-  contact: Contact;
-  onUpdate: (key: keyof Contact, value: string) => void;
+  details: PersonalDetails;
+  onUpdate: (key: keyof PersonalDetails, value: string) => void;
 }) {
   const { t } = useTranslation();
-  const fields: { key: keyof Contact; labelKey: string }[] = [
-    { key: "email", labelKey: "editor.email" },
-    { key: "phone", labelKey: "editor.phone" },
-    { key: "linkedin", labelKey: "editor.linkedin" },
-    { key: "github", labelKey: "editor.github" },
-    { key: "website", labelKey: "editor.website" },
+  const fields: { key: keyof PersonalDetails; labelKey: string }[] = [
+    { key: "location", labelKey: "editor.location" },
+    { key: "birthDate", labelKey: "editor.birthDate" },
+    { key: "age", labelKey: "editor.age" },
+    { key: "nationality", labelKey: "editor.nationality" },
+    { key: "drivingLicense", labelKey: "editor.drivingLicense" },
+    { key: "workAuthorization", labelKey: "editor.workAuthorization" },
+    { key: "availability", labelKey: "editor.availability" },
+    { key: "pronouns", labelKey: "editor.pronouns" },
   ];
 
   return (
@@ -263,7 +333,7 @@ function ContactSection({
           key={key}
           label={t(labelKey)}
           onChange={(e) => onUpdate(key, e.target.value)}
-          value={contact[key] ?? ""}
+          value={details[key] ?? ""}
         />
       ))}
     </div>
@@ -331,6 +401,46 @@ function ListSection<T>({
 }
 
 /* ── Field groups ── */
+
+function ContactFields({
+  index: _index,
+  item,
+  onChange,
+}: {
+  index: number;
+  item: ContactLink;
+  onChange: (updated: ContactLink) => void;
+}) {
+  const { t } = useTranslation();
+  const typeOptions = CONTACT_TYPES.map((config) => ({
+    value: config.type,
+    label: t(config.labelKey, config.fallbackLabel),
+  }));
+
+  return (
+    <>
+      <Dropdown
+        label={t("editor.contactType")}
+        onChange={(value) => onChange({ ...item, type: value as ContactLink["type"] })}
+        options={typeOptions}
+        value={item.type}
+      />
+      <TextInput
+        label={t("editor.contactValue")}
+        onChange={(e) => onChange({ ...item, value: e.target.value })}
+        value={item.value}
+      />
+      {item.type === "custom" ? (
+        <TextInput
+          label={t("editor.contactLabel")}
+          onChange={(e) => onChange({ ...item, label: e.target.value })}
+          placeholder={t("editor.contactLabelPlaceholder")}
+          value={item.label ?? ""}
+        />
+      ) : null}
+    </>
+  );
+}
 
 function ExperienceFields({
   index: _index,

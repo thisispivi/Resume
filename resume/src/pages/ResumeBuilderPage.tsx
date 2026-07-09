@@ -6,6 +6,7 @@ import Navbar from "@/components/organisms/Navbar";
 import Sidebar from "@/components/organisms/Sidebar";
 import ResumePreview from "@/components/organisms/ResumePreview";
 import ResumeEditorModal from "@/components/molecules/ResumeEditorModal";
+import WelcomeModal from "@/components/molecules/WelcomeModal";
 import Button from "@/components/atoms/Button";
 import Spinner from "@/components/atoms/Spinner";
 import { THEME_PALETTES } from "@/data/palettes";
@@ -15,11 +16,12 @@ import type { GoogleFont } from "@/data/fonts";
 import { DEFAULT_LOCALE } from "@/i18n";
 import { useTheme } from "@/context/useTheme";
 import type { ResumeData, ResumeDataMap, TemplateId, ThemeColors, ThemePalette } from "@/types";
-import { getFirstLocale } from "@/utils/resume";
+import { buildBlankResumeData, downloadJsonFile, getFirstLocale } from "@/utils/resume";
 import { generateSinglePagePdf } from "@/utils/pdf";
 import { validateResumeDataMap } from "@/utils/validateResumeData";
 
 const DEFAULT_DATA = rawData as ResumeDataMap;
+const STORAGE_KEY = "resume-builder-state-v2";
 
 const DARK_OVERRIDES = {
   background: "#0f172a",
@@ -34,29 +36,98 @@ const A4_WIDTH = 794;
 /** A4 page height in px — must match $resume-height in _variables.scss */
 const A4_HEIGHT = 1123;
 
+interface PersistedBuilderState {
+  resumeDataMap?: ResumeDataMap;
+  pdfLocale?: string;
+  templateId?: TemplateId;
+  paletteId?: string;
+  colors?: ThemeColors;
+  isPdfDark?: boolean;
+  resumeFont?: GoogleFont;
+}
+
+const isThemeColors = (value: unknown): value is ThemeColors => {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return false;
+  const colors = value as Record<keyof ThemeColors, unknown>;
+  return ["primary", "secondary", "accent", "background", "surface", "text"].every(
+    (key) => typeof colors[key as keyof ThemeColors] === "string",
+  );
+};
+
+const isTemplateId = (value: unknown): value is TemplateId =>
+  typeof value === "string" && TEMPLATE_OPTIONS.some((template) => template.id === value);
+
+const findFont = (value: unknown) => {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return undefined;
+  const candidate = value as Partial<GoogleFont>;
+  return GOOGLE_FONTS.find((font) => font.family === candidate.family);
+};
+
+const readPersistedState = (): PersistedBuilderState => {
+  if (typeof window === "undefined") return {};
+
+  try {
+    const rawState = window.localStorage.getItem(STORAGE_KEY);
+    if (!rawState) return {};
+
+    const parsed = JSON.parse(rawState) as Record<string, unknown>;
+    const state: PersistedBuilderState = {};
+    const resumeValidation = validateResumeDataMap(parsed.resumeDataMap);
+    if (resumeValidation.data) state.resumeDataMap = resumeValidation.data;
+    if (typeof parsed.pdfLocale === "string") state.pdfLocale = parsed.pdfLocale;
+    if (isTemplateId(parsed.templateId)) state.templateId = parsed.templateId;
+    if (
+      typeof parsed.paletteId === "string" &&
+      THEME_PALETTES.some((palette) => palette.id === parsed.paletteId)
+    ) {
+      state.paletteId = parsed.paletteId;
+    }
+    if (isThemeColors(parsed.colors)) state.colors = parsed.colors;
+    if (typeof parsed.isPdfDark === "boolean") state.isPdfDark = parsed.isPdfDark;
+    state.resumeFont = findFont(parsed.resumeFont);
+    return state;
+  } catch (error) {
+    console.warn("Failed to restore saved resume builder state:", error);
+    return {};
+  }
+};
+
 /** Main page orchestrating resume data, theming, template selection, and PDF export. */
 function ResumeBuilderPage() {
   const { t, i18n } = useTranslation();
-  const [resumeDataMap, setResumeDataMap] = useState<ResumeDataMap>(DEFAULT_DATA);
-  const [pdfLocale, setPdfLocale] = useState<string>(getFirstLocale(DEFAULT_DATA, DEFAULT_LOCALE));
-  const [templateId, setTemplateId] = useState<TemplateId>("modern");
-  const [paletteId, setPaletteId] = useState(THEME_PALETTES[0].id);
-  const [colors, setColors] = useState<ThemeColors>(THEME_PALETTES[0].colors);
+  const [initialState] = useState(readPersistedState);
+  const initialDataMap = initialState.resumeDataMap ?? DEFAULT_DATA;
+  const [resumeDataMap, setResumeDataMap] = useState<ResumeDataMap>(initialDataMap);
+  const [pdfLocale, setPdfLocale] = useState<string>(
+    initialState.pdfLocale ?? getFirstLocale(initialDataMap, DEFAULT_LOCALE),
+  );
+  const [templateId, setTemplateId] = useState<TemplateId>(initialState.templateId ?? "modern");
+  const [paletteId, setPaletteId] = useState(initialState.paletteId ?? THEME_PALETTES[0].id);
+  const [colors, setColors] = useState<ThemeColors>(
+    initialState.colors ?? THEME_PALETTES[0].colors,
+  );
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
-  const [isPdfDark, setIsPdfDark] = useState(false);
-  const [resumeFont, setResumeFont] = useState<GoogleFont>(DEFAULT_FONT);
+  const [isPdfDark, setIsPdfDark] = useState(initialState.isPdfDark ?? false);
+  const [resumeFont, setResumeFont] = useState<GoogleFont>(initialState.resumeFont ?? DEFAULT_FONT);
   const [isFontLoading, setIsFontLoading] = useState(false);
+  const [prevFont, setPrevFont] = useState<GoogleFont | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isWelcomeOpen, setIsWelcomeOpen] = useState(() => !initialState.resumeDataMap);
   const { isDark, toggleDark } = useTheme();
   const previewContainerRef = useRef<HTMLDivElement>(null);
   const [previewScale, setPreviewScale] = useState(1);
 
   const appLocale = i18n.language;
 
-  useEffect(() => {
+  // Flag loading as soon as the font changes, before the async load effect below runs.
+  if (resumeFont !== prevFont) {
+    setPrevFont(resumeFont);
     setIsFontLoading(true);
+  }
+
+  useEffect(() => {
     loadGoogleFont(resumeFont).then(() => setIsFontLoading(false));
   }, [resumeFont]);
 
@@ -84,11 +155,26 @@ function ResumeBuilderPage() {
 
   const effectiveColors = isPdfDark ? { ...colors, ...DARK_OVERRIDES } : colors;
 
-  const appThemeStyle = {
-    "--color-primary": colors.primary,
-    "--color-secondary": colors.secondary,
-    "--color-accent": colors.accent,
-  } as CSSProperties;
+  useEffect(() => {
+    const state: PersistedBuilderState = {
+      resumeDataMap,
+      pdfLocale: activePdfLocale,
+      templateId,
+      paletteId,
+      colors,
+      isPdfDark,
+      resumeFont,
+    };
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }, [activePdfLocale, colors, isPdfDark, paletteId, resumeDataMap, resumeFont, templateId]);
+
+  // Set on :root (not .app) so portaled dropdowns/modals inherit the palette too
+  useEffect(() => {
+    const root = document.documentElement.style;
+    root.setProperty("--color-primary", colors.primary);
+    root.setProperty("--color-secondary", colors.secondary);
+    root.setProperty("--color-accent", colors.accent);
+  }, [colors]);
 
   const pdfThemeStyle = {
     "--color-primary": colors.primary,
@@ -156,6 +242,22 @@ function ResumeBuilderPage() {
     setIsEditorOpen(true);
   }, []);
 
+  const handleUseExample = useCallback(() => {
+    setIsWelcomeOpen(false);
+  }, []);
+
+  const handleStartBlank = useCallback(() => {
+    const blankLocale = getFirstLocale(resumeDataMap, DEFAULT_LOCALE);
+    setResumeDataMap({ [blankLocale]: buildBlankResumeData() });
+    setPdfLocale(blankLocale);
+    setIsWelcomeOpen(false);
+    setIsEditorOpen(true);
+  }, [resumeDataMap]);
+
+  const handleDownloadData = useCallback(() => {
+    downloadJsonFile(resumeDataMap, "resume-data.json");
+  }, [resumeDataMap]);
+
   const handleEditorSave = useCallback(
     (updatedData: ResumeData) => {
       setResumeDataMap((prev) => ({
@@ -185,7 +287,7 @@ function ResumeBuilderPage() {
   };
 
   return (
-    <div className="app" style={appThemeStyle}>
+    <div className="app">
       <Navbar
         appLocale={appLocale}
         isDark={isDark}
@@ -202,6 +304,7 @@ function ResumeBuilderPage() {
         isSidebarOpen={isSidebarOpen}
         onCloseSidebar={handleCloseSidebar}
         onColorsChange={handleColorsChange}
+        onDownloadData={handleDownloadData}
         onEditResume={handleEditResume}
         onFontChange={handleFontChange}
         onPaletteChange={handlePaletteChange}
@@ -247,7 +350,7 @@ function ResumeBuilderPage() {
       </div>
 
       <div className="fab-download">
-        <Button disabled={isDownloading} onClick={handleDownloadPdf}>
+        <Button disabled={isDownloading} onClick={handleDownloadPdf} variant="brand">
           {isDownloading ? <Spinner size={24} /> : t("downloadLabel")}
         </Button>
       </div>
@@ -260,6 +363,12 @@ function ResumeBuilderPage() {
           onSave={handleEditorSave}
         />
       ) : null}
+
+      <WelcomeModal
+        isOpen={isWelcomeOpen}
+        onStartBlank={handleStartBlank}
+        onUseExample={handleUseExample}
+      />
     </div>
   );
 }

@@ -184,6 +184,39 @@
   }
 }
 
+// ── Personal details ──
+.personal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 10px;
+
+  &--compact {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px 12px;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: minmax(58px, 0.52fr) minmax(0, 1fr);
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  &__label {
+    color: var(--ink-hint);
+    font-size: 8.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    color: inherit;
+    min-width: 0;
+  }
+}
+
 @media print {
   .resume-preview__page {
     box-shadow: none;

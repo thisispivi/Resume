@@ -11,4 +11,10 @@ export const TEMPLATE_OPTIONS: TemplateOption[] = [
   { id: "compact", labelKey: "template.compact", fallbackLabel: "Compact" },
   { id: "elegant", labelKey: "template.elegant", fallbackLabel: "Elegant" },
   { id: "timeline", labelKey: "template.timeline", fallbackLabel: "Timeline" },
+  { id: "portfolio", labelKey: "template.portfolio", fallbackLabel: "Portfolio" },
+  { id: "editorial", labelKey: "template.editorial", fallbackLabel: "Editorial" },
+  { id: "bold", labelKey: "template.bold", fallbackLabel: "Bold" },
+  { id: "banner", labelKey: "template.banner", fallbackLabel: "Banner" },
+  { id: "geometric", labelKey: "template.geometric", fallbackLabel: "Geometric" },
+  { id: "neo", labelKey: "template.neo", fallbackLabel: "Neo" },
 ];

@@ -1,0 +1,159 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.template--portfolio {
+  height: 100%;
+  background: var(--color-surface);
+
+  .resume-tag {
+    border: 1px solid color-mix(in srgb, var(--color-accent), transparent 70%);
+    background: color-mix(in srgb, var(--color-accent), var(--color-surface) 86%);
+    color: var(--ink);
+  }
+}
+
+.template-portfolio {
+  &__hero {
+    min-height: 260px;
+    padding: 34px 42px;
+    display: grid;
+    grid-template-columns: 1fr 132px;
+    align-items: end;
+    gap: 28px;
+    background:
+      linear-gradient(90deg, var(--color-primary) 0 66%, var(--color-accent) 66% 100%);
+    color: #ffffff;
+  }
+
+  &__identity {
+    @include flex-col(12px);
+  }
+
+  &__eyebrow {
+    font-size: 10px;
+    font-weight: $fw-bold;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  &__name {
+    max-width: 450px;
+    font-size: 42px;
+    line-height: 0.96;
+    font-weight: $fw-bold;
+  }
+
+  &__summary {
+    max-width: 470px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  &__avatar {
+    width: 118px;
+    height: 118px;
+    justify-self: end;
+    border: 4px solid rgba(255, 255, 255, 0.84);
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: 245px 1fr;
+    min-height: calc(100% - 260px);
+  }
+
+  &__sidebar {
+    padding: 26px 24px;
+    background: color-mix(in srgb, var(--color-secondary), var(--color-surface) 88%);
+    border-right: 1px solid var(--border-light);
+    @include flex-col(18px);
+  }
+
+  &__section,
+  &__skills,
+  &__skill-group {
+    @include flex-col(8px);
+  }
+
+  &__section-title,
+  &__feature h2 {
+    font-size: 10px;
+    font-weight: $fw-bold;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  &__skill-group h3 {
+    font-size: 10px;
+    color: var(--ink);
+  }
+
+  &__languages {
+    list-style: none;
+    @include flex-col(7px);
+    font-size: 10px;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    strong {
+      color: var(--ink-hint);
+      font-weight: $fw-semibold;
+      text-align: right;
+    }
+  }
+
+  &__main {
+    padding: 26px 34px;
+    @include flex-col(16px);
+  }
+
+  &__feature {
+    @include flex-col(12px);
+    margin-bottom: 2px;
+  }
+
+  &__project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  &__project {
+    min-height: 132px;
+    padding: 12px;
+    border: 1px solid var(--border-light);
+    border-top: 4px solid var(--color-accent);
+    background: color-mix(in srgb, var(--color-background), var(--color-surface) 64%);
+    @include flex-col(6px);
+
+    span {
+      font-size: 9px;
+      color: var(--color-secondary);
+      font-weight: $fw-bold;
+    }
+
+    h3 {
+      font-size: 12px;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 9.5px;
+      line-height: 1.42;
+      color: var(--ink-secondary);
+    }
+
+    small {
+      margin-top: auto;
+      font-size: 8.5px;
+      color: var(--ink-hint);
+      text-transform: uppercase;
+    }
+  }
+}

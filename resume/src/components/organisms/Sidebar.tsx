@@ -20,6 +20,7 @@ interface SidebarProps {
   onCloseSidebar: () => void;
   onColorsChange: (colors: ThemeColors) => void;
   onEditResume: () => void;
+  onDownloadData: () => void;
   onFontChange: (font: GoogleFont) => void;
   onPaletteChange: (palette: ThemePalette) => void;
   onPdfLocaleChange: (value: string) => void;
@@ -43,6 +44,7 @@ function Sidebar({
   isPdfDark,
   onCloseSidebar,
   onColorsChange,
+  onDownloadData,
   onEditResume,
   onFontChange,
   onPaletteChange,
@@ -68,6 +70,12 @@ function Sidebar({
       {isSidebarOpen ? <div className="sidebar-overlay" onClick={onCloseSidebar} /> : null}
       <aside className={`sidebar${isSidebarOpen ? " sidebar--open" : ""}`}>
         <nav className="sidebar__content">
+          <section className="sidebar__section sidebar__actions">
+            <Button onClick={onEditResume} variant="brand">
+              {t("editResumeLabel")}
+            </Button>
+          </section>
+
           <section className="sidebar__section">
             <TemplatePicker onChange={onTemplateChange} templates={templates} value={templateId} />
           </section>
@@ -116,8 +124,8 @@ function Sidebar({
           </section>
 
           <section className="sidebar__section sidebar__actions">
-            <Button onClick={onEditResume} variant="ghost">
-              {t("editResumeLabel")}
+            <Button onClick={onDownloadData} variant="ghost">
+              {t("downloadDataLabel")}
             </Button>
             <Button onClick={handleDownloadTemplate} variant="ghost">
               {t("downloadTemplateLabel")}
