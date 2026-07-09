@@ -5,7 +5,11 @@
   height: 100%;
   padding: 38px 44px;
   background:
-    linear-gradient(90deg, transparent 0 68%, color-mix(in srgb, var(--color-accent), transparent 88%) 68% 100%),
+    linear-gradient(
+      90deg,
+      transparent 0 68%,
+      color-mix(in srgb, var(--color-accent), transparent 88%) 68% 100%
+    ),
     var(--color-surface);
 
   .resume-section__title {

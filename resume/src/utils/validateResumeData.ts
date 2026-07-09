@@ -35,7 +35,8 @@ const migrateContactField = (value: unknown): unknown => {
   const links: ContactLink[] = [];
   LEGACY_CONTACT_KEYS.forEach((type) => {
     const fieldValue = value[type];
-    if (typeof fieldValue === "string" && fieldValue.trim()) links.push({ type, value: fieldValue });
+    if (typeof fieldValue === "string" && fieldValue.trim())
+      links.push({ type, value: fieldValue });
   });
   return links;
 };

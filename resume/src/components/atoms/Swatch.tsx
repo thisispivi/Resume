@@ -10,7 +10,8 @@ interface SwatchProps {
 /** Small rounded color chip button used for palette selection. */
 function Swatch({ colors, isActive, label, onClick }: SwatchProps) {
   const stops = colors.map(
-    (color, index) => `${color} ${(index * 100) / colors.length}% ${((index + 1) * 100) / colors.length}%`,
+    (color, index) =>
+      `${color} ${(index * 100) / colors.length}% ${((index + 1) * 100) / colors.length}%`,
   );
 
   return (

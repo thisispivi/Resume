@@ -278,13 +278,7 @@ function PersonalSection({
             ) : null}
           </div>
         </div>
-        <input
-          accept="image/*"
-          hidden
-          onChange={handleFileSelect}
-          ref={fileInputRef}
-          type="file"
-        />
+        <input accept="image/*" hidden onChange={handleFileSelect} ref={fileInputRef} type="file" />
       </div>
 
       <TextArea

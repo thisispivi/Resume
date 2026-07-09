@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
 import Avatar from "@/components/molecules/Avatar";
 import ContactList from "@/components/molecules/ContactList";
-import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
+import PersonalDetailsList, {
+  hasPersonalDetails,
+} from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateBannerProps {
@@ -62,7 +64,9 @@ function TemplateBanner({ data, pdfLocale }: TemplateBannerProps) {
 
           {data.certifications && data.certifications.length > 0 ? (
             <section className="template-banner__section">
-              <h2 className="template-banner__section-title">{t("sectionTitles.certifications")}</h2>
+              <h2 className="template-banner__section-title">
+                {t("sectionTitles.certifications")}
+              </h2>
               {data.certifications.map((certification, index) => (
                 <div className="resume-entry" key={`${certification.name}-${index}`}>
                   <h3 className="resume-entry__title">{certification.name}</h3>

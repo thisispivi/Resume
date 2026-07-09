@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
 import Avatar from "@/components/molecules/Avatar";
 import ContactList from "@/components/molecules/ContactList";
-import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
+import PersonalDetailsList, {
+  hasPersonalDetails,
+} from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateGeometricProps {

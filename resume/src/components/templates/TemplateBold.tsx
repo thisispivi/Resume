@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import ContactList from "@/components/molecules/ContactList";
-import PersonalDetailsList, { hasPersonalDetails } from "@/components/molecules/PersonalDetailsList";
+import PersonalDetailsList, {
+  hasPersonalDetails,
+} from "@/components/molecules/PersonalDetailsList";
 import type { ResumeData } from "@/types";
 
 interface TemplateBoldProps {
@@ -92,7 +94,12 @@ function TemplateBold({ data, pdfLocale }: TemplateBoldProps) {
                 </div>
               ) : null}
               {project.link ? (
-                <a className="resume-entry__link" href={project.link} rel="noreferrer" target="_blank">
+                <a
+                  className="resume-entry__link"
+                  href={project.link}
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   {project.link}
                 </a>
               ) : null}

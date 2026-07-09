@@ -88,7 +88,10 @@ function TemplateEditorial({ data, pdfLocale }: TemplateEditorialProps) {
             <section className="template-editorial__side-section">
               <h2>{t("sectionTitles.education")}</h2>
               {data.education.map((education, index) => (
-                <div className="template-editorial__mini-entry" key={`${education.institution}-${index}`}>
+                <div
+                  className="template-editorial__mini-entry"
+                  key={`${education.institution}-${index}`}
+                >
                   <h3>{education.degree}</h3>
                   <p>{education.institution}</p>
                   <span>{education.duration}</span>
@@ -115,7 +118,10 @@ function TemplateEditorial({ data, pdfLocale }: TemplateEditorialProps) {
             <section className="template-editorial__side-section">
               <h2>{t("sectionTitles.certifications")}</h2>
               {data.certifications.map((certification, index) => (
-                <div className="template-editorial__mini-entry" key={`${certification.name}-${index}`}>
+                <div
+                  className="template-editorial__mini-entry"
+                  key={`${certification.name}-${index}`}
+                >
                   <h3>{certification.name}</h3>
                   <p>{certification.issuer}</p>
                   {certification.date ? <span>{certification.date}</span> : null}
