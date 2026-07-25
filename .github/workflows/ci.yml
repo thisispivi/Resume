@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Queue deploys rather than cancelling them; only PR checks are safe to cancel.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  # The prepare script installs Git hooks, which CI has no use for.
+  HUSKY: 0
+
+jobs:
+  verify:
+    name: Lint, type-check and build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: resume
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: resume/package.json
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: resume/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Formatting
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Date parsing self-check
+        run: pnpm selfcheck
+
+      # `build` runs `tsc --noEmit` before Vite, so this covers type-checking too.
+      - name: Type-check and build
+        run: pnpm build
+
+      # Only main deploys, so pull requests skip the artifact upload entirely.
+      - if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: resume/dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: verify
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

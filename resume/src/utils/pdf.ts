@@ -7,8 +7,17 @@ interface PdfOptions {
   backgroundColor?: string;
 }
 
-/** Captures a DOM element as an image and saves it as a single-page A4 PDF. */
-export const generateSinglePagePdf = async ({
+/** A4 aspect ratio (height / width), used to slice the capture into pages. */
+const A4_RATIO = 297 / 210;
+
+/**
+ * Captures a DOM element as an image and saves it as an A4 PDF.
+ *
+ * Content taller than one page is sliced into as many pages as it needs, so a
+ * long resume is never silently cropped. Anchors are re-drawn as invisible link
+ * boxes on whichever page they land on, keeping URLs clickable in the export.
+ */
+export const generateResumePdf = async ({
   elementId,
   fileName,
   backgroundColor = "#ffffff",
@@ -25,48 +34,72 @@ export const generateSinglePagePdf = async ({
     backgroundColor,
   });
 
-  const pdf = new jsPDF({
-    orientation: "portrait",
-    unit: "mm",
-    format: "a4",
-  });
-
+  const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
   const pageWidth = pdf.internal.pageSize.getWidth();
   const pageHeight = pdf.internal.pageSize.getHeight();
-  const imgWidth = canvas.width;
-  const imgHeight = canvas.height;
-  const scale = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
-  const renderWidth = imgWidth * scale;
-  const renderHeight = imgHeight * scale;
-  const xOffset = (pageWidth - renderWidth) / 2;
-  const yOffset = (pageHeight - renderHeight) / 2;
 
-  pdf.addImage(
-    canvas.toDataURL("image/jpeg", 1.0),
-    "JPEG",
-    xOffset,
-    yOffset,
-    renderWidth,
-    renderHeight,
-    undefined,
-    "FAST",
-  );
+  const sliceHeight = Math.round(canvas.width * A4_RATIO);
+  const pageCount = Math.max(1, Math.ceil(canvas.height / sliceHeight));
+  const mmPerCanvasPx = pageWidth / canvas.width;
 
-  // Overlay invisible link boxes so contact/project URLs stay clickable in the PDF
+  const sliceCanvas = document.createElement("canvas");
+  sliceCanvas.width = canvas.width;
+  const sliceContext = sliceCanvas.getContext("2d");
+  if (!sliceContext) {
+    throw new Error("Unable to prepare the PDF canvas.");
+  }
+
+  for (let page = 0; page < pageCount; page += 1) {
+    const sourceY = page * sliceHeight;
+    const sourceHeight = Math.min(sliceHeight, canvas.height - sourceY);
+
+    sliceCanvas.height = sourceHeight;
+    sliceContext.fillStyle = backgroundColor;
+    sliceContext.fillRect(0, 0, sliceCanvas.width, sourceHeight);
+    sliceContext.drawImage(
+      canvas,
+      0,
+      sourceY,
+      canvas.width,
+      sourceHeight,
+      0,
+      0,
+      canvas.width,
+      sourceHeight,
+    );
+
+    if (page > 0) pdf.addPage();
+    pdf.addImage(
+      sliceCanvas.toDataURL("image/jpeg", 0.95),
+      "JPEG",
+      0,
+      0,
+      pageWidth,
+      Math.min(sourceHeight * mmPerCanvasPx, pageHeight),
+      undefined,
+      "FAST",
+    );
+  }
+
   const elementRect = element.getBoundingClientRect();
-  const links = element.querySelectorAll("a");
-  const domToPdfScale = renderWidth / element.offsetWidth;
+  const canvasPxPerDomPx = canvas.width / element.offsetWidth;
+  const pageHeightInDomPx = sliceHeight / canvasPxPerDomPx;
 
-  links.forEach((link) => {
+  element.querySelectorAll("a[href]").forEach((link) => {
     const linkRect = link.getBoundingClientRect();
-    const relativeX = linkRect.left - elementRect.left;
     const relativeY = linkRect.top - elementRect.top;
-    const pdfX = xOffset + relativeX * domToPdfScale;
-    const pdfY = yOffset + relativeY * domToPdfScale;
-    const pdfW = linkRect.width * domToPdfScale;
-    const pdfH = linkRect.height * domToPdfScale;
+    const page = Math.floor(relativeY / pageHeightInDomPx);
+    if (page < 0 || page >= pageCount) return;
 
-    pdf.link(pdfX, pdfY, pdfW, pdfH, { url: link.href });
+    const mmPerDomPx = canvasPxPerDomPx * mmPerCanvasPx;
+    pdf.setPage(page + 1);
+    pdf.link(
+      (linkRect.left - elementRect.left) * mmPerDomPx,
+      (relativeY - page * pageHeightInDomPx) * mmPerDomPx,
+      linkRect.width * mmPerDomPx,
+      linkRect.height * mmPerDomPx,
+      { url: (link as HTMLAnchorElement).href },
+    );
   });
 
   pdf.save(fileName);

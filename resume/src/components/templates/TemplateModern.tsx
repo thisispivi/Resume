@@ -4,6 +4,10 @@ import ContactList from "@/components/molecules/ContactList";
 import PersonalDetailsList, {
   hasPersonalDetails,
 } from "@/components/molecules/PersonalDetailsList";
+import ResumeHighlights from "@/components/molecules/ResumeHighlights";
+import EducationDetails from "@/components/molecules/EducationDetails";
+import ResumeExtraSections from "@/components/molecules/ResumeExtraSections";
+import { formatCertificationPeriod, formatPeriod, joinMeta } from "@/utils/resumeFormat";
 import type { ResumeData } from "@/types";
 
 interface TemplateModernProps {
@@ -58,7 +62,9 @@ function TemplateModern({ data, pdfLocale }: TemplateModernProps) {
               {data.languages.map((language) => (
                 <li className="template-modern__language" key={language.language}>
                   <span className="template-modern__language-name">{language.language}</span>
-                  <span className="template-modern__language-level">{language.proficiency}</span>
+                  <span className="template-modern__language-level">
+                    {joinMeta(language.proficiency, language.certificate)}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -81,10 +87,17 @@ function TemplateModern({ data, pdfLocale }: TemplateModernProps) {
               <div className="resume-entry" key={`${experience.company}-${index}`}>
                 <div className="resume-entry__header">
                   <h3 className="resume-entry__title">{experience.position}</h3>
-                  <span className="resume-entry__date">{experience.duration}</span>
+                  <span className="resume-entry__date">
+                    {formatPeriod(experience, pdfLocale, t)}
+                  </span>
                 </div>
-                <p className="resume-entry__subtitle">{experience.company}</p>
-                <p className="resume-entry__body">{experience.description}</p>
+                <p className="resume-entry__subtitle">
+                  {joinMeta(experience.company, experience.location, experience.employmentType)}
+                </p>
+                {experience.description ? (
+                  <p className="resume-entry__body">{experience.description}</p>
+                ) : null}
+                <ResumeHighlights items={experience.highlights} />
               </div>
             ))}
           </section>
@@ -97,19 +110,14 @@ function TemplateModern({ data, pdfLocale }: TemplateModernProps) {
               <div className="resume-entry" key={`${education.institution}-${index}`}>
                 <div className="resume-entry__header">
                   <h3 className="resume-entry__title">{education.degree}</h3>
-                  <span className="resume-entry__date">{education.duration}</span>
+                  <span className="resume-entry__date">
+                    {formatPeriod(education, pdfLocale, t)}
+                  </span>
                 </div>
-                <p className="resume-entry__subtitle">{education.institution}</p>
-                {education.grades ? (
-                  <p className="resume-entry__detail">
-                    {t("fieldLabels.grade")}: {education.grades}
-                  </p>
-                ) : null}
-                {education.thesis ? (
-                  <p className="resume-entry__detail">
-                    {t("fieldLabels.thesis")}: {education.thesis}
-                  </p>
-                ) : null}
+                <p className="resume-entry__subtitle">
+                  {joinMeta(education.institution, education.location)}
+                </p>
+                <EducationDetails education={education} pdfLocale={pdfLocale} />
               </div>
             ))}
           </section>
@@ -120,8 +128,15 @@ function TemplateModern({ data, pdfLocale }: TemplateModernProps) {
             <h2 className="resume-section__title">{t("sectionTitles.projects")}</h2>
             {data.projects.map((project, index) => (
               <div className="resume-entry" key={`${project.name}-${index}`}>
-                <h3 className="resume-entry__title">{project.name}</h3>
-                <p className="resume-entry__body">{project.description}</p>
+                <div className="resume-entry__header">
+                  <h3 className="resume-entry__title">{project.name}</h3>
+                  <span className="resume-entry__date">{formatPeriod(project, pdfLocale, t)}</span>
+                </div>
+                {project.role ? <p className="resume-entry__subtitle">{project.role}</p> : null}
+                {project.description ? (
+                  <p className="resume-entry__body">{project.description}</p>
+                ) : null}
+                <ResumeHighlights items={project.highlights} />
                 {project.technologies && project.technologies.length > 0 ? (
                   <div className="resume-tags">
                     {project.technologies.map((tech) => (
@@ -154,14 +169,19 @@ function TemplateModern({ data, pdfLocale }: TemplateModernProps) {
                 <div className="resume-entry__header">
                   <h3 className="resume-entry__title">{certification.name}</h3>
                   {certification.date ? (
-                    <span className="resume-entry__date">{certification.date}</span>
+                    <span className="resume-entry__date">
+                      {formatCertificationPeriod(certification, pdfLocale)}
+                    </span>
                   ) : null}
                 </div>
-                <p className="resume-entry__subtitle">{certification.issuer}</p>
+                <p className="resume-entry__subtitle">
+                  {joinMeta(certification.issuer, certification.credentialId)}
+                </p>
               </div>
             ))}
           </section>
         ) : null}
+        <ResumeExtraSections data={data} pdfLocale={pdfLocale} />
       </main>
     </div>
   );

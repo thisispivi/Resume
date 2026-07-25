@@ -1,19 +1,20 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { createPortal } from "react-dom";
+import Spinner from "@/components/atoms/Spinner";
 import { SUPPORTED_LOCALES } from "@/i18n";
 import Logo from "@/assets/icons/logo.svg?react";
 import LanguageIcon from "@/assets/icons/language.svg?react";
 import MoonIcon from "@/assets/icons/moon.svg?react";
 import SunIcon from "@/assets/icons/sun.svg?react";
-import MenuIcon from "@/assets/icons/menu.svg?react";
 
 interface NavbarProps {
   appLocale: string;
   onAppLocaleChange: (value: string) => void;
   isDark: boolean;
   onToggleDark: () => void;
-  onToggleSidebar: () => void;
+  onDownloadPdf: () => void;
+  isDownloading: boolean;
 }
 
 const FLAG_MAP: Record<string, string> = {
@@ -21,13 +22,14 @@ const FLAG_MAP: Record<string, string> = {
   "it-IT": "🇮🇹",
 };
 
-/** Top navigation bar with app branding, language switcher, and dark mode toggle. */
+/** Top bar with branding, app language, dark mode, and the primary export action. */
 function Navbar({
   appLocale,
-  onAppLocaleChange,
   isDark,
+  isDownloading,
+  onAppLocaleChange,
+  onDownloadPdf,
   onToggleDark,
-  onToggleSidebar,
 }: NavbarProps) {
   const { t } = useTranslation();
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -125,15 +127,6 @@ function Navbar({
 
       <nav className="navbar__actions">
         <button
-          aria-label={t("menuLabel")}
-          className="navbar__menu-btn"
-          onClick={onToggleSidebar}
-          title={t("menuLabel")}
-          type="button"
-        >
-          <MenuIcon aria-hidden="true" height={20} width={20} />
-        </button>
-        <button
           aria-expanded={isLangOpen}
           aria-haspopup="listbox"
           aria-label={t("appLanguageLabel")}
@@ -159,6 +152,16 @@ function Navbar({
           ) : (
             <MoonIcon aria-hidden="true" height={20} width={20} />
           )}
+        </button>
+
+        <button
+          className="navbar__download"
+          disabled={isDownloading}
+          onClick={onDownloadPdf}
+          type="button"
+        >
+          {isDownloading ? <Spinner size={16} /> : null}
+          <span>{isDownloading ? t("generatingLabel") : t("downloadLabel")}</span>
         </button>
       </nav>
     </header>

@@ -1,0 +1,154 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+// Two-column field grid shared by every section of the content editor.
+.entry-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-3;
+
+  @include below($bp-sm) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  &__field {
+    min-width: 0;
+
+    &--wide {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.entry-list {
+  @include flex-col($space-2);
+
+  &__empty {
+    font-size: $fs-sm;
+    color: var(--ink-hint);
+    font-style: italic;
+  }
+
+  &__item {
+    border: 0.0625rem solid var(--border-lighter);
+    border-radius: $radius-sm;
+    background: var(--fill-hover);
+    overflow: hidden;
+  }
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-3;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    @include transition(background);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:hover {
+      background: var(--fill-subtle);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      outline-offset: -0.125rem;
+    }
+  }
+
+  &__marker {
+    flex-shrink: 0;
+    color: var(--ink-hint);
+    @include transition(transform);
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    font-size: $fs-md;
+    font-weight: $fw-medium;
+    color: var(--ink-secondary);
+    @include truncate;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    flex-shrink: 0;
+  }
+
+  &__action {
+    @include flex-center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: none;
+    border-radius: $radius-xs;
+    background: transparent;
+    color: var(--ink-hint);
+    cursor: pointer;
+    @include transition(background, color, opacity);
+
+    &:hover:not(:disabled) {
+      background: var(--fill-tag);
+      color: var(--ink);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    &--danger:hover {
+      color: #dc2626;
+      background: color-mix(in srgb, #dc2626, transparent 90%);
+    }
+  }
+
+  &__action-icon--up {
+    transform: rotate(180deg);
+  }
+
+  &__body {
+    padding: $space-3;
+    border-top: 0.0625rem solid var(--border-lighter);
+    background: var(--color-surface);
+    animation: fade-in $duration-fast $ease-out both;
+  }
+
+  &__add {
+    align-self: flex-start;
+    padding: $space-2 $space-3;
+    border: 0.0625rem dashed var(--border-ghost);
+    border-radius: $radius-sm;
+    background: transparent;
+    font-family: inherit;
+    font-size: $fs-md;
+    font-weight: $fw-medium;
+    color: var(--color-primary-ink);
+    cursor: pointer;
+    @include transition(background, border-color);
+
+    &:hover {
+      background: color-mix(in srgb, var(--color-primary), transparent 94%);
+      border-color: var(--color-primary);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+}
+
+.entry-list__item[open] > .entry-list__summary > .entry-list__marker {
+  transform: rotate(180deg);
+}

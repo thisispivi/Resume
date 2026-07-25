@@ -1,0 +1,55 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.start-modal {
+  @include flex-col($space-5);
+
+  &__body {
+    font-size: $fs-base;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+  }
+
+  &__options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $space-3;
+
+    @include below($bp-sm) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  &__option {
+    @include flex-col($space-2);
+    padding: $space-4;
+    text-align: left;
+    border: 0.0625rem solid var(--border-light);
+    border-radius: $radius-md;
+    background: var(--color-surface);
+    cursor: pointer;
+    @include transition(border-color, transform, box-shadow);
+
+    &:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-0.125rem);
+      box-shadow: 0 0.5rem 1.25rem -0.5rem var(--shadow-light);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  &__option-title {
+    font-size: $fs-lg;
+    font-weight: $fw-semibold;
+    color: var(--ink);
+  }
+
+  &__option-body {
+    font-size: $fs-sm;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+}

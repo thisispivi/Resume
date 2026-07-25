@@ -1,0 +1,72 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.content-panel,
+.design-panel,
+.export-panel {
+  @include flex-col($space-2);
+}
+
+.content-panel {
+  &__progress {
+    @include flex-col($space-2);
+    padding: $space-3 $space-4;
+    border-radius: $radius-md;
+    background: color-mix(in srgb, var(--color-primary), transparent 94%);
+  }
+
+  &__progress-head {
+    @include flex-between;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: var(--ink-secondary);
+  }
+
+  &__progress-value {
+    font-variant-numeric: tabular-nums;
+    color: var(--color-primary-ink);
+    font-weight: $fw-semibold;
+  }
+
+  &__progress-track {
+    height: 0.375rem;
+    border-radius: $radius-full;
+    background: var(--fill-tag);
+    overflow: hidden;
+  }
+
+  &__progress-bar {
+    height: 100%;
+    border-radius: $radius-full;
+    background: var(--color-primary);
+    @include transition(width);
+  }
+
+  &__photo {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    margin-top: $space-2;
+  }
+
+  &__photo-actions {
+    @include flex-col($space-2);
+  }
+
+  &__inline-toggle {
+    padding-bottom: $space-2;
+    border-bottom: 0.0625rem solid var(--border-lighter);
+  }
+}
+
+.export-panel {
+  &__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $space-2;
+
+    @include below($bp-sm) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}

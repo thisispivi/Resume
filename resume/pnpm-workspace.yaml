@@ -5,4 +5,4 @@ ignoredBuiltDependencies:
   - "@parcel/watcher"
   - core-js
 minimumReleaseAgeExclude:
-  - i18next@26.3.5
+  - sass@1.102.0

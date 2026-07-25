@@ -1,0 +1,78 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.collapsible {
+  border: 0.0625rem solid var(--border-lighter);
+  border-radius: $radius-md;
+  background: var(--color-surface);
+  overflow: hidden;
+  @include transition(border-color, box-shadow);
+
+  &[open] {
+    border-color: var(--border-light);
+    box-shadow: 0 0.125rem 0.5rem -0.25rem var(--shadow-lighter);
+  }
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-3 $space-4;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    @include transition(background);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:hover {
+      background: var(--fill-hover);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      outline-offset: -0.125rem;
+    }
+  }
+
+  &__marker {
+    flex-shrink: 0;
+    color: var(--ink-hint);
+    @include transition(transform);
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    font-size: $fs-base;
+    font-weight: $fw-semibold;
+    color: var(--ink);
+    @include truncate;
+  }
+
+  &__badge {
+    flex-shrink: 0;
+    min-width: 1.25rem;
+    padding: 0 $space-1;
+    border-radius: $radius-full;
+    background: color-mix(in srgb, var(--color-primary), transparent 88%);
+    color: var(--color-primary-ink);
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    line-height: 1.25rem;
+    text-align: center;
+  }
+
+  &__body {
+    padding: 0 $space-4 $space-4;
+    @include flex-col($space-3);
+    animation: fade-in $duration-fast $ease-out both;
+  }
+}
+
+// Chevron rotation relies on the parent <details>, which SCSS cannot nest into.
+.collapsible[open] > .collapsible__summary > .collapsible__marker {
+  transform: rotate(180deg);
+}

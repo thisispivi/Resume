@@ -51,7 +51,8 @@ $radius-xl: 1.25rem; // 20px
 $radius-full: 62.4375rem; // 999px
 
 // Layout (px, fixed positioning)
-$sidebar-width: 20rem; // 320px
+$workspace-width: 25rem; // 400px
+$mobile-nav-height: 3.5rem; // 56px
 $navbar-height: 3.25rem; // 52px
 $resume-width: 794px;
 $resume-height: 1123px;
@@ -70,7 +71,7 @@ $duration-normal: 0.25s;
 $duration-slow: 0.35s;
 
 // Z-index scale
-$z-sidebar: 20;
+$z-workspace: 20;
+$z-mobile-nav: 25;
 $z-dropdown: 30;
 $z-navbar: 40;
-$z-fab: 25;

@@ -4,6 +4,10 @@ import ContactList from "@/components/molecules/ContactList";
 import PersonalDetailsList, {
   hasPersonalDetails,
 } from "@/components/molecules/PersonalDetailsList";
+import ResumeHighlights from "@/components/molecules/ResumeHighlights";
+import EducationDetails from "@/components/molecules/EducationDetails";
+import ResumeExtraSections from "@/components/molecules/ResumeExtraSections";
+import { formatCertificationPeriod, formatPeriod, joinMeta } from "@/utils/resumeFormat";
 import type { ResumeData } from "@/types";
 
 interface TemplatePortfolioProps {
@@ -69,7 +73,7 @@ function TemplatePortfolio({ data, pdfLocale }: TemplatePortfolioProps) {
                 {data.languages.map((language) => (
                   <li key={language.language}>
                     <span>{language.language}</span>
-                    <strong>{language.proficiency}</strong>
+                    <strong>{joinMeta(language.proficiency, language.certificate)}</strong>
                   </li>
                 ))}
               </ul>
@@ -86,7 +90,8 @@ function TemplatePortfolio({ data, pdfLocale }: TemplatePortfolioProps) {
                   <article className="template-portfolio__project" key={`${project.name}-${index}`}>
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <h3>{project.name}</h3>
-                    <p>{project.description}</p>
+                    {project.description ? <p>{project.description}</p> : null}
+                    <ResumeHighlights items={project.highlights} />
                     {project.technologies && project.technologies.length > 0 ? (
                       <small>{project.technologies.join(" / ")}</small>
                     ) : null}
@@ -103,10 +108,17 @@ function TemplatePortfolio({ data, pdfLocale }: TemplatePortfolioProps) {
                 <div className="resume-entry" key={`${experience.company}-${index}`}>
                   <div className="resume-entry__header">
                     <h3 className="resume-entry__title">{experience.position}</h3>
-                    <span className="resume-entry__date">{experience.duration}</span>
+                    <span className="resume-entry__date">
+                      {formatPeriod(experience, pdfLocale, t)}
+                    </span>
                   </div>
-                  <p className="resume-entry__subtitle">{experience.company}</p>
-                  <p className="resume-entry__body">{experience.description}</p>
+                  <p className="resume-entry__subtitle">
+                    {joinMeta(experience.company, experience.location, experience.employmentType)}
+                  </p>
+                  {experience.description ? (
+                    <p className="resume-entry__body">{experience.description}</p>
+                  ) : null}
+                  <ResumeHighlights items={experience.highlights} />
                 </div>
               ))}
             </section>
@@ -119,19 +131,14 @@ function TemplatePortfolio({ data, pdfLocale }: TemplatePortfolioProps) {
                 <div className="resume-entry" key={`${education.institution}-${index}`}>
                   <div className="resume-entry__header">
                     <h3 className="resume-entry__title">{education.degree}</h3>
-                    <span className="resume-entry__date">{education.duration}</span>
+                    <span className="resume-entry__date">
+                      {formatPeriod(education, pdfLocale, t)}
+                    </span>
                   </div>
-                  <p className="resume-entry__subtitle">{education.institution}</p>
-                  {education.grades ? (
-                    <p className="resume-entry__detail">
-                      {t("fieldLabels.grade")}: {education.grades}
-                    </p>
-                  ) : null}
-                  {education.thesis ? (
-                    <p className="resume-entry__detail">
-                      {t("fieldLabels.thesis")}: {education.thesis}
-                    </p>
-                  ) : null}
+                  <p className="resume-entry__subtitle">
+                    {joinMeta(education.institution, education.location)}
+                  </p>
+                  <EducationDetails education={education} pdfLocale={pdfLocale} />
                 </div>
               ))}
             </section>
@@ -145,14 +152,19 @@ function TemplatePortfolio({ data, pdfLocale }: TemplatePortfolioProps) {
                   <div className="resume-entry__header">
                     <h3 className="resume-entry__title">{certification.name}</h3>
                     {certification.date ? (
-                      <span className="resume-entry__date">{certification.date}</span>
+                      <span className="resume-entry__date">
+                        {formatCertificationPeriod(certification, pdfLocale)}
+                      </span>
                     ) : null}
                   </div>
-                  <p className="resume-entry__subtitle">{certification.issuer}</p>
+                  <p className="resume-entry__subtitle">
+                    {joinMeta(certification.issuer, certification.credentialId)}
+                  </p>
                 </div>
               ))}
             </section>
           ) : null}
+          <ResumeExtraSections data={data} pdfLocale={pdfLocale} />
         </main>
       </div>
     </div>

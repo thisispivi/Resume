@@ -1,0 +1,89 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.workspace {
+  z-index: $z-workspace;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: linear-gradient(
+    180deg,
+    var(--color-surface) 0%,
+    color-mix(in srgb, var(--color-surface), var(--color-background) 5%) 100%
+  );
+  box-shadow:
+    0.0625rem 0 0 0 var(--border-lighter),
+    0.25rem 0 1.25rem -0.25rem var(--shadow-light);
+
+  @include below($bp-lg) {
+    &--hidden-mobile {
+      display: none;
+    }
+  }
+
+  &__tabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    flex-shrink: 0;
+    border-bottom: 0.0625rem solid var(--border-lighter);
+    background: var(--color-surface);
+  }
+
+  &__tab {
+    position: relative;
+    padding: $space-3 $space-2;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: $fs-base;
+    font-weight: $fw-medium;
+    color: var(--ink-muted);
+    cursor: pointer;
+    @include transition(color, background);
+
+    &:hover {
+      color: var(--ink);
+      background: var(--fill-hover);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      outline-offset: -0.125rem;
+    }
+
+    &--active {
+      color: var(--color-primary-ink);
+      font-weight: $fw-semibold;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: $space-4;
+        right: $space-4;
+        bottom: 0;
+        height: 0.125rem;
+        border-radius: $radius-full;
+        background: var(--color-primary);
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: $space-4 $space-4 $space-8;
+    @include flex-col($space-2);
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+
+    &::-webkit-scrollbar {
+      width: 0.375rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: $radius-full;
+    }
+  }
+}

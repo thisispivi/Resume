@@ -1,0 +1,44 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.mobile-nav {
+  display: none;
+
+  @include below($bp-lg) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-mobile-nav;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    height: $mobile-nav-height;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--color-surface);
+    box-shadow: 0 -0.25rem 1.25rem -0.5rem var(--shadow-light);
+    border-top: 0.0625rem solid var(--border-lighter);
+  }
+
+  &__item {
+    @include flex-center;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: var(--ink-muted);
+    cursor: pointer;
+    @include transition(color, background);
+
+    &:focus-visible {
+      @include focus-ring;
+      outline-offset: -0.125rem;
+    }
+
+    &--active {
+      color: var(--color-primary-ink);
+      font-weight: $fw-semibold;
+      background: color-mix(in srgb, var(--color-primary), transparent 94%);
+    }
+  }
+}

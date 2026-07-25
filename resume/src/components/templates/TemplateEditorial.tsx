@@ -1,6 +1,9 @@
 import { useTranslation } from "react-i18next";
 import ContactList from "@/components/molecules/ContactList";
 import PersonalDetailsList from "@/components/molecules/PersonalDetailsList";
+import ResumeHighlights from "@/components/molecules/ResumeHighlights";
+import ResumeExtraSections from "@/components/molecules/ResumeExtraSections";
+import { formatCertificationPeriod, formatPeriod, joinMeta } from "@/utils/resumeFormat";
 import type { ResumeData } from "@/types";
 
 interface TemplateEditorialProps {
@@ -40,10 +43,17 @@ function TemplateEditorial({ data, pdfLocale }: TemplateEditorialProps) {
                 <div className="resume-entry" key={`${experience.company}-${index}`}>
                   <div className="resume-entry__header">
                     <h3 className="resume-entry__title">{experience.position}</h3>
-                    <span className="resume-entry__date">{experience.duration}</span>
+                    <span className="resume-entry__date">
+                      {formatPeriod(experience, pdfLocale, t)}
+                    </span>
                   </div>
-                  <p className="resume-entry__subtitle">{experience.company}</p>
-                  <p className="resume-entry__body">{experience.description}</p>
+                  <p className="resume-entry__subtitle">
+                    {joinMeta(experience.company, experience.location, experience.employmentType)}
+                  </p>
+                  {experience.description ? (
+                    <p className="resume-entry__body">{experience.description}</p>
+                  ) : null}
+                  <ResumeHighlights items={experience.highlights} />
                 </div>
               ))}
             </div>
@@ -54,8 +64,17 @@ function TemplateEditorial({ data, pdfLocale }: TemplateEditorialProps) {
               <h2 className="resume-section__title">{t("sectionTitles.projects")}</h2>
               {data.projects.map((project, index) => (
                 <div className="resume-entry" key={`${project.name}-${index}`}>
-                  <h3 className="resume-entry__title">{project.name}</h3>
-                  <p className="resume-entry__body">{project.description}</p>
+                  <div className="resume-entry__header">
+                    <h3 className="resume-entry__title">{project.name}</h3>
+                    <span className="resume-entry__date">
+                      {formatPeriod(project, pdfLocale, t)}
+                    </span>
+                  </div>
+                  {project.role ? <p className="resume-entry__subtitle">{project.role}</p> : null}
+                  {project.description ? (
+                    <p className="resume-entry__body">{project.description}</p>
+                  ) : null}
+                  <ResumeHighlights items={project.highlights} />
                   {project.technologies && project.technologies.length > 0 ? (
                     <div className="resume-tags">
                       {project.technologies.map((tech) => (
@@ -69,6 +88,7 @@ function TemplateEditorial({ data, pdfLocale }: TemplateEditorialProps) {
               ))}
             </div>
           ) : null}
+          <ResumeExtraSections data={data} pdfLocale={pdfLocale} />
         </section>
 
         <aside className="template-editorial__column">
@@ -93,8 +113,8 @@ function TemplateEditorial({ data, pdfLocale }: TemplateEditorialProps) {
                   key={`${education.institution}-${index}`}
                 >
                   <h3>{education.degree}</h3>
-                  <p>{education.institution}</p>
-                  <span>{education.duration}</span>
+                  <p>{joinMeta(education.institution, education.location)}</p>
+                  <span>{formatPeriod(education, pdfLocale, t)}</span>
                 </div>
               ))}
             </section>
@@ -107,7 +127,7 @@ function TemplateEditorial({ data, pdfLocale }: TemplateEditorialProps) {
                 {data.languages.map((language) => (
                   <li key={language.language}>
                     <span>{language.language}</span>
-                    <strong>{language.proficiency}</strong>
+                    <strong>{joinMeta(language.proficiency, language.certificate)}</strong>
                   </li>
                 ))}
               </ul>
@@ -123,8 +143,10 @@ function TemplateEditorial({ data, pdfLocale }: TemplateEditorialProps) {
                   key={`${certification.name}-${index}`}
                 >
                   <h3>{certification.name}</h3>
-                  <p>{certification.issuer}</p>
-                  {certification.date ? <span>{certification.date}</span> : null}
+                  <p>{joinMeta(certification.issuer, certification.credentialId)}</p>
+                  {certification.date ? (
+                    <span>{formatCertificationPeriod(certification, pdfLocale)}</span>
+                  ) : null}
                 </div>
               ))}
             </section>

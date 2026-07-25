@@ -3,9 +3,12 @@
   justify-content: center;
   width: 100%;
 
+  // A4 width with a one-page minimum; taller content flows onto further PDF pages.
   &__page {
+    display: flex;
+    flex-direction: column;
     width: 794px;
-    height: 1123px;
+    min-height: 1123px;
     background: var(--color-surface);
     color: var(--color-text);
     font-family: var(--font-sans);
@@ -48,7 +51,7 @@
 }
 
 .template {
-  height: 100%;
+  flex: 1 0 auto;
 }
 
 // ── Shared resume section ──
@@ -134,6 +137,22 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+// ── Achievement bullets ──
+.resume-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 2px 0 0;
+  padding-left: 13px;
+  list-style: disc;
+
+  &__item {
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--ink-secondary);
   }
 }
 

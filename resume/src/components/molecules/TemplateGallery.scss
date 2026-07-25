@@ -1,0 +1,125 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.template-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-2;
+
+  @include below($bp-sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  &__card {
+    @include flex-col($space-2);
+    padding: $space-2;
+    border: 0.0625rem solid var(--border-light);
+    border-radius: $radius-sm;
+    background: var(--color-surface);
+    cursor: pointer;
+    @include transition(border-color, box-shadow, transform);
+
+    &:hover {
+      border-color: var(--border-ghost);
+      transform: translateY(-0.0625rem);
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+
+    &--active {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 0.0625rem var(--color-primary);
+    }
+  }
+
+  &__label {
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: var(--ink-secondary);
+    text-align: center;
+    @include truncate;
+  }
+}
+
+// ── Schematic page thumbnail ──
+.template-thumb {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  aspect-ratio: 210 / 297;
+  padding: 4px;
+  border-radius: $radius-xs;
+  background: #ffffff;
+  overflow: hidden;
+
+  [data-theme="dark"] & {
+    background: #e2e8f0;
+  }
+
+  &__banner {
+    height: 22%;
+    flex-shrink: 0;
+    border-radius: 1px;
+    background: var(--color-primary);
+  }
+
+  &__body {
+    display: flex;
+    gap: 3px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 32%;
+    padding: 3px 2px;
+    border-radius: 1px;
+    background: var(--color-primary);
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 38%;
+  }
+
+  &__heading {
+    height: 4px;
+    width: 60%;
+    border-radius: 1px;
+    background: var(--color-secondary);
+  }
+
+  &__line {
+    height: 2px;
+    border-radius: 1px;
+    background: rgba(15, 23, 42, 0.22);
+
+    &:nth-child(even) {
+      width: 80%;
+    }
+  }
+
+  // Lines drawn on the colored sidebar need to read as light on dark.
+  &__aside &__line {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  &--sidebar-right &__body {
+    flex-direction: row-reverse;
+  }
+}

@@ -1,0 +1,27 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  min-height: 2.5rem;
+
+  &__input {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  &__label {
+    font-size: $fs-md;
+    color: var(--ink-secondary);
+    cursor: pointer;
+  }
+}

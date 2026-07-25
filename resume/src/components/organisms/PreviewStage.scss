@@ -1,0 +1,125 @@
+@use "../../styles/base/variables" as *;
+@use "../../styles/base/mixins" as *;
+
+.preview-stage {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+
+  &__toolbar {
+    @include flex-between;
+    flex-shrink: 0;
+    gap: $space-3;
+    padding: $space-2 $space-5;
+    border-bottom: 0.0625rem solid var(--border-lighter);
+    background: color-mix(in srgb, var(--color-surface), transparent 35%);
+    backdrop-filter: blur(0.5rem);
+  }
+
+  &__zoom {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+  }
+
+  &__zoom-btn {
+    @include flex-center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 0.0625rem solid var(--border-light);
+    border-radius: $radius-sm;
+    background: var(--color-surface);
+    color: var(--ink-secondary);
+    font-size: $fs-lg;
+    line-height: 1;
+    cursor: pointer;
+    @include transition(background, color, border-color);
+
+    &:hover:not(:disabled) {
+      background: var(--fill-subtle);
+      color: var(--ink);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  &__zoom-value {
+    min-width: 3rem;
+    text-align: center;
+    font-size: $fs-sm;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-muted);
+  }
+
+  &__pages {
+    font-size: $fs-sm;
+    color: var(--ink-muted);
+  }
+
+  &__scroll {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    padding: $space-6 $space-4 $space-8;
+
+    @include below($bp-md) {
+      padding: $space-4 $space-2 $space-6;
+    }
+  }
+
+  // Scaled down to fit; height is pre-multiplied so no dead space is left below.
+  &__scaler {
+    transform-origin: top center;
+    flex-shrink: 0;
+  }
+
+  &__guides {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &__guide {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: 0.125rem dashed color-mix(in srgb, var(--color-accent), transparent 45%);
+  }
+
+  &__guide-label {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.5rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: $radius-full;
+    background: var(--color-accent);
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: $fw-semibold;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  &__loading {
+    position: absolute;
+    inset: 0;
+    @include flex-center;
+    background: color-mix(in srgb, var(--color-surface), transparent 25%);
+    backdrop-filter: blur(0.125rem);
+  }
+}
+
+.preview-wrapper {
+  position: relative;
+  animation: rise-in $duration-slow $ease-out both;
+}
