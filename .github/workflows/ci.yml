@@ -9,10 +9,10 @@ on:
 permissions:
   contents: read
 
-# Queue deploys rather than cancelling them; only PR checks are safe to cancel.
+# Nothing here publishes, so superseded runs are always safe to cancel.
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 
 env:
   # The prepare script installs Git hooks, which CI has no use for.
@@ -52,24 +52,3 @@ jobs:
       # `build` runs `tsc --noEmit` before Vite, so this covers type-checking too.
       - name: Type-check and build
         run: pnpm build
-
-      # Only main deploys, so pull requests skip the artifact upload entirely.
-      - if: github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: resume/dist
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: verify
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v5

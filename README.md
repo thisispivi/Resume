@@ -166,9 +166,7 @@ Repeatable sections are declared once in `src/data/resumeSections.ts` — an id,
 
 `.github/workflows/ci.yml` runs on every push to `main`, every pull request, and on demand. It checks formatting, lints, runs the date self-check, then type-checks and builds — the same four commands you can run locally.
 
-On `main`, a second job publishes `resume/dist` to GitHub Pages via the official `upload-pages-artifact` / `deploy-pages` actions, so a broken build never ships. The custom domain comes from `resume/public/CNAME`.
-
-> **One-time setup:** in **Settings → Pages**, set the build source to **GitHub Actions**. Until you do, the deploy job fails and the site keeps serving whatever the `gh-pages` branch last held. The manual `pnpm deploygh` path still works if you prefer it.
+CI does not deploy. Publishing stays manual: `pnpm deploygh` builds and pushes `dist/` to the `gh-pages` branch, which GitHub Pages serves at the custom domain from `resume/public/CNAME`.
 
 `.github/dependabot.yml` opens grouped weekly dependency PRs (and monthly ones for the actions themselves), which CI then gates. Two majors are pinned back on purpose:
 

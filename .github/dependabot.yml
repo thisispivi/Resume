@@ -13,7 +13,15 @@ updates:
       linting:
         patterns: ["eslint*", "@eslint/*", "@typescript-eslint/*", "prettier*"]
       build:
-        patterns: ["vite", "@vitejs/*", "rolldown-vite", "sass", "postcss", "autoprefixer"]
+        patterns:
+          [
+            "vite",
+            "@vitejs/*",
+            "rolldown-vite",
+            "sass",
+            "postcss",
+            "autoprefixer",
+          ]
       minor-and-patch:
         patterns: ["*"]
         update-types: ["minor", "patch"]
