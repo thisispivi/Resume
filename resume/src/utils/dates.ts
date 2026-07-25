@@ -26,6 +26,18 @@ const PRESENT_WORDS = [
   "in corso",
 ];
 
+/** Formatters are expensive to construct and a resume renders dozens of dates. */
+const monthFormatters = new Map<string, Intl.DateTimeFormat>();
+
+const getMonthFormatter = (locale: string) => {
+  let formatter = monthFormatters.get(locale);
+  if (!formatter) {
+    formatter = new Intl.DateTimeFormat(locale, { month: "short", year: "numeric" });
+    monthFormatters.set(locale, formatter);
+  }
+  return formatter;
+};
+
 /**
  * Renders a single stored date for display.
  *
@@ -41,7 +53,7 @@ export const formatDateValue = (value: string | undefined, locale: string): stri
 
   const [, year, month] = monthMatch;
   const date = new Date(Number(year), Number(month) - 1, 1);
-  return new Intl.DateTimeFormat(locale, { month: "short", year: "numeric" }).format(date);
+  return getMonthFormatter(locale).format(date);
 };
 
 /**

@@ -6,7 +6,7 @@
  * - `tags` edits a `string[]` as a comma-separated line.
  * - `bullets` edits a `string[]` as one line per bullet.
  */
-export type FieldKind = "text" | "textarea" | "month" | "tags" | "bullets" | "checkbox";
+type FieldKind = "text" | "textarea" | "month" | "tags" | "bullets" | "checkbox";
 
 /** Declarative description of one editable field inside a list entry. */
 export interface FieldDef {

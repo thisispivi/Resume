@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import Spinner from "@/components/atoms/Spinner";
 
 /** A4 page width in px — must match $resume-width in _variables.scss */
-export const A4_WIDTH = 794;
+const A4_WIDTH = 794;
 /** A4 page height in px — must match $resume-height in _variables.scss */
-export const A4_HEIGHT = 1123;
+const A4_HEIGHT = 1123;
 
 const ZOOM_STEPS = [0.5, 0.75, 1, 1.25, 1.5];
 

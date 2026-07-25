@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useId, useRef } from "react";
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "@/assets/icons/close.svg?react";
@@ -14,6 +14,7 @@ interface ModalProps {
 function Modal({ children, isOpen, onClose, title }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
+  const titleId = useId();
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -74,10 +75,18 @@ function Modal({ children, isOpen, onClose, title }: ModalProps) {
   if (!isOpen) return null;
 
   return createPortal(
-    <div aria-modal="true" className="modal-backdrop" onClick={handleBackdropClick} role="dialog">
+    <div
+      aria-labelledby={titleId}
+      aria-modal="true"
+      className="modal-backdrop"
+      onClick={handleBackdropClick}
+      role="dialog"
+    >
       <div className="modal" ref={dialogRef}>
         <div className="modal__header">
-          <h2 className="modal__title">{title}</h2>
+          <h2 className="modal__title" id={titleId}>
+            {title}
+          </h2>
           <button aria-label="Close" className="modal__close" onClick={onClose} type="button">
             <CloseIcon aria-hidden="true" height={18} width={18} />
           </button>

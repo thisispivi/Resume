@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  // Entry points are inferred from vite.config.ts and package.json scripts.
+  "project": ["src/**/*.{ts,tsx,scss,sass}"],
+  "ignoreDependencies": [
+    // Run by .husky/pre-commit, which lives at the repository root and so sits
+    // outside the directory knip scans.
+    "lint-staged",
+  ],
+}

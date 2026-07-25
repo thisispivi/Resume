@@ -1,13 +1,12 @@
 import { useTranslation } from "react-i18next";
 import Avatar from "@/components/molecules/Avatar";
 import ContactList from "@/components/molecules/ContactList";
-import PersonalDetailsList, {
-  hasPersonalDetails,
-} from "@/components/molecules/PersonalDetailsList";
+import PersonalDetailsList from "@/components/molecules/PersonalDetailsList";
 import ResumeHighlights from "@/components/molecules/ResumeHighlights";
 import EducationDetails from "@/components/molecules/EducationDetails";
 import ResumeExtraSections from "@/components/molecules/ResumeExtraSections";
 import { formatCertificationPeriod, formatPeriod, joinMeta } from "@/utils/resumeFormat";
+import { hasPersonalDetails } from "@/utils/resume";
 import type { ResumeData } from "@/types";
 
 interface TemplatePortfolioProps {

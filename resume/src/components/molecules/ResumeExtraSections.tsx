@@ -24,6 +24,25 @@ interface GenericEntry {
 /** Joins the non-empty parts of a subtitle line, e.g. "Issuer · Location". */
 const joinParts = (...parts: (string | undefined)[]) => parts.filter(Boolean).join(" · ");
 
+/** Renders a run of generic entries; shared by every section below. */
+const renderEntries = (entries: GenericEntry[]) =>
+  entries.map((entry) => (
+    <div className="resume-entry" key={entry.key}>
+      <div className="resume-entry__header">
+        <h3 className="resume-entry__title">{entry.title}</h3>
+        {entry.date ? <span className="resume-entry__date">{entry.date}</span> : null}
+      </div>
+      {entry.subtitle ? <p className="resume-entry__subtitle">{entry.subtitle}</p> : null}
+      {entry.description ? <p className="resume-entry__body">{entry.description}</p> : null}
+      <ResumeHighlights items={entry.highlights} />
+      {entry.link ? (
+        <a className="resume-entry__link" href={entry.link} rel="noreferrer" target="_blank">
+          {entry.link}
+        </a>
+      ) : null}
+    </div>
+  ));
+
 /**
  * Renders the resume sections that no template lays out by hand — volunteering,
  * awards, publications, courses, interests, references, and user-defined
@@ -44,24 +63,6 @@ function ResumeExtraSections({
       {children}
     </section>
   );
-
-  const renderEntries = (entries: GenericEntry[]) =>
-    entries.map((entry) => (
-      <div className="resume-entry" key={entry.key}>
-        <div className="resume-entry__header">
-          <h3 className="resume-entry__title">{entry.title}</h3>
-          {entry.date ? <span className="resume-entry__date">{entry.date}</span> : null}
-        </div>
-        {entry.subtitle ? <p className="resume-entry__subtitle">{entry.subtitle}</p> : null}
-        {entry.description ? <p className="resume-entry__body">{entry.description}</p> : null}
-        <ResumeHighlights items={entry.highlights} />
-        {entry.link ? (
-          <a className="resume-entry__link" href={entry.link} rel="noreferrer" target="_blank">
-            {entry.link}
-          </a>
-        ) : null}
-      </div>
-    ));
 
   const sections: ReactNode[] = [];
 

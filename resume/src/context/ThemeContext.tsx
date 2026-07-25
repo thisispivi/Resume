@@ -1,4 +1,4 @@
-import { useState, useEffect, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { ThemeContext } from "./ThemeContextValue";
 
 /** Provides dark/light theme state and toggle to the component tree. */
@@ -13,7 +13,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
 
-  const toggleDark = () => setIsDark((prev) => !prev);
+  const toggleDark = useCallback(() => setIsDark((prev) => !prev), []);
 
-  return <ThemeContext.Provider value={{ isDark, toggleDark }}>{children}</ThemeContext.Provider>;
+  // Memoized so consumers only re-render when the theme actually changes.
+  const value = useMemo(() => ({ isDark, toggleDark }), [isDark, toggleDark]);
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }

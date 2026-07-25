@@ -1,4 +1,8 @@
-import type { ResumeData, ResumeDataMap } from "@/types";
+import type { PersonalDetails, ResumeData, ResumeDataMap } from "@/types";
+
+/** Returns true if any personal-details field has a non-empty value. */
+export const hasPersonalDetails = (details?: PersonalDetails) =>
+  Boolean(details && Object.values(details).some(Boolean));
 
 /**
  * Returns a starter ResumeDataMap with example values for every supported

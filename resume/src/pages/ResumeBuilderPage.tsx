@@ -10,7 +10,7 @@ import Navbar from "@/components/organisms/Navbar";
 import PreviewStage from "@/components/organisms/PreviewStage";
 import ResumePreview from "@/components/organisms/ResumePreview";
 import Workspace from "@/components/organisms/Workspace";
-import type { WorkspaceTab } from "@/components/organisms/Workspace";
+import type { WorkspaceTab } from "@/data/workspaceTabs";
 import StartModal from "@/components/molecules/StartModal";
 import { THEME_PALETTES } from "@/data/palettes";
 import { TEMPLATE_OPTIONS } from "@/data/templates";
@@ -234,15 +234,17 @@ function ResumeBuilderPage() {
     [activePdfLocale, resumeDataMap],
   );
 
-  const handleRemoveLocale = useCallback((locale: string) => {
-    setResumeDataMap((prev) => {
-      if (Object.keys(prev).length <= 1) return prev;
-      const next = { ...prev };
+  const handleRemoveLocale = useCallback(
+    (locale: string) => {
+      if (Object.keys(resumeDataMap).length <= 1) return;
+
+      const next = { ...resumeDataMap };
       delete next[locale];
+      setResumeDataMap(next);
       setPdfLocale(getFirstLocale(next, DEFAULT_LOCALE));
-      return next;
-    });
-  }, []);
+    },
+    [resumeDataMap],
+  );
 
   const handleReset = useCallback(() => {
     window.localStorage.removeItem(STORAGE_KEY);

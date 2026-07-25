@@ -7,13 +7,14 @@ interface TemplateGalleryProps {
   onChange: (value: TemplateId) => void;
 }
 
+/** Placeholder text lines inside a thumbnail. */
+const lines = (count: number) =>
+  Array.from({ length: count }, (_, index) => (
+    <span className="template-thumb__line" key={index} />
+  ));
+
 /** Schematic preview of a template's page structure, drawn from theme colors. */
 function TemplateThumb({ layout }: { layout: TemplateLayout }) {
-  const lines = (count: number) =>
-    Array.from({ length: count }, (_, index) => (
-      <span className="template-thumb__line" key={index} />
-    ));
-
   return (
     <span aria-hidden="true" className={`template-thumb template-thumb--${layout}`}>
       {layout === "banner" ? <span className="template-thumb__banner" /> : null}

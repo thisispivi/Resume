@@ -18,10 +18,6 @@ const detailFields: { key: keyof PersonalDetails; labelKey: string }[] = [
   { key: "pronouns", labelKey: "fieldLabels.pronouns" },
 ];
 
-/** Returns true if any personal-details field has a non-empty value. */
-export const hasPersonalDetails = (details?: PersonalDetails) =>
-  Boolean(details && Object.values(details).some((value) => value));
-
 /** Renders optional personal facts such as location, license, age, and availability. */
 function PersonalDetailsList({ compact = false, details, pdfLocale }: PersonalDetailsListProps) {
   const { i18n } = useTranslation();

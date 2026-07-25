@@ -1,14 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-
-/** The three editing surfaces of the workspace panel. */
-export type WorkspaceTab = "content" | "design" | "export";
-
-export const WORKSPACE_TABS: { id: WorkspaceTab; labelKey: string }[] = [
-  { id: "content", labelKey: "workspace.content" },
-  { id: "design", labelKey: "workspace.design" },
-  { id: "export", labelKey: "workspace.export" },
-];
+import { WORKSPACE_TABS } from "@/data/workspaceTabs";
+import type { WorkspaceTab } from "@/data/workspaceTabs";
 
 interface WorkspaceProps {
   activeTab: WorkspaceTab;

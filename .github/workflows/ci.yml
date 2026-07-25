@@ -46,6 +46,9 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Unused files, exports and dependencies
+        run: pnpm knip
+
       - name: Date parsing self-check
         run: pnpm selfcheck
 

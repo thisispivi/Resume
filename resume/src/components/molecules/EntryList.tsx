@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg?react";
@@ -19,8 +20,11 @@ interface EntryListProps<T extends EditableEntry> {
 /**
  * Repeatable list of collapsible entries with add, remove, and reorder actions.
  *
- * Entries are keyed by index because resume entries carry no stable id; the
- * list is short and edits are local, so React's reconciliation stays correct.
+ * Resume entries carry no stable id, so the list is keyed by index. That makes
+ * the expanded panel positional rather than tied to an entry, which is why the
+ * disclosure is controlled here and moved alongside the entry it belongs to —
+ * leaving `<details>` to manage its own state would expand the wrong row after
+ * a reorder. One entry is open at a time, which also keeps long lists readable.
  */
 function EntryList<T extends EditableEntry>({
   addLabel,
@@ -32,21 +36,34 @@ function EntryList<T extends EditableEntry>({
   renderFields,
 }: EntryListProps<T>) {
   const { t } = useTranslation();
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleAdd = () => {
     onChange([...entries, structuredClone(emptyEntry)]);
+    setOpenIndex(entries.length);
   };
 
   const handleRemove = (index: number) => {
     onChange(entries.filter((_, position) => position !== index));
+    setOpenIndex((current) => {
+      if (current === null || current === index) return null;
+      return current > index ? current - 1 : current;
+    });
   };
 
   const handleMove = (index: number, offset: number) => {
     const target = index + offset;
     if (target < 0 || target >= entries.length) return;
+
     const next = [...entries];
     [next[index], next[target]] = [next[target], next[index]];
     onChange(next);
+
+    setOpenIndex((current) => {
+      if (current === index) return target;
+      if (current === target) return index;
+      return current;
+    });
   };
 
   const handleFieldChange = (index: number, key: string, value: unknown) => {
@@ -60,8 +77,19 @@ function EntryList<T extends EditableEntry>({
       {entries.length === 0 ? <p className="entry-list__empty">{emptyMessage}</p> : null}
 
       {entries.map((entry, index) => (
-        <details className="entry-list__item" key={`entry-${String(index)}`} open={false}>
-          <summary className="entry-list__summary">
+        <details
+          className="entry-list__item"
+          key={`entry-${String(index)}`}
+          open={openIndex === index}
+        >
+          <summary
+            className="entry-list__summary"
+            onClick={(event) => {
+              // React drives `open`, so suppress the browser's own toggle.
+              event.preventDefault();
+              setOpenIndex((current) => (current === index ? null : index));
+            }}
+          >
             <ChevronDownIcon
               aria-hidden="true"
               className="entry-list__marker"
@@ -77,7 +105,7 @@ function EntryList<T extends EditableEntry>({
                 className="entry-list__action"
                 disabled={index === 0}
                 onClick={(event) => {
-                  event.preventDefault();
+                  event.stopPropagation();
                   handleMove(index, -1);
                 }}
                 type="button"
@@ -94,7 +122,7 @@ function EntryList<T extends EditableEntry>({
                 className="entry-list__action"
                 disabled={index === entries.length - 1}
                 onClick={(event) => {
-                  event.preventDefault();
+                  event.stopPropagation();
                   handleMove(index, 1);
                 }}
                 type="button"
@@ -110,7 +138,7 @@ function EntryList<T extends EditableEntry>({
                 aria-label={t("editor.remove")}
                 className="entry-list__action entry-list__action--danger"
                 onClick={(event) => {
-                  event.preventDefault();
+                  event.stopPropagation();
                   handleRemove(index);
                 }}
                 type="button"

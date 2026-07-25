@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { WORKSPACE_TABS } from "@/components/organisms/Workspace";
-import type { WorkspaceTab } from "@/components/organisms/Workspace";
+import { WORKSPACE_TABS } from "@/data/workspaceTabs";
+import type { WorkspaceTab } from "@/data/workspaceTabs";
 
 interface MobileNavProps {
   activeTab: WorkspaceTab;

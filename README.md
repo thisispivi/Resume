@@ -173,6 +173,12 @@ CI does not deploy. Publishing stays manual: `pnpm deploygh` builds and pushes `
 - **ESLint 10** — `eslint-plugin-react@7.37.5` crashes on it (`contextOrFilename.getFilename is not a function`).
 - **TypeScript 7** — `typescript-eslint` [does not support the TS 7 compiler yet](https://github.com/typescript-eslint/typescript-eslint/issues/10940); `tsc` passes but `pnpm lint` refuses to run.
 
+### Accepted advisory
+
+`pnpm audit` reports one high-severity finding it cannot fix, so `pnpm-workspace.yaml` ignores it under `auditConfig.ignoreGhsas` with the reasoning inline:
+
+[GHSA-mh99-v99m-4gvg](https://github.com/advisories/GHSA-mh99-v99m-4gvg) — a DoS in `brace-expansion`. The vulnerable 1.x copy arrives only through `minimatch@3`, which both `eslint@9` and `eslint-plugin-react@7.37.5` hard-depend on. No patched 1.x exists (`1.1.16` is the head of `maintenance-v1`), and `brace-expansion@5` changed its CommonJS export from a function to an object, so forcing it via an override makes `minimatch@3` throw. It is dev-only: `pnpm audit --prod` is clean and the package never reaches `dist/`. The ignore comes out when `eslint-plugin-react` supports ESLint 10, which pulls `minimatch@10` and with it the patched `brace-expansion@5`.
+
 ## Available scripts
 
 | Script              | Description                                |
