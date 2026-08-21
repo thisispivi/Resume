@@ -11,7 +11,7 @@ export default defineConfig({
   server: { watch: { usePolling: true }, host: true },
   css: { postcss: { plugins: [autoprefixer({})] } },
   resolve: {
-    alias: [{ find: "@", replacement: resolve(__dirname, "./src") }],
+    alias: [{ find: "@", replacement: resolve(import.meta.dirname, "./src") }],
   },
   build: {
     rollupOptions: {

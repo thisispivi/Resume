@@ -4,10 +4,10 @@ allowBuilds:
 ignoredBuiltDependencies:
   - "@parcel/watcher"
   - core-js
+overrides:
+  "brace-expansion@<2": 1.1.18
+  "brace-expansion@>=4 <6": 5.0.9
+  dompurify: 3.4.13
+  js-yaml: 4.3.1
 minimumReleaseAgeExclude:
   - sass@1.102.0
-  - dompurify@3.4.12
-  - brace-expansion@5.0.8
-auditConfig:
-  ignoreGhsas:
-    - GHSA-mh99-v99m-4gvg

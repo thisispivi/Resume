@@ -40,6 +40,12 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Dependency audit
+        run: pnpm audit
+
+      - name: Peer dependencies
+        run: pnpm peers check
+
       - name: Formatting
         run: pnpm format:check
 
