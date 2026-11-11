@@ -1,30 +1,23 @@
+# Dependabot: security updates open as soon as an advisory lands; version
+# updates arrive once a week, minor and patch grouped into one pull request.
+# Triage both with the fix-vulnerabilities skill (.claude/skills/).
 version: 2
-
 updates:
   - package-ecosystem: npm
     directory: /resume
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope
     groups:
-      # One PR per ecosystem keeps the review surface small; CI gates each group.
-      react:
-        patterns: ["react", "react-dom", "@types/react", "@types/react-dom"]
-      linting:
-        patterns: ["eslint*", "@eslint/*", "@typescript-eslint/*", "prettier*"]
-      build:
-        patterns:
-          [
-            "vite",
-            "@vitejs/*",
-            "rolldown-vite",
-            "sass",
-            "postcss",
-            "autoprefixer",
-          ]
-      minor-and-patch:
+      security:
+        applies-to: security-updates
         patterns: ["*"]
-        update-types: ["minor", "patch"]
+      dependencies:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]
     ignore:
       # eslint-plugin-react 7.37.5 does not work with ESLint 10 yet.
       - dependency-name: eslint
@@ -39,3 +32,14 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
+      actions:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]

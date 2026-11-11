@@ -136,6 +136,7 @@ dist
 .pnp.*
 
 tmp*
-.claude
+.claude/*
+!.claude/skills/
 mine.json
 Lucas_Ferris_Resume.pdf

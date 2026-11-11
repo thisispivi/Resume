@@ -17,6 +17,10 @@ interface NavbarProps {
   isDownloading: boolean;
 }
 
+const APP_VERSION = __APP_VERSION__;
+const REPOSITORY_URL = "https://github.com/thisispivi/Resume";
+const AUTHOR_URL = "https://linktree.pivi.dev/";
+
 const FLAG_MAP: Record<string, string> = {
   "en-US": "🇺🇸",
   "it-IT": "🇮🇹",
@@ -121,6 +125,31 @@ function Navbar({
       <div className="navbar__brand">
         <Logo className="navbar__logo" height={32} width={32} />
         <span className="navbar__name">{t("appTitle")}</span>
+        <span className="navbar__meta">
+          <a
+            href={`${REPOSITORY_URL}/releases/tag/v${APP_VERSION}`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            v{APP_VERSION}
+          </a>
+          <a
+            className="navbar__meta-link"
+            href={REPOSITORY_URL}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            GitHub
+          </a>
+          <a
+            className="navbar__meta-link"
+            href={AUTHOR_URL}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {t("author")}
+          </a>
+        </span>
       </div>
 
       <div className="navbar__spacer" />

@@ -4,10 +4,12 @@ import svgr from "vite-plugin-svgr";
 import { qrcode } from "vite-plugin-qrcode";
 import { resolve } from "path";
 import autoprefixer from "autoprefixer";
+import { version } from "./package.json";
 
 export default defineConfig({
   plugins: [react(), svgr(), qrcode()],
   base: "./",
+  define: { __APP_VERSION__: JSON.stringify(version) },
   server: { watch: { usePolling: true }, host: true },
   css: { postcss: { plugins: [autoprefixer({})] } },
   resolve: {

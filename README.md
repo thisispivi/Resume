@@ -8,7 +8,7 @@
    </div>
 </div>
 
-# Resume Builder
+# [Resume Builder](https://resume.pivi.dev/)
 
 A resume builder that edits inline against a live A4 preview. Fifteen templates, fifty-five palettes, thirty fonts, a Europass-grade data model, and a multi-page PDF export — all client-side, with your data kept in your own browser.
 
@@ -82,7 +82,7 @@ Dates are stored as `YYYY-MM` or `YYYY` and reformatted for the resume's locale;
 
 **Export → Starter JSON** downloads an annotated file with every supported field filled in. Files written by earlier versions still load: the legacy `duration` string is split into `startDate`/`endDate`, and the old fixed contact object is converted to the `ContactLink[]` form.
 
-## Project structure
+## Project Structure
 
 ```text
 .
@@ -166,7 +166,7 @@ Repeatable sections are declared once in `src/data/resumeSections.ts` — an id,
 
 `.github/workflows/ci.yml` runs on every push to `main`, every pull request, and on demand. It checks formatting, lints, runs the date self-check, then type-checks and builds — the same four commands you can run locally.
 
-CI does not deploy. Publishing stays manual: `pnpm deploygh` builds and pushes `dist/` to the `gh-pages` branch, which GitHub Pages serves at the custom domain from `resume/public/CNAME`.
+Deployment is automatic: when a new version reaches `main`, the Release workflow builds `resume/` and deploys it to GitHub Pages at <https://resume.pivi.dev/>.
 
 `.github/dependabot.yml` opens grouped weekly dependency PRs (and monthly ones for the actions themselves), which CI then gates. Two majors are pinned back on purpose:
 
@@ -191,4 +191,17 @@ CI does not deploy. Publishing stays manual: `pnpm deploygh` builds and pushes `
 | `pnpm format`       | Format code with Prettier                  |
 | `pnpm format:check` | Verify formatting without writing          |
 | `pnpm selfcheck`    | Run the date parsing/formatting assertions |
-| `pnpm deploygh`     | Build and publish to the `gh-pages` branch |
+
+## Versioning and releases
+
+Releases are automatic and follow [Semantic Versioning](https://semver.org/).
+Every pull request that changes code bumps the version in `resume/package.json`, as
+[AGENTS.md](./AGENTS.md#versioning-and-releases) describes. When CI passes on
+`main`, the Release workflow tags the new version, publishes the
+[GitHub release](https://github.com/thisispivi/Resume/releases), and deploys the app to GitHub Pages.
+Dependabot alerts and security updates are on; the `fix-vulnerabilities` skill
+triages them.
+
+## License
+
+[MIT](./LICENSE)

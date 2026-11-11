@@ -66,6 +66,28 @@
     }
   }
 
+  &__meta {
+    display: flex;
+    gap: $space-2;
+    font-size: $fs-xs;
+    color: var(--color-text-muted);
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__meta-link {
+    @include below($bp-sm) {
+      display: none;
+    }
+  }
+
   &__spacer {
     flex: 1;
   }
