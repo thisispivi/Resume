@@ -42,7 +42,7 @@
     "i18next": "^26.7.2",
     "jspdf": "^4.2.1",
     "react": "^19.3.1",
-    "react-avatar-editor": "^15.2.0",
+    "react-avatar-editor": "^16.0.0",
     "react-dom": "^19.3.1",
     "react-i18next": "^17.1.13"
   },
