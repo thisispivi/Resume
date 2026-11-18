@@ -1,0 +1,23 @@
+{
+  "name": "resume-workspace",
+  "private": true,
+  "packageManager": "pnpm@12.21.0",
+  "scripts": {
+    "dev": "pnpm --filter resume dev",
+    "build": "pnpm --filter resume build",
+    "audit": "pnpm --filter resume audit",
+    "lint": "pnpm --filter resume lint",
+    "lint:fix": "pnpm --filter resume lint:fix",
+    "preview": "pnpm --filter resume preview",
+    "selfcheck": "pnpm --filter resume selfcheck",
+    "format": "pnpm --filter resume format",
+    "format:check": "pnpm --filter resume format:check",
+    "knip": "pnpm --filter resume knip",
+    "peers": "pnpm --filter resume peers",
+    "update:packages": "pnpm --filter resume update:packages",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
