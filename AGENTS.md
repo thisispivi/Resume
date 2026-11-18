@@ -10,17 +10,17 @@ copy rules into them.
 
 ## Repository layout
 
-- `resume/` is the React app. Run every `pnpm` command there.
-- `resume/src/components/` follows Atomic Design: `atoms`, `molecules`,
+- `apps/resume/` is the React app. Run `pnpm` commands from the repository root.
+- `apps/resume/src/components/` follows Atomic Design: `atoms`, `molecules`,
   `organisms`, and the resume `templates`.
-- `resume/src/data/` holds palettes, fonts, templates, and section metadata;
-  `resume/src/context/` the resume state.
+- `apps/resume/src/data/` holds palettes, fonts, templates, and section metadata;
+  `apps/resume/src/context/` the resume state.
 - `mine.json` at the root is your personal resume data. It is gitignored and
   never committed.
 
 ## Required verification
 
-From `resume/`, every change must pass:
+From the repository root, every change must pass:
 
 ```bash
 pnpm lint && pnpm format:check && pnpm knip && pnpm selfcheck && pnpm build && pnpm audit
@@ -32,7 +32,7 @@ pnpm lint && pnpm format:check && pnpm knip && pnpm selfcheck && pnpm build && p
 
 ## Versioning and releases
 
-`resume/package.json` holds the version, and it is what triggers a release. When
+`apps/resume/package.json` holds the version, and it is what triggers a release. When
 CI passes on `main` and that version has no tag yet, the Release workflow tags
 it, publishes the GitHub release with generated notes, and deploys the app to GitHub Pages at <https://resume.pivi.dev/>. Nobody
 releases by hand, and nothing is committed back to `main`.

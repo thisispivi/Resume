@@ -1,9 +1,9 @@
 <div align="center">
    <div style="display: flex;padding-block:40px;margin-bottom:20px;background-color:#1f1f1f">
       <picture>
-         <source media="(prefers-color-scheme: dark)" srcset="../logos/logo_dark.png">
-         <source media="(prefers-color-scheme: light)" srcset="../logos/logo_light.png">
-         <img alt="logo" src="../logos/logo_dark.png" height="75">
+         <source media="(prefers-color-scheme: dark)" srcset="../../logos/logo_dark.png">
+         <source media="(prefers-color-scheme: light)" srcset="../../logos/logo_light.png">
+         <img alt="logo" src="../../logos/logo_dark.png" height="75">
       </picture>
    </div>
 </div>
@@ -18,19 +18,19 @@ Resume Builder is a web app for writing and styling a resume. It has 15 template
 
 ```bash
 git clone https://github.com/thisispivi/Resume.git
-cd resume
+cd Resume
 pnpm i
 pnpm dev
 ```
 
 ## Deployment
 
-The Release workflow builds this folder and deploys it to GitHub Pages when a new version reaches `main`. See the [root README](../README.md#deployment).
+The Release workflow builds this folder and deploys it to GitHub Pages when a new version reaches `main`. See the [root README](../../README.md#deployment).
 
 ## Project Structure
 
 ```text
 .
-├── logos     Assets used in the app
-└── resume    The React app for Resume Builder
+├── logos          Assets used in the app
+└── apps/resume    The React app for Resume Builder
 ```

@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
-cd "$(dirname "$0")/../resume"
+cd "$(dirname "$0")/../apps/resume"
 
 npx tsc --noEmit
-npx lint-staged
+npx lint-staged --max-arg-length 7000
 pnpm run lint

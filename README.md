@@ -69,7 +69,7 @@ There is no save button. The app writes every change to `localStorage` shortly a
 
 ## Getting Started
 
-You need [Node.js](https://nodejs.org/) 24 (the version CI uses) and [pnpm](https://pnpm.io/) 11.8.0, the version pinned in `resume/package.json`. Every `pnpm` command runs from `resume/`.
+You need [Node.js](https://nodejs.org/) 24 (the version CI uses) and [pnpm](https://pnpm.io/) 12.21.0, the version pinned in `package.json`. Every `pnpm` command runs from the repository root.
 
 ```bash
 git clone https://github.com/thisispivi/Resume.git
@@ -89,7 +89,7 @@ pnpm preview
 
 ## Development checks
 
-Run the full quality gate from `resume/` before pushing:
+Run the full quality gate from the repository root before pushing:
 
 ```bash
 pnpm lint && pnpm format:check && pnpm knip && pnpm selfcheck && pnpm build && pnpm audit
@@ -123,7 +123,7 @@ pnpm lint && pnpm format:check && pnpm knip && pnpm selfcheck && pnpm build && p
 
 ## Deployment
 
-Deployment is automatic. When a new version reaches `main` and CI passes, the Release workflow builds `resume/` and deploys it to GitHub Pages at <https://resume.pivi.dev/>. There is no manual deploy command.
+Deployment is automatic. When a new version reaches `main` and CI passes, the Release workflow builds `apps/resume/` and deploys it to GitHub Pages at <https://resume.pivi.dev/>. There is no manual deploy command.
 
 ## Resume data format
 
@@ -159,7 +159,7 @@ Dates are stored as `YYYY-MM` or `YYYY` and reformatted for the resume's locale.
 ## Versioning and releases
 
 Releases are automatic and follow [Semantic Versioning](https://semver.org/).
-Every pull request that changes code bumps the version in `resume/package.json`, as
+Every pull request that changes code bumps the version in `apps/resume/package.json`, as
 [AGENTS.md](./AGENTS.md#versioning-and-releases) describes. When CI passes on
 `main`, the Release workflow tags the new version, publishes the
 [GitHub release](https://github.com/thisispivi/Resume/releases), and deploys the app to GitHub Pages.
@@ -172,7 +172,7 @@ triages them.
 | ------------------------------------------- | -------------------------------------------------------- |
 | [AGENTS.md](./AGENTS.md)                    | Workflow, quality gate, versioning, and commit rules     |
 | [Coding guidelines](./CODING_GUIDELINES.md) | The coding standard for components, TypeScript, and SCSS |
-| [App README](./resume/README.md)            | Short setup notes for the React app in `resume/`         |
+| [App README](./apps/resume/README.md)       | Short setup notes for the React app in `apps/resume/`    |
 
 ## Project Structure
 
@@ -181,28 +181,30 @@ triages them.
 ├── .husky/              # Git hooks (pre-commit)
 ├── logos/               # Logo assets
 ├── mine.json            # The owner's personal resume data (gitignored)
-├── resume/              # Main application
-│   ├── public/
-│   ├── src/
-│   │   ├── assets/
-│   │   │   ├── icons/
-│   │   │   └── template/data.json    # Bundled example resume
-│   │   ├── components/
-│   │   │   ├── atoms/       # Button, CollapsibleSection, MonthInput, StringListInput, …
-│   │   │   ├── molecules/   # EntryList, EntryFields, TemplateGallery, ResumeExtraSections, …
-│   │   │   ├── organisms/   # Navbar, Workspace, ContentPanel, DesignPanel, ExportPanel, PreviewStage
-│   │   │   └── templates/   # 15 resume templates
-│   │   ├── context/         # Theme context (dark mode)
-│   │   ├── data/            # Palettes, fonts, templates, contact types, section registry
-│   │   ├── i18n/            # i18next localization (en-US, it-IT)
-│   │   ├── pages/           # ResumeBuilderPage
-│   │   ├── styles/          # SCSS base (tokens, mixins, variables)
-│   │   ├── utils/           # Dates, PDF generation, validation, helpers
-│   │   └── types.ts         # Shared TypeScript types
-│   ├── eslint.config.js
-│   ├── tsconfig.json
-│   ├── vite.config.ts
-│   └── package.json
+├── apps/
+│   └── resume/          # Main application
+│       ├── public/
+│       ├── src/
+│       │   ├── assets/
+│       │   │   ├── icons/
+│       │   │   └── template/data.json    # Bundled example resume
+│       │   ├── components/
+│       │   │   ├── atoms/       # Button, CollapsibleSection, MonthInput, StringListInput, …
+│       │   │   ├── molecules/   # EntryList, EntryFields, TemplateGallery, ResumeExtraSections, …
+│       │   │   ├── organisms/   # Navbar, Workspace, ContentPanel, DesignPanel, ExportPanel, PreviewStage
+│       │   │   └── templates/   # 15 resume templates
+│       │   ├── context/         # Theme context (dark mode)
+│       │   ├── data/            # Palettes, fonts, templates, contact types, section registry
+│       │   ├── i18n/            # i18next localization (en-US, it-IT)
+│       │   ├── pages/           # ResumeBuilderPage
+│       │   ├── styles/          # SCSS base (tokens, mixins, variables)
+│       │   ├── utils/           # Dates, PDF generation, validation, helpers
+│       │   └── types.ts         # Shared TypeScript types
+│       ├── eslint.config.js
+│       ├── tsconfig.json
+│       ├── vite.config.ts
+│       └── package.json
+├── package.json         # Workspace scripts that run the app's scripts
 └── README.md
 ```
 
